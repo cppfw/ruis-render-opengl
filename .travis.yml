@@ -37,7 +37,7 @@ before_install:
     brew tap igagis/tap &&
     brew update > /dev/null &&
     (brew list libpng || brew install libpng) &&
-    brew install prorab libutki libpapki libunikod libstob libsvgren jpeg z glew freetype libkolme libnitki;
+    brew install prorab glew libkolme libmorda;
   fi
 - if [ "$BUILD_NAME" == "debian" ]; then
     echo "deb http://dl.bintray.com/igagis/deb unstable main" | sudo tee /etc/apt/sources.list.d/igagis.list > /dev/null &&
@@ -70,10 +70,10 @@ before_install:
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61 &&
     sudo apt-get update -qq &&
     sudo apt-get install -qq prorab;
-    sudo prorab-make-raspberry-chroot.sh /srv/chroot/rasp-armhf &&
+    sudo prorab-make-raspberry-chroot.sh -d testing /srv/chroot/rasp-armhf &&
     echo "deb http://dl.bintray.com/igagis/rasp unstable main" | sudo tee /srv/chroot/rasp-armhf/etc/apt/sources.list.d/igagis.list > /dev/null &&
     sudo chroot /srv/chroot/rasp-armhf apt-get update &&
-    sudo chroot /srv/chroot/rasp-armhf apt-get install --allow-unauthenticated -qq -y $linuxDependencies &&
+    sudo chroot /srv/chroot/rasp-armhf apt-get install --allow-unauthenticated -qq -y $linuxDependencies g++ &&
     sudo mkdir -p /srv/chroot/rasp-armhf/build &&
     sudo rsync -av $TRAVIS_BUILD_DIR/ /srv/chroot/rasp-armhf/build/;
   fi
@@ -104,7 +104,7 @@ script:
   fi
 - if [ "$BUILD_NAME" == "raspberry_pi" ]; then
     sudo chroot /srv/chroot/rasp-armhf bash -c "cd /build && prorab-deb-prepare.sh" &&
-    sudo chroot /srv/chroot/rasp-armhf bash -c "cd /build && ogles2=true dpkg-buildpackage -us -uc";
+    sudo chroot /srv/chroot/rasp-armhf bash -c "cd /build && dpkg-buildpackage -us -uc";
   fi
   
   
