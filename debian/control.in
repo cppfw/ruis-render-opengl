@@ -1,0 +1,36 @@
+Source: libmorda-opengl2-ren
+Section: libs
+Priority: extra
+Maintainer: Ivan Gagis <igagis@gmail.com>
+Build-Depends: debhelper (>= 9), prorab,
+		libmorda-dev
+Build-Depends-Indep: doxygen
+Standards-Version: 3.9.2
+
+Package: libmorda-opengl2-ren$(soname)
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: OpenGL 2 renderer for morda.
+ OpenGL 2 renderer for morda GUI library.
+
+Package: libmorda-opengl2-ren$(soname)-dbg
+Section: debug
+Architecture: any
+Depends: libmorda-opengl2-ren$(soname) (= ${binary:Version}), ${misc:Depends}
+Description: debugging symbols for libmorda-opengl2-ren$(soname) package.
+
+Package: libmorda-opengl2-ren-dev
+Section: libdevel
+Architecture: any
+Depends: libmorda-opengl2-ren$(soname) (= ${binary:Version}), libmorda-opengl2-ren$(soname)-dbg (= ${binary:Version}), ${misc:Depends}
+Suggests: libmorda-opengl2-ren-doc
+Description: OpenGL 2 renderer for morda.
+ OpenGL 2 renderer for morda GUI library.
+
+Package: libmorda-opengl2-ren-doc
+Section: doc
+Architecture: all
+Depends: ${misc:Depends}
+Description: documentation for libmorda-opengl2-ren library.
+ For more details see description to libmorda-opengl2-ren-dev package.
