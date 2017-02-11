@@ -30,7 +30,7 @@ this_cxxflags += -I$(d)/../../src
 
 ifeq ($(prorab_os), linux)
     this_cxxflags += -fPIC #generate position independent code
-    this_ldlibs += -lpthread
+    this_ldlibs += -lpthread -lGL
 else ifeq ($(prorab_os), windows)
 #    this_cxxflags += -Wno-format #due to bugs in some g++ versions it warns about format when not needed, so disable format warnings
 #    this_cxxflags += -I/usr/include -I/usr/local/include/ -I/usr/local/include/freetype2
@@ -43,7 +43,7 @@ else ifeq ($(prorab_os), macosx)
     this_ldlibs += -lc++
 endif
 
-this_ldlibs += -lGLEW -lGL
+this_ldlibs += -lGLEW
 
 this_ldlibs += -lstdc++ -lm -lmorda
 
