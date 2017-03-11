@@ -46,7 +46,7 @@
       <makefileType>
         <makeTool>
           <buildCommandWorkingDir></buildCommandWorkingDir>
-          <buildCommand>${MAKE}</buildCommand>
+          <buildCommand>${MAKE} -j8</buildCommand>
           <cleanCommand>${MAKE} clean</cleanCommand>
           <executablePath></executablePath>
         </makeTool>
