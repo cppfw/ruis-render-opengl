@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.6) unstable; urgency=medium
+
+  * link to latest morda
+
+ -- Ivan Gagis <igagis@gmail.com>  Tue, 02 May 2017 21:33:13 +0300
+
 libmorda-opengl2-ren (0.1.5) unstable; urgency=medium
 
   * test release
