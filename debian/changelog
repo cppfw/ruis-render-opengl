@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.8) unstable; urgency=medium
+
+  * test release
+
+ -- Ivan Gagis <igagis@gmail.com>  Thu, 03 Aug 2017 21:48:17 +0300
+
 libmorda-opengl2-ren (0.1.7) unstable; urgency=medium
 
   * msvs nuget update
