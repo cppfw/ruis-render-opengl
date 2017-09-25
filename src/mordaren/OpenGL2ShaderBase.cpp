@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "OpenGL2Shader.hpp"
+#include "OpenGL2ShaderBase.hpp"
 #include "OpenGL2_util.hpp"
 #include "OpenGL2VertexArray.hpp"
 #include "OpenGL2IndexBuffer.hpp"
@@ -13,10 +13,10 @@
 
 using namespace mordaren;
 
-const OpenGL2Shader* OpenGL2Shader::boundShader = nullptr;
+const OpenGL2ShaderBase* OpenGL2ShaderBase::boundShader = nullptr;
 
 
-GLenum OpenGL2Shader::modeMap[] = {
+GLenum OpenGL2ShaderBase::modeMap[] = {
 	GL_TRIANGLES,			//TRIANGLES
 	GL_TRIANGLE_FAN,		//TRIANGLE_FAN
 	GL_LINE_LOOP,			//LINE_LOOP
@@ -119,13 +119,13 @@ ProgramWrapper::ProgramWrapper(const char* vertexShaderCode, const char* fragmen
 
 
 
-OpenGL2Shader::OpenGL2Shader(const char* vertexShaderCode, const char* fragmentShaderCode) :
+OpenGL2ShaderBase::OpenGL2ShaderBase(const char* vertexShaderCode, const char* fragmentShaderCode) :
 		program(vertexShaderCode, fragmentShaderCode),
 		matrixUniform(this->getUniform("matrix"))
 {
 }
 
-GLint OpenGL2Shader::getUniform(const char* n) {
+GLint OpenGL2ShaderBase::getUniform(const char* n) {
 	GLint ret = glGetUniformLocation(this->program.p, n);
 	if(ret < 0){
 		throw utki::Exc("No uniform found in the shader program");
@@ -133,7 +133,7 @@ GLint OpenGL2Shader::getUniform(const char* n) {
 	return ret;
 }
 
-void OpenGL2Shader::render(const kolme::Matr4f& m, const morda::VertexArray& va)const{
+void OpenGL2ShaderBase::render(const kolme::Matr4f& m, const morda::VertexArray& va)const{
 	ASSERT(this->isBound())
 	
 	ASSERT(dynamic_cast<const OpenGL2IndexBuffer*>(va.indices.operator ->()))

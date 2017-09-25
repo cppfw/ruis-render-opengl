@@ -4,7 +4,7 @@ using namespace mordaren;
 
 
 OpenGL2ShaderPosClr::OpenGL2ShaderPosClr() :
-		OpenGL2Shader(
+		OpenGL2ShaderBase(
 				R"qwertyuiop(
 						#ifndef GL_ES
 						#	define highp
@@ -44,6 +44,6 @@ OpenGL2ShaderPosClr::OpenGL2ShaderPosClr() :
 void OpenGL2ShaderPosClr::render(const kolme::Matr4f& m, const morda::VertexArray& va) const {
 	this->bind();
 	
-	this->OpenGL2Shader::render(m, va);
+	this->OpenGL2ShaderBase::render(m, va);
 }
 

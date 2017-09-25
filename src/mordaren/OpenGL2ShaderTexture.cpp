@@ -1,4 +1,4 @@
-#include "OpenGL2ShaderPosTex.hpp"
+#include "OpenGL2ShaderTexture.hpp"
 
 #include "OpenGL2Texture2D.hpp"
 #include "OpenGL2VertexBuffer.hpp"
@@ -9,8 +9,8 @@
 
 using namespace mordaren;
 
-OpenGL2ShaderPosTex::OpenGL2ShaderPosTex() :
-		OpenGL2Shader(
+OpenGL2ShaderTexture::OpenGL2ShaderTexture() :
+		OpenGL2ShaderBase(
 				R"qwertyuiop(
 						#ifndef GL_ES
 						#	define highp
@@ -52,10 +52,10 @@ OpenGL2ShaderPosTex::OpenGL2ShaderPosTex() :
 }
 
 
-void OpenGL2ShaderPosTex::render(const kolme::Matr4f& m, const morda::Texture2D& tex, const morda::VertexArray& va){
+void OpenGL2ShaderTexture::render(const kolme::Matr4f& m, const morda::VertexArray& va, const morda::Texture2D& tex){
 	static_cast<const OpenGL2Texture2D&>(tex).bind(0);
 	this->bind();
 	
-	this->OpenGL2Shader::render(m, va);
+	this->OpenGL2ShaderBase::render(m, va);
 }
 

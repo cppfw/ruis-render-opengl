@@ -7,8 +7,8 @@
 #include "OpenGL2IndexBuffer.hpp"
 
 #include "OpenGL2Texture2D.hpp"
-#include "OpenGL2ShaderPosTex.hpp"
-#include "OpenGL2ShaderColorPos.hpp"
+#include "OpenGL2ShaderTexture.hpp"
+#include "OpenGL2ShaderColor.hpp"
 #include "OpenGL2ShaderPosClr.hpp"
 #include "OpenGL2ShaderColorPosTex.hpp"
 #include "OpenGL2FrameBuffer.hpp"
@@ -35,7 +35,7 @@ std::shared_ptr<morda::Texture2D> OpenGL2Factory::createTexture2D(morda::Texture
 
 	ASSERT(data.size() == 0 || data.size() / morda::Texture2D::bytesPerPixel(type) / dim.x == dim.y)
 	
-	auto ret = utki::makeShared<OpenGL2Texture2D>(dim.to<float>());
+	auto ret = std::make_shared<OpenGL2Texture2D>(dim.to<float>());
 	
 	//TODO: save previous bind and restore it after?
 	ret->bind(0);
@@ -89,35 +89,35 @@ std::shared_ptr<morda::Texture2D> OpenGL2Factory::createTexture2D(morda::Texture
 }
 
 std::shared_ptr<morda::VertexBuffer> OpenGL2Factory::createVertexBuffer(const utki::Buf<kolme::Vec4f> vertices){
-	return utki::makeShared<OpenGL2VertexBuffer>(vertices);
+	return std::make_shared<OpenGL2VertexBuffer>(vertices);
 }
 
 std::shared_ptr<morda::VertexBuffer> OpenGL2Factory::createVertexBuffer(const utki::Buf<kolme::Vec3f> vertices){
-	return utki::makeShared<OpenGL2VertexBuffer>(vertices);
+	return std::make_shared<OpenGL2VertexBuffer>(vertices);
 }
 
 std::shared_ptr<morda::VertexBuffer> OpenGL2Factory::createVertexBuffer(const utki::Buf<kolme::Vec2f> vertices){
-	return utki::makeShared<OpenGL2VertexBuffer>(vertices);
+	return std::make_shared<OpenGL2VertexBuffer>(vertices);
 }
 
 std::shared_ptr<morda::VertexArray> OpenGL2Factory::createVertexArray(std::vector<std::shared_ptr<morda::VertexBuffer>>&& buffers, std::shared_ptr<morda::IndexBuffer> indices, morda::VertexArray::Mode_e mode) {
-	return utki::makeShared<OpenGL2VertexArray>(std::move(buffers), std::move(indices), mode);
+	return std::make_shared<OpenGL2VertexArray>(std::move(buffers), std::move(indices), mode);
 }
 
 std::shared_ptr<morda::IndexBuffer> OpenGL2Factory::createIndexBuffer(const utki::Buf<std::uint16_t> indices) {
-	return utki::makeShared<OpenGL2IndexBuffer>(indices);
+	return std::make_shared<OpenGL2IndexBuffer>(indices);
 }
 
 std::unique_ptr<morda::RenderFactory::Shaders> OpenGL2Factory::createShaders() {
 	auto ret = utki::makeUnique<morda::RenderFactory::Shaders>();
-	ret->posTex = utki::makeUnique<OpenGL2ShaderPosTex>();
-	ret->colorPos = utki::makeUnique<OpenGL2ShaderColorPos>();
+	ret->posTex = utki::makeUnique<OpenGL2ShaderTexture>();
+	ret->colorPos = utki::makeUnique<OpenGL2ShaderColor>();
 	ret->posClr = utki::makeUnique<OpenGL2ShaderPosClr>();
 	ret->colorPosTex = utki::makeUnique<OpenGL2ShaderColorPosTex>();
 	return ret;
 }
 
 std::shared_ptr<morda::FrameBuffer> OpenGL2Factory::createFramebuffer(std::shared_ptr<morda::Texture2D> color) {
-	return utki::makeShared<OpenGL2FrameBuffer>(std::move(color));
+	return std::make_shared<OpenGL2FrameBuffer>(std::move(color));
 }
 

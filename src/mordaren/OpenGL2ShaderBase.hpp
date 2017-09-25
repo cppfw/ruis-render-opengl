@@ -40,19 +40,19 @@ struct ProgramWrapper{
 
 
 
-class OpenGL2Shader {
+class OpenGL2ShaderBase {
 	ProgramWrapper program;
 	
 	const GLint matrixUniform;
 	
-	static const OpenGL2Shader* boundShader;
+	static const OpenGL2ShaderBase* boundShader;
 public:
-	OpenGL2Shader(const char* vertexShaderCode, const char* fragmentShaderCode);
+	OpenGL2ShaderBase(const char* vertexShaderCode, const char* fragmentShaderCode);
 	
-	OpenGL2Shader(const OpenGL2Shader&) = delete;
-	OpenGL2Shader& operator=(const OpenGL2Shader&) = delete;
+	OpenGL2ShaderBase(const OpenGL2ShaderBase&) = delete;
+	OpenGL2ShaderBase& operator=(const OpenGL2ShaderBase&) = delete;
 	
-	virtual ~OpenGL2Shader()noexcept{}
+	virtual ~OpenGL2ShaderBase()noexcept{}
 
 protected:
 	GLint getUniform(const char* n);
