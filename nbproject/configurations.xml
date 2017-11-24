@@ -8,11 +8,8 @@
         <in>OpenGL2FrameBuffer.cpp</in>
         <in>OpenGL2IndexBuffer.cpp</in>
         <in>OpenGL2Renderer.cpp</in>
-        <in>OpenGL2Shader.cpp</in>
-        <in>OpenGL2ShaderColorPos.cpp</in>
         <in>OpenGL2ShaderColorPosTex.cpp</in>
         <in>OpenGL2ShaderPosClr.cpp</in>
-        <in>OpenGL2ShaderPosTex.cpp</in>
         <in>OpenGL2Texture2D.cpp</in>
         <in>OpenGL2VertexArray.cpp</in>
         <in>OpenGL2VertexBuffer.cpp</in>
@@ -72,24 +69,12 @@
       </item>
       <item path="src/mordaren/OpenGL2Renderer.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/mordaren/OpenGL2Shader.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/mordaren/OpenGL2ShaderColorPos.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
       <item path="src/mordaren/OpenGL2ShaderColorPosTex.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
       <item path="src/mordaren/OpenGL2ShaderPosClr.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="src/mordaren/OpenGL2ShaderPosTex.cpp"
             ex="false"
             tool="1"
             flavor2="0">
