@@ -23,6 +23,7 @@
       <itemPath>appveyor.yml</itemPath>
       <itemPath>debian/control.in</itemPath>
       <itemPath>nbproject/private/launcher.properties</itemPath>
+      <itemPath>homebrew/libmorda-opengl2-ren.rb.in</itemPath>
       <itemPath>src/makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
