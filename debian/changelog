@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.16) unstable; urgency=medium
+
+  * color pos lum shader added
+
+ -- Ivan Gagis <igagis@gmail.com>  Thu, 25 Jan 2018 09:56:24 +0200
+
 libmorda-opengl2-ren (0.1.15) unstable; urgency=medium
 
   * update to latest morda
