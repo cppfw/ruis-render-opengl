@@ -41,42 +41,34 @@ nuget{
 		
 		[x86,v140,release] {
 			lib: ..\msvs_solution\v140_Release\libmorda-opengl2-ren.lib;
-			res: ..\res\morda_res\**\*;
 		}
 
 		[x86,v140,debug] {
 			lib: ..\msvs_solution\v140_Debug\libmorda-opengl2-ren.lib;
-			res: ..\res\morda_res\**\*;
 		}
 
 		[x64,v140,release] {
 			lib: ..\msvs_solution\x64\v140_Release\libmorda-opengl2-ren.lib;
-			res: ..\res\morda_res\**\*;
 		}
 
 		[x64,v140,debug] {
 			lib: ..\msvs_solution\x64\v140_Debug\libmorda-opengl2-ren.lib;
-			res: ..\res\morda_res\**\*;
 		}
 
 		[x86,v141,release] {
 			lib: ..\msvs_solution\v141_Release\libmorda-opengl2-ren.lib;
-			res: ..\res\morda_res\**\*;
 		}
 
 		[x86,v141,debug] {
 			lib: ..\msvs_solution\v141_Debug\libmorda-opengl2-ren.lib;
-			res: ..\res\morda_res\**\*;
 		}
 
 		[x64,v141,release] {
 			lib: ..\msvs_solution\x64\v141_Release\libmorda-opengl2-ren.lib;
-			res: ..\res\morda_res\**\*;
 		}
 
 		[x64,v141,debug] {
 			lib: ..\msvs_solution\x64\v141_Debug\libmorda-opengl2-ren.lib;
-			res: ..\res\morda_res\**\*;
 		}
 	}
 }
