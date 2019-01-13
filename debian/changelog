@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.17) unstable; urgency=medium
+
+  * msys2 deployment
+
+ -- Ivan Gagis <igagis@gmail.com>  Mon, 14 Jan 2019 01:21:49 +0200
+
 libmorda-opengl2-ren (0.1.16) unstable; urgency=medium
 
   * color pos lum shader added
