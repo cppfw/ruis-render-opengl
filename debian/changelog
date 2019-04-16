@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.18) unstable; urgency=medium
+
+  * deploy to bionic
+
+ -- Ivan Gagis <igagis@gmail.com>  Tue, 16 Apr 2019 21:38:40 +0300
+
 libmorda-opengl2-ren (0.1.17) unstable; urgency=medium
 
   * msys2 deployment
