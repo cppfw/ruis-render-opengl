@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.22) unstable; urgency=medium
+
+  * homebrew dependencies fixed
+
+ -- Ivan Gagis <igagis@gmail.com>  Mon, 11 Nov 2019 19:26:05 +0200
+
 libmorda-opengl2-ren (0.1.21) unstable; urgency=medium
 
   * homebrew package lib prefix removed
