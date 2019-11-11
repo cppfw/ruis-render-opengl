@@ -32,13 +32,13 @@ OpenGL2ShaderColorPosTex::OpenGL2ShaderColorPosTex() :
 						#	define mediump
 						#	define lowp
 						#endif
-		
+
 						uniform sampler2D texture0;
-		
+
 						uniform highp vec4 uniformColor;
-		
+
 						varying highp vec2 tc0;
-		
+
 						void main(void){
 							gl_FragColor = texture2D(texture0, tc0) * uniformColor;
 						}
@@ -48,11 +48,11 @@ OpenGL2ShaderColorPosTex::OpenGL2ShaderColorPosTex() :
 	this->colorUniform = this->getUniform("uniformColor");
 }
 
-void OpenGL2ShaderColorPosTex::render(const kolme::Matr4f& m, const morda::VertexArray& va, kolme::Vec4f color, const morda::Texture2D& tex)const{
+void OpenGL2ShaderColorPosTex::render(const r4::mat4f& m, const morda::VertexArray& va, r4::vec4f color, const morda::Texture2D& tex)const{
 	static_cast<const OpenGL2Texture2D&>(tex).bind(0);
 	this->bind();
-	
+
 	this->setUniform4f(this->colorUniform, color.x, color.y, color.z, color.w);
-	
+
 	this->OpenGL2ShaderBase::render(m, va);
 }

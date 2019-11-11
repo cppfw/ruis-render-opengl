@@ -95,11 +95,11 @@ ProgramWrapper::ProgramWrapper(const char* vertexShaderCode, const char* fragmen
 	this->p = glCreateProgram();
 	glAttachShader(this->p, vertexShader.s);
 	glAttachShader(this->p, fragmentShader.s);
-	
+
 	GLint maxAttribs;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &maxAttribs);
 	ASSERT(maxAttribs >= 0)
-	
+
 	for(GLuint i = 0; i < GLuint(maxAttribs); ++i){
 		std::stringstream ss;
 		ss << "a" << i;
@@ -107,7 +107,7 @@ ProgramWrapper::ProgramWrapper(const char* vertexShaderCode, const char* fragmen
 		glBindAttribLocation(this->p, i, ss.str().c_str());
 		assertOpenGLNoError();
 	}
-	
+
 	glLinkProgram(this->p);
 	if (checkForLinkErrors(this->p)) {
 		TRACE( << "Error while linking shader program" << vertexShaderCode << std::endl << fragmentShaderCode << std::endl)
@@ -133,39 +133,39 @@ GLint OpenGL2ShaderBase::getUniform(const char* n) {
 	return ret;
 }
 
-void OpenGL2ShaderBase::render(const kolme::Matr4f& m, const morda::VertexArray& va)const{
+void OpenGL2ShaderBase::render(const r4::mat4f& m, const morda::VertexArray& va)const{
 	ASSERT(this->isBound())
-	
+
 	ASSERT(dynamic_cast<const OpenGL2IndexBuffer*>(va.indices.operator ->()))
 	const OpenGL2IndexBuffer& ivbo = static_cast<const OpenGL2IndexBuffer&>(*va.indices);
-	
+
 	this->setMatrix(m);
-	
+
 	for(unsigned i = 0; i != va.buffers.size(); ++i){
 		ASSERT(dynamic_cast<OpenGL2VertexBuffer*>(va.buffers[i].operator->()))
 		auto& vbo = static_cast<OpenGL2VertexBuffer&>(*va.buffers[i]);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo.buffer);
 		assertOpenGLNoError();
-		
+
 //		TRACE(<< "vbo.numComponents = " << vbo.numComponents << " vbo.type = " << vbo.type << std::endl)
-		
+
 		glVertexAttribPointer(i, vbo.numComponents, vbo.type, GL_FALSE, 0, nullptr);
 		assertOpenGLNoError();
-		
+
 		glEnableVertexAttribArray(i);
 		assertOpenGLNoError();
 	}
-	
+
 	{
 		ASSERT(dynamic_cast<OpenGL2IndexBuffer*>(va.indices.operator->()))
 		auto& ivbo = static_cast<OpenGL2IndexBuffer&>(*va.indices);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ivbo.buffer);
 		assertOpenGLNoError();
 	}
-	
+
 
 //	TRACE(<< "ivbo.elementsCount = " << ivbo.elementsCount << " ivbo.elementType = " << ivbo.elementType << std::endl)
-	
+
 	glDrawElements(modeToGLMode(va.mode), ivbo.elementsCount, ivbo.elementType, nullptr);
 	assertOpenGLNoError();
 }

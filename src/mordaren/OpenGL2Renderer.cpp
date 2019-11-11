@@ -40,10 +40,10 @@ void OpenGL2Renderer::setFramebufferInternal(morda::FrameBuffer* fb) {
 		assertOpenGLNoError();
 		return;
 	}
-	
+
 	ASSERT(dynamic_cast<OpenGL2FrameBuffer*>(fb))
 	auto& ogl2fb = static_cast<OpenGL2FrameBuffer&>(*fb);
-	
+
 	glBindFramebuffer(GL_FRAMEBUFFER, ogl2fb.fbo);
 	assertOpenGLNoError();
 }
@@ -53,7 +53,7 @@ void OpenGL2Renderer::clearFramebuffer() {
 	assertOpenGLNoError();
 	glClear(GL_COLOR_BUFFER_BIT);
 	assertOpenGLNoError();
-	
+
 #if M_OS_NAME == M_OS_NAME_IOS || defined(M_RENDER_OPENGLES2)
 	glClearDepthf(0);
 #else
@@ -61,7 +61,7 @@ void OpenGL2Renderer::clearFramebuffer() {
 #endif
 	glClear(GL_DEPTH_BUFFER_BIT);
 	assertOpenGLNoError();
-	
+
 	glClearStencil(0);
 	glClear(GL_STENCIL_BUFFER_BIT);
 	assertOpenGLNoError();
@@ -79,26 +79,26 @@ void OpenGL2Renderer::setScissorEnabled(bool enabled) {
 	}
 }
 
-kolme::Recti OpenGL2Renderer::getScissorRect() const {
+r4::recti OpenGL2Renderer::getScissorRect() const {
 	GLint osb[4];
 	glGetIntegerv(GL_SCISSOR_BOX, osb);
-	return kolme::Recti(osb[0], osb[1], osb[2], osb[3]);
+	return r4::recti(osb[0], osb[1], osb[2], osb[3]);
 }
 
-void OpenGL2Renderer::setScissorRect(kolme::Recti r) {
+void OpenGL2Renderer::setScissorRect(r4::recti r) {
 	glScissor(r.p.x, r.p.y, r.d.x, r.d.y);
 	assertOpenGLNoError();
 }
 
-kolme::Recti OpenGL2Renderer::getViewport()const {
+r4::recti OpenGL2Renderer::getViewport()const {
 	GLint vp[4];
 
 	glGetIntegerv(GL_VIEWPORT, vp);
-	
-	return kolme::Recti(vp[0], vp[1], vp[2], vp[3]);
+
+	return r4::recti(vp[0], vp[1], vp[2], vp[3]);
 }
 
-void OpenGL2Renderer::setViewport(kolme::Recti r) {
+void OpenGL2Renderer::setViewport(r4::recti r) {
 	glViewport(r.p.x, r.p.y, r.d.x, r.d.y);
 	assertOpenGLNoError();
 }

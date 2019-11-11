@@ -10,12 +10,12 @@ class OpenGL2ShaderColorPosLum :
 	GLint colorUniform;
 public:
 	OpenGL2ShaderColorPosLum();
-	
+
 	OpenGL2ShaderColorPosLum(const OpenGL2ShaderColorPosLum&) = delete;
 	OpenGL2ShaderColorPosLum& operator=(const OpenGL2ShaderColorPosLum&) = delete;
-	
+
 	using morda::ShaderColor::render;
-	
-	void render(const kolme::Matr4f& m, const morda::VertexArray& va, kolme::Vec4f color)const override;
+
+	void render(const r4::mat4f& m, const morda::VertexArray& va, r4::vec4f color)const override;
 };
 

@@ -29,18 +29,18 @@ OpenGL2Factory::~OpenGL2Factory()noexcept{
 
 
 
-std::shared_ptr<morda::Texture2D> OpenGL2Factory::createTexture2D(morda::Texture2D::TexType_e type, kolme::Vec2ui dim, const utki::Buf<std::uint8_t>& data) {
+std::shared_ptr<morda::Texture2D> OpenGL2Factory::createTexture2D(morda::Texture2D::TexType_e type, r4::vec2ui dim, const utki::Buf<std::uint8_t>& data) {
 	//TODO: turn these asserts to real checks with exceptions throwing
 	ASSERT(data.size() % morda::Texture2D::bytesPerPixel(type) == 0)
 	ASSERT(data.size() % dim.x == 0)
 
 	ASSERT(data.size() == 0 || data.size() / morda::Texture2D::bytesPerPixel(type) / dim.x == dim.y)
-	
+
 	auto ret = std::make_shared<OpenGL2Texture2D>(dim.to<float>());
-	
+
 	//TODO: save previous bind and restore it after?
 	ret->bind(0);
-	
+
 	GLint internalFormat;
 	switch(type){
 		default:
@@ -82,22 +82,22 @@ std::shared_ptr<morda::Texture2D> OpenGL2Factory::createTexture2D(morda::Texture
 	assertOpenGLNoError();
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	assertOpenGLNoError();
-	
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	
+
 	return ret;
 }
 
-std::shared_ptr<morda::VertexBuffer> OpenGL2Factory::createVertexBuffer(const utki::Buf<kolme::Vec4f> vertices){
+std::shared_ptr<morda::VertexBuffer> OpenGL2Factory::createVertexBuffer(const utki::Buf<r4::vec4f> vertices){
 	return std::make_shared<OpenGL2VertexBuffer>(vertices);
 }
 
-std::shared_ptr<morda::VertexBuffer> OpenGL2Factory::createVertexBuffer(const utki::Buf<kolme::Vec3f> vertices){
+std::shared_ptr<morda::VertexBuffer> OpenGL2Factory::createVertexBuffer(const utki::Buf<r4::vec3f> vertices){
 	return std::make_shared<OpenGL2VertexBuffer>(vertices);
 }
 
-std::shared_ptr<morda::VertexBuffer> OpenGL2Factory::createVertexBuffer(const utki::Buf<kolme::Vec2f> vertices){
+std::shared_ptr<morda::VertexBuffer> OpenGL2Factory::createVertexBuffer(const utki::Buf<r4::vec2f> vertices){
 	return std::make_shared<OpenGL2VertexBuffer>(vertices);
 }
 
