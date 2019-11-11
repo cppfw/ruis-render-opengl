@@ -8,7 +8,7 @@ class MordaOpengl2Ren < Formula
   depends_on "prorab-extra" => :build
   depends_on "libmorda"
   depends_on "glew"
-  depends_on "libkolme"
+  depends_on "r4"
 
   def install
     ENV['PATH'] += ':/usr/local/bin'
