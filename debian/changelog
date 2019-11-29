@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.23) unstable; urgency=medium
+
+  * debian buster
+
+ -- Ivan Gagis <igagis@gmail.com>  Sat, 30 Nov 2019 01:11:29 +0200
+
 libmorda-opengl2-ren (0.1.22) unstable; urgency=medium
 
   * homebrew dependencies fixed
