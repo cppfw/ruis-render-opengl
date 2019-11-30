@@ -26,7 +26,7 @@ nuget{
 	}
 	dependencies {
 		packages : {
-			libkolme/1.0.6;
+			r4/0.1.0;
 			glew.v140/1.12.0;
 			libutki/1.0.22;
 			libmorda/0.5.10;
