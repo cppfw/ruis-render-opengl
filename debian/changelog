@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.26) unstable; urgency=medium
+
+  * relink to libs
+
+ -- Ivan Gagis <igagis@gmail.com>  Wed, 08 Jan 2020 20:54:42 +0200
+
 libmorda-opengl2-ren (0.1.25) unstable; urgency=medium
 
   * relink to libs
