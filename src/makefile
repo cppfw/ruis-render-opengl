@@ -24,14 +24,13 @@ else
     this_cxxflags += -O3
 endif
 
-
 ifeq ($(prorab_os), linux)
-    this_cxxflags += -fPIC #generate position independent code
+    this_cxxflags += -fPIC # generate position independent code
     this_ldlibs += -lGL -lGLEW
 else ifeq ($(prorab_os), windows)
     this_ldlibs += -lopengl32 -lglew32 -lstdc++
 else ifeq ($(prorab_os), macosx)
-    this_cxxflags += -stdlib=libc++ #this is needed to be able to use c++11 std lib
+    this_cxxflags += -stdlib=libc++ #t his is needed to be able to use c++11 std lib
     this_ldlibs += -lGLEW -lc++
 endif
 
