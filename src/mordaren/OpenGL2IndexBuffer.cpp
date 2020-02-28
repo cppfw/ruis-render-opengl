@@ -6,7 +6,7 @@
 
 using namespace mordaren;
 
-OpenGL2IndexBuffer::OpenGL2IndexBuffer(const utki::Buf<std::uint16_t> indices) :
+OpenGL2IndexBuffer::OpenGL2IndexBuffer(const utki::span<std::uint16_t> indices) :
 		elementType(GL_UNSIGNED_SHORT),
 		elementsCount(GLsizei(indices.size()))
 {	
@@ -14,9 +14,5 @@ OpenGL2IndexBuffer::OpenGL2IndexBuffer(const utki::Buf<std::uint16_t> indices) :
 	assertOpenGLNoError();
 	
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.sizeInBytes(), &*indices.begin(), GL_STATIC_DRAW);
-	assertOpenGLNoError();
-	
-	//TODO: remove this
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	assertOpenGLNoError();
 }

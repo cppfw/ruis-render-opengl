@@ -37,11 +37,11 @@ OpenGL2ShaderTexture::OpenGL2ShaderTexture() :
 						#	define mediump
 						#	define lowp
 						#endif
-
+		
 						uniform sampler2D texture0;
-
+		
 						varying highp vec2 tc0;
-
+		
 						void main(void){
 							gl_FragColor = texture2D(texture0, tc0);
 						}
@@ -52,10 +52,10 @@ OpenGL2ShaderTexture::OpenGL2ShaderTexture() :
 }
 
 
-void OpenGL2ShaderTexture::render(const r4::mat4f& m, const morda::VertexArray& va, const morda::Texture2D& tex)const{
+void OpenGL2ShaderTexture::render(const r4::mat4f& m, const morda::vertex_array& va, const morda::texture_2d& tex)const{
 	static_cast<const OpenGL2Texture2D&>(tex).bind(0);
 	this->bind();
-
+	
 	this->OpenGL2ShaderBase::render(m, va);
 }
 

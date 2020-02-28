@@ -28,11 +28,11 @@ OpenGL2ShaderColorPosLum::OpenGL2ShaderColorPosLum() :
 						#	define mediump
 						#	define lowp
 						#endif
-
+		
 						uniform lowp vec4 uniformColor;
-
+		
 						varying highp float lum;
-
+		
 						void main(void){
 							gl_FragColor = vec4(uniformColor.x, uniformColor.y, uniformColor.z, uniformColor.w * lum);
 						}
@@ -42,10 +42,10 @@ OpenGL2ShaderColorPosLum::OpenGL2ShaderColorPosLum() :
 	this->colorUniform = this->getUniform("uniformColor");
 }
 
-void OpenGL2ShaderColorPosLum::render(const r4::mat4f& m, const morda::VertexArray& va, r4::vec4f color)const {
+void OpenGL2ShaderColorPosLum::render(const r4::mat4f& m, const morda::vertex_array& va, r4::vec4f color)const{
 	this->bind();
-
+	
 	this->setUniform4f(this->colorUniform, color.x, color.y, color.z, color.w);
-
+	
 	this->OpenGL2ShaderBase::render(m, va);
 }

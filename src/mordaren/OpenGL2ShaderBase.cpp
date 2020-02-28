@@ -1,5 +1,5 @@
 #include <utki/debug.hpp>
-#include <utki/Exc.hpp>
+#include <utki/exception.hpp>
 
 #include <vector>
 
@@ -17,17 +17,17 @@ const OpenGL2ShaderBase* OpenGL2ShaderBase::boundShader = nullptr;
 
 
 GLenum OpenGL2ShaderBase::modeMap[] = {
-	GL_TRIANGLES,			//TRIANGLES
-	GL_TRIANGLE_FAN,		//TRIANGLE_FAN
-	GL_LINE_LOOP,			//LINE_LOOP
-	GL_TRIANGLE_STRIP		//TRIANGLE_STRIP
+	GL_TRIANGLES,			// TRIANGLES
+	GL_TRIANGLE_FAN,		// TRIANGLE_FAN
+	GL_LINE_LOOP,			// LINE_LOOP
+	GL_TRIANGLE_STRIP		// TRIANGLE_STRIP
 };
 
 
 
 
 namespace{
-//return true if not compiled
+// return true if not compiled
 bool checkForCompileErrors(GLuint shader) {
 	GLint value = 0;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &value);
@@ -73,7 +73,7 @@ ShaderWrapper::ShaderWrapper(const char* code, GLenum type) {
 	this->s = glCreateShader(type);
 
 	if (this->s == 0) {
-		throw utki::Exc("glCreateShader() failed");
+		throw utki::exception("glCreateShader() failed");
 	}
 
 	const char* c = code;
@@ -83,7 +83,7 @@ ShaderWrapper::ShaderWrapper(const char* code, GLenum type) {
 	if (checkForCompileErrors(this->s)) {
 		TRACE( << "Error while compiling:\n" << c << std::endl)
 		glDeleteShader(this->s);
-		throw utki::Exc("Error compiling shader");
+		throw utki::exception("Error compiling shader");
 	}
 }
 
@@ -95,11 +95,11 @@ ProgramWrapper::ProgramWrapper(const char* vertexShaderCode, const char* fragmen
 	this->p = glCreateProgram();
 	glAttachShader(this->p, vertexShader.s);
 	glAttachShader(this->p, fragmentShader.s);
-
+	
 	GLint maxAttribs;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &maxAttribs);
 	ASSERT(maxAttribs >= 0)
-
+	
 	for(GLuint i = 0; i < GLuint(maxAttribs); ++i){
 		std::stringstream ss;
 		ss << "a" << i;
@@ -107,12 +107,12 @@ ProgramWrapper::ProgramWrapper(const char* vertexShaderCode, const char* fragmen
 		glBindAttribLocation(this->p, i, ss.str().c_str());
 		assertOpenGLNoError();
 	}
-
+	
 	glLinkProgram(this->p);
 	if (checkForLinkErrors(this->p)) {
 		TRACE( << "Error while linking shader program" << vertexShaderCode << std::endl << fragmentShaderCode << std::endl)
 		glDeleteProgram(this->p);
-		throw utki::Exc("Error linking shader program");
+		throw utki::exception("Error linking shader program");
 	}
 }
 
@@ -128,45 +128,45 @@ OpenGL2ShaderBase::OpenGL2ShaderBase(const char* vertexShaderCode, const char* f
 GLint OpenGL2ShaderBase::getUniform(const char* n) {
 	GLint ret = glGetUniformLocation(this->program.p, n);
 	if(ret < 0){
-		throw utki::Exc("No uniform found in the shader program");
+		throw utki::exception("No uniform found in the shader program");
 	}
 	return ret;
 }
 
-void OpenGL2ShaderBase::render(const r4::mat4f& m, const morda::VertexArray& va)const{
+void OpenGL2ShaderBase::render(const r4::mat4f& m, const morda::vertex_array& va)const{
 	ASSERT(this->isBound())
-
+	
 	ASSERT(dynamic_cast<const OpenGL2IndexBuffer*>(va.indices.operator ->()))
 	const OpenGL2IndexBuffer& ivbo = static_cast<const OpenGL2IndexBuffer&>(*va.indices);
-
+	
 	this->setMatrix(m);
-
+	
 	for(unsigned i = 0; i != va.buffers.size(); ++i){
 		ASSERT(dynamic_cast<OpenGL2VertexBuffer*>(va.buffers[i].operator->()))
 		auto& vbo = static_cast<OpenGL2VertexBuffer&>(*va.buffers[i]);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo.buffer);
 		assertOpenGLNoError();
-
+		
 //		TRACE(<< "vbo.numComponents = " << vbo.numComponents << " vbo.type = " << vbo.type << std::endl)
-
+		
 		glVertexAttribPointer(i, vbo.numComponents, vbo.type, GL_FALSE, 0, nullptr);
 		assertOpenGLNoError();
-
+		
 		glEnableVertexAttribArray(i);
 		assertOpenGLNoError();
 	}
-
+	
 	{
 		ASSERT(dynamic_cast<OpenGL2IndexBuffer*>(va.indices.operator->()))
 		auto& ivbo = static_cast<OpenGL2IndexBuffer&>(*va.indices);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ivbo.buffer);
 		assertOpenGLNoError();
 	}
-
+	
 
 //	TRACE(<< "ivbo.elementsCount = " << ivbo.elementsCount << " ivbo.elementType = " << ivbo.elementType << std::endl)
-
-	glDrawElements(modeToGLMode(va.mode), ivbo.elementsCount, ivbo.elementType, nullptr);
+	
+	glDrawElements(modeToGLMode(va.rendering_mode), ivbo.elementsCount, ivbo.elementType, nullptr);
 	assertOpenGLNoError();
 }
 
