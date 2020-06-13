@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.30) unstable; urgency=medium
+
+  * nuget token updated
+
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 14 Jun 2020 02:19:50 +0300
+
 libmorda-opengl2-ren (0.1.29) unstable; urgency=medium
 
   * update to latest libs
