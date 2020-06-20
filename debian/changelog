@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.33) unstable; urgency=medium
+
+  * nuget headers directory structure corrected
+
+ -- Ivan Gagis <igagis@gmail.com>  Sat, 20 Jun 2020 15:15:59 +0300
+
 libmorda-opengl2-ren (0.1.32) unstable; urgency=medium
 
   * nuget headers directory corrected
