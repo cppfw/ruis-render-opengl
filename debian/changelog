@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.32) unstable; urgency=medium
+
+  * nuget headers directory corrected
+
+ -- Ivan Gagis <igagis@gmail.com>  Sat, 20 Jun 2020 13:08:50 +0300
+
 libmorda-opengl2-ren (0.1.31) unstable; urgency=medium
 
   * remove unikod dependency, update to new naming convention
