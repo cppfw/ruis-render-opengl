@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.31) unstable; urgency=medium
+
+  * remove unikod dependency, update to new naming convention
+
+ -- Ivan Gagis <igagis@gmail.com>  Sat, 20 Jun 2020 10:21:36 +0300
+
 libmorda-opengl2-ren (0.1.30) unstable; urgency=medium
 
   * nuget token updated
