@@ -35,8 +35,8 @@ nuget{
 	files {
 		//this is needed to put headers in the base folder
 		nestedInclude: {
-			#destination = ${d_include}mordaren;
-			"..\src\mordaren\**\*.hpp"
+			#destination = ${d_include}morda;
+			"..\src\morda\**\*.hpp"
 		};
 		
 		[x86,v140,release] {
