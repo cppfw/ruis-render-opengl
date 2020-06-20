@@ -1,15 +1,14 @@
-#include "OpenGL2ShaderTexture.hpp"
+#include "shader_texture.hpp"
 
-#include "OpenGL2Texture2D.hpp"
-#include "OpenGL2VertexBuffer.hpp"
-#include "OpenGL2VertexArray.hpp"
-#include "OpenGL2IndexBuffer.hpp"
+#include "texture_2d.hpp"
+#include "vertex_buffer.hpp"
+#include "vertex_array.hpp"
+#include "index_buffer.hpp"
+#include "util.hpp"
 
-#include "OpenGL2_util.hpp"
+using namespace morda::render_opengl2;
 
-using namespace mordaren;
-
-OpenGL2ShaderTexture::OpenGL2ShaderTexture() :
+shader_texture::shader_texture() :
 		OpenGL2ShaderBase(
 				R"qwertyuiop(
 						#ifndef GL_ES
@@ -52,8 +51,8 @@ OpenGL2ShaderTexture::OpenGL2ShaderTexture() :
 }
 
 
-void OpenGL2ShaderTexture::render(const r4::mat4f& m, const morda::vertex_array& va, const morda::texture_2d& tex)const{
-	static_cast<const OpenGL2Texture2D&>(tex).bind(0);
+void shader_texture::render(const r4::mat4f& m, const morda::vertex_array& va, const morda::texture_2d& tex)const{
+	static_cast<const texture_2d&>(tex).bind(0);
 	this->bind();
 	
 	this->OpenGL2ShaderBase::render(m, va);

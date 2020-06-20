@@ -1,7 +1,10 @@
-#include "OpenGL2ShaderColorPosLum.hpp"
+#include "shader_color_pos_tex.hpp"
 
+#include "texture_2d.hpp"
 
-OpenGL2ShaderColorPosLum::OpenGL2ShaderColorPosLum() :
+using namespace morda::render_opengl2;
+
+shader_color_pos_tex::shader_color_pos_tex() :
 		OpenGL2ShaderBase(
 				R"qwertyuiop(
 						#ifndef GL_ES
@@ -11,15 +14,16 @@ OpenGL2ShaderColorPosLum::OpenGL2ShaderColorPosLum() :
 						#endif
 
 						attribute highp vec4 a0;
-						attribute highp float a1;
+
+						attribute highp vec2 a1;
 
 						uniform highp mat4 matrix;
 
-						varying highp float lum;
+						varying highp vec2 tc0;
 
 						void main(void){
 							gl_Position = matrix * a0;
-							lum = a1;
+							tc0 = a1;
 						}
 					)qwertyuiop",
 				R"qwertyuiop(
@@ -29,12 +33,14 @@ OpenGL2ShaderColorPosLum::OpenGL2ShaderColorPosLum() :
 						#	define lowp
 						#endif
 		
-						uniform lowp vec4 uniformColor;
+						uniform sampler2D texture0;
 		
-						varying highp float lum;
+						uniform highp vec4 uniformColor;
+		
+						varying highp vec2 tc0;
 		
 						void main(void){
-							gl_FragColor = vec4(uniformColor.x, uniformColor.y, uniformColor.z, uniformColor.w * lum);
+							gl_FragColor = texture2D(texture0, tc0) * uniformColor;
 						}
 					)qwertyuiop"
 			)
@@ -42,7 +48,8 @@ OpenGL2ShaderColorPosLum::OpenGL2ShaderColorPosLum() :
 	this->colorUniform = this->getUniform("uniformColor");
 }
 
-void OpenGL2ShaderColorPosLum::render(const r4::mat4f& m, const morda::vertex_array& va, r4::vec4f color)const{
+void shader_color_pos_tex::render(const r4::mat4f& m, const morda::vertex_array& va, r4::vec4f color, const morda::texture_2d& tex)const{
+	static_cast<const texture_2d&>(tex).bind(0);
 	this->bind();
 	
 	this->setUniform4f(this->colorUniform, color.x, color.y, color.z, color.w);

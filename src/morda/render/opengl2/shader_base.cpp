@@ -3,18 +3,17 @@
 
 #include <vector>
 
-#include "OpenGL2ShaderBase.hpp"
-#include "OpenGL2_util.hpp"
-#include "OpenGL2VertexArray.hpp"
-#include "OpenGL2IndexBuffer.hpp"
-#include "OpenGL2VertexBuffer.hpp"
+#include "shader_base.hpp"
+#include "util.hpp"
+#include "vertex_array.hpp"
+#include "index_buffer.hpp"
+#include "vertex_buffer.hpp"
 
 #include <GL/glew.h>
 
-using namespace mordaren;
+using namespace morda::render_opengl2;
 
 const OpenGL2ShaderBase* OpenGL2ShaderBase::boundShader = nullptr;
-
 
 GLenum OpenGL2ShaderBase::modeMap[] = {
 	GL_TRIANGLES,			// TRIANGLES
@@ -22,9 +21,6 @@ GLenum OpenGL2ShaderBase::modeMap[] = {
 	GL_LINE_LOOP,			// LINE_LOOP
 	GL_TRIANGLE_STRIP		// TRIANGLE_STRIP
 };
-
-
-
 
 namespace{
 // return true if not compiled
@@ -47,7 +43,7 @@ bool checkForCompileErrors(GLuint shader) {
 	return false;
 }
 
-//return true if not linked
+// return true if not linked
 bool checkForLinkErrors(GLuint program){
 	GLint value = 0;
 	glGetProgramiv(program, GL_LINK_STATUS, &value);
@@ -67,9 +63,7 @@ bool checkForLinkErrors(GLuint program){
 
 }
 
-
-
-ShaderWrapper::ShaderWrapper(const char* code, GLenum type) {
+shader_wrapper::shader_wrapper(const char* code, GLenum type) {
 	this->s = glCreateShader(type);
 
 	if (this->s == 0) {
@@ -87,8 +81,7 @@ ShaderWrapper::ShaderWrapper(const char* code, GLenum type) {
 	}
 }
 
-
-ProgramWrapper::ProgramWrapper(const char* vertexShaderCode, const char* fragmentShaderCode) :
+program_wrapper::program_wrapper(const char* vertexShaderCode, const char* fragmentShaderCode) :
 		vertexShader(vertexShaderCode, GL_VERTEX_SHADER),
 		fragmentShader(fragmentShaderCode, GL_FRAGMENT_SHADER)
 {
@@ -116,14 +109,10 @@ ProgramWrapper::ProgramWrapper(const char* vertexShaderCode, const char* fragmen
 	}
 }
 
-
-
-
 OpenGL2ShaderBase::OpenGL2ShaderBase(const char* vertexShaderCode, const char* fragmentShaderCode) :
 		program(vertexShaderCode, fragmentShaderCode),
 		matrixUniform(this->getUniform("matrix"))
-{
-}
+{}
 
 GLint OpenGL2ShaderBase::getUniform(const char* n) {
 	GLint ret = glGetUniformLocation(this->program.p, n);
@@ -136,14 +125,14 @@ GLint OpenGL2ShaderBase::getUniform(const char* n) {
 void OpenGL2ShaderBase::render(const r4::mat4f& m, const morda::vertex_array& va)const{
 	ASSERT(this->isBound())
 	
-	ASSERT(dynamic_cast<const OpenGL2IndexBuffer*>(va.indices.operator ->()))
-	const OpenGL2IndexBuffer& ivbo = static_cast<const OpenGL2IndexBuffer&>(*va.indices);
+	ASSERT(dynamic_cast<const index_buffer*>(va.indices.operator ->()))
+	const index_buffer& ivbo = static_cast<const index_buffer&>(*va.indices);
 	
 	this->setMatrix(m);
 	
 	for(unsigned i = 0; i != va.buffers.size(); ++i){
-		ASSERT(dynamic_cast<OpenGL2VertexBuffer*>(va.buffers[i].operator->()))
-		auto& vbo = static_cast<OpenGL2VertexBuffer&>(*va.buffers[i]);
+		ASSERT(dynamic_cast<vertex_buffer*>(va.buffers[i].operator->()))
+		auto& vbo = static_cast<vertex_buffer&>(*va.buffers[i]);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo.buffer);
 		assertOpenGLNoError();
 		
@@ -157,16 +146,14 @@ void OpenGL2ShaderBase::render(const r4::mat4f& m, const morda::vertex_array& va
 	}
 	
 	{
-		ASSERT(dynamic_cast<OpenGL2IndexBuffer*>(va.indices.operator->()))
-		auto& ivbo = static_cast<OpenGL2IndexBuffer&>(*va.indices);
+		ASSERT(dynamic_cast<index_buffer*>(va.indices.operator->()))
+		auto& ivbo = static_cast<index_buffer&>(*va.indices);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ivbo.buffer);
 		assertOpenGLNoError();
 	}
 	
-
 //	TRACE(<< "ivbo.elementsCount = " << ivbo.elementsCount << " ivbo.elementType = " << ivbo.elementType << std::endl)
 	
 	glDrawElements(modeToGLMode(va.rendering_mode), ivbo.elementsCount, ivbo.elementType, nullptr);
 	assertOpenGLNoError();
 }
-

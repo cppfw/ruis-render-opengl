@@ -5,7 +5,7 @@ this_name := morda-opengl2-ren
 
 this_soname := $(shell cat $(d)soname.txt)
 
-this_srcs += $(call prorab-src-dir,mordaren)
+this_srcs += $(call prorab-src-dir,.)
 
 this_cxxflags += -Wall # enable all warnings
 this_cxxflags += -Wno-comment # no warnings on nested comments
