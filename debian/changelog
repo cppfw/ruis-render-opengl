@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.36) unstable; urgency=medium
+
+  * update to latest libs
+
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 05 Jul 2020 01:06:47 +0300
+
 libmorda-opengl2-ren (0.1.35) unstable; urgency=medium
 
   * build for ubuntu eoan
