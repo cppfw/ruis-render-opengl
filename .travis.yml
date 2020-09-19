@@ -72,7 +72,7 @@ before_install:
   fi
 - if [ "$TRAVIS_JOB_NAME" == "macosx" ]; then
     brew unlink python@2 &&
-    brew install prorab prorab-extra glew r4 libmorda libpng;
+    brew install `myci-list-deps-homebrew.sh`;
   fi
 - if [ "$TRAVIS_JOB_NAME" == "msys2" ]; then
     choco upgrade --no-progress -y msys2 &&
