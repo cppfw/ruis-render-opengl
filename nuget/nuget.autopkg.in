@@ -26,10 +26,10 @@ nuget{
 	}
 	dependencies {
 		packages : {
-			r4/0.1.0;
+			libr4/0.1.30;
 			glew.v140/1.12.0;
 			libutki/1.0.22;
-			libmorda/0.5.10;
+			libmorda/0.5.141;
 		};
 	}
 	files {
