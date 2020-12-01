@@ -21,6 +21,8 @@ Global
 		v142_Debug_MT|x86 = v142_Debug_MT|x86
 		v142_Release_MD|x64 = v142_Release_MD|x64
 		v142_Release_MD|x86 = v142_Release_MD|x86
+		v142_Release_MT|x64 = v142_Release_MT|x64
+		v142_Release_MT|x86 = v142_Release_MT|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{48379684-A77A-41E9-9052-4D472C286665}.v140_Debug|x64.ActiveCfg = v140_Debug|x64
@@ -51,6 +53,10 @@ Global
 		{48379684-A77A-41E9-9052-4D472C286665}.v142_Release_MD|x64.Build.0 = v142_Release_MD|x64
 		{48379684-A77A-41E9-9052-4D472C286665}.v142_Release_MD|x86.ActiveCfg = v142_Release_MD|Win32
 		{48379684-A77A-41E9-9052-4D472C286665}.v142_Release_MD|x86.Build.0 = v142_Release_MD|Win32
+		{48379684-A77A-41E9-9052-4D472C286665}.v142_Release_MT|x64.ActiveCfg = v142_Release_MT|x64
+		{48379684-A77A-41E9-9052-4D472C286665}.v142_Release_MT|x64.Build.0 = v142_Release_MT|x64
+		{48379684-A77A-41E9-9052-4D472C286665}.v142_Release_MT|x86.ActiveCfg = v142_Release_MT|Win32
+		{48379684-A77A-41E9-9052-4D472C286665}.v142_Release_MT|x86.Build.0 = v142_Release_MT|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
