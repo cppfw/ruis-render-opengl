@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.41) unstable; urgency=medium
+
+  * github actions
+
+ -- Ivan Gagis <igagis@gmail.com>  Tue, 01 Dec 2020 22:06:48 +0200
+
 libmorda-opengl2-ren (0.1.40) unstable; urgency=medium
 
   * correct msvs dependencies, rename homebrew package
