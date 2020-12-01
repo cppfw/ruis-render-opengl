@@ -13,9 +13,9 @@ nuget{
 		title: OpenGL 2 renderer for morda C++ GUI library;
 		authors: {Ivan Gagis};
 		owners: {Ivan Gagis};
-		licenseUrl: "https://raw.githubusercontent.com/igagis/morda-opengl2-ren/master/LICENSE";
-		projectUrl: "https://github.com/igagis/morda-opengl2-ren";
-		iconUrl: "https://github.com/igagis/morda-opengl2-ren/blob/master/logo.svg";
+		licenseUrl: "https://raw.githubusercontent.com/cppfw/morda-opengl2-ren/master/LICENSE";
+		projectUrl: "https://github.com/cppfw/morda-opengl2-ren";
+		iconUrl: "https://github.com/cppfw/morda-opengl2-ren/blob/master/logo.svg";
 		requireLicenseAcceptance:false;
 		summary: OpenGL 2 renderer for morda C++ GUI library;
 
