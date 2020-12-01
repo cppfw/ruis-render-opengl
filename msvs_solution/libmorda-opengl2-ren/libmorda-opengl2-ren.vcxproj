@@ -514,7 +514,6 @@
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\glew.v140.1.12.0\build\native\glew.v140.targets" Condition="Exists('..\packages\glew.v140.1.12.0\build\native\glew.v140.targets')" />
     <Import Project="..\packages\freetype_static.2.10.1.7\build\native\freetype_static.targets" Condition="Exists('..\packages\freetype_static.2.10.1.7\build\native\freetype_static.targets')" />
-    <Import Project="..\packages\libagg.2.7.1\build\native\libagg.targets" Condition="Exists('..\packages\libagg.2.7.1\build\native\libagg.targets')" />
     <Import Project="..\packages\libjpeg_static.6.1.1.9\build\native\libjpeg_static.targets" Condition="Exists('..\packages\libjpeg_static.6.1.1.9\build\native\libjpeg_static.targets')" />
     <Import Project="..\packages\libutki.1.1.103\build\native\libutki.targets" Condition="Exists('..\packages\libutki.1.1.103\build\native\libutki.targets')" />
     <Import Project="..\packages\libmikroxml.0.1.30\build\native\libmikroxml.targets" Condition="Exists('..\packages\libmikroxml.0.1.30\build\native\libmikroxml.targets')" />
@@ -535,7 +534,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\glew.v140.1.12.0\build\native\glew.v140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glew.v140.1.12.0\build\native\glew.v140.targets'))" />
     <Error Condition="!Exists('..\packages\freetype_static.2.10.1.7\build\native\freetype_static.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\freetype_static.2.10.1.7\build\native\freetype_static.targets'))" />
-    <Error Condition="!Exists('..\packages\libagg.2.7.1\build\native\libagg.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libagg.2.7.1\build\native\libagg.targets'))" />
     <Error Condition="!Exists('..\packages\libjpeg_static.6.1.1.9\build\native\libjpeg_static.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libjpeg_static.6.1.1.9\build\native\libjpeg_static.targets'))" />
     <Error Condition="!Exists('..\packages\libutki.1.1.103\build\native\libutki.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libutki.1.1.103\build\native\libutki.targets'))" />
     <Error Condition="!Exists('..\packages\libmikroxml.0.1.30\build\native\libmikroxml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libmikroxml.0.1.30\build\native\libmikroxml.targets'))" />
