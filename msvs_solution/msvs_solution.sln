@@ -17,6 +17,8 @@ Global
 		v141_Release|x86 = v141_Release|x86
 		v142_Debug_MD|x64 = v142_Debug_MD|x64
 		v142_Debug_MD|x86 = v142_Debug_MD|x86
+		v142_Debug_MT|x64 = v142_Debug_MT|x64
+		v142_Debug_MT|x86 = v142_Debug_MT|x86
 		v142_Release_MD|x64 = v142_Release_MD|x64
 		v142_Release_MD|x86 = v142_Release_MD|x86
 	EndGlobalSection
@@ -41,6 +43,10 @@ Global
 		{48379684-A77A-41E9-9052-4D472C286665}.v142_Debug_MD|x64.Build.0 = v142_Debug_MD|x64
 		{48379684-A77A-41E9-9052-4D472C286665}.v142_Debug_MD|x86.ActiveCfg = v142_Debug_MD|Win32
 		{48379684-A77A-41E9-9052-4D472C286665}.v142_Debug_MD|x86.Build.0 = v142_Debug_MD|Win32
+		{48379684-A77A-41E9-9052-4D472C286665}.v142_Debug_MT|x64.ActiveCfg = v142_Debug_MT|x64
+		{48379684-A77A-41E9-9052-4D472C286665}.v142_Debug_MT|x64.Build.0 = v142_Debug_MT|x64
+		{48379684-A77A-41E9-9052-4D472C286665}.v142_Debug_MT|x86.ActiveCfg = v142_Debug_MT|Win32
+		{48379684-A77A-41E9-9052-4D472C286665}.v142_Debug_MT|x86.Build.0 = v142_Debug_MT|Win32
 		{48379684-A77A-41E9-9052-4D472C286665}.v142_Release_MD|x64.ActiveCfg = v142_Release_MD|x64
 		{48379684-A77A-41E9-9052-4D472C286665}.v142_Release_MD|x64.Build.0 = v142_Release_MD|x64
 		{48379684-A77A-41E9-9052-4D472C286665}.v142_Release_MD|x86.ActiveCfg = v142_Release_MD|Win32
