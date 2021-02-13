@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.43) unstable; urgency=medium
+
+  * dependency versions update
+
+ -- Ivan Gagis <igagis@gmail.com>  Sat, 13 Feb 2021 23:10:53 +0200
+
 libmorda-opengl2-ren (0.1.42) unstable; urgency=medium
 
   * update to latest r4
