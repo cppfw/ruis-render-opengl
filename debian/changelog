@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.45) unstable; urgency=medium
+
+  * msvs: disable whole program optimization
+
+ -- Ivan Gagis <igagis@gmail.com>  Wed, 17 Mar 2021 21:35:45 +0200
+
 libmorda-opengl2-ren (0.1.44) unstable; urgency=medium
 
   * update to latest morda
