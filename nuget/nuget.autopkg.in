@@ -32,11 +32,11 @@ nuget{
 	dependencies {
 		packages : {
 			glew.v140/1.12.0;
-			libmorda/0.5.158;
+			libmorda/0.5.163;
 		};
 	}
 	files {
-		//this is needed to put headers in the base folder
+		// this is needed to put headers in the base folder
 		nestedInclude: {
 			#destination = ${d_include}morda\render\opengl2;
 			"..\src\morda\render\opengl2\**\*.hpp"
@@ -44,7 +44,7 @@ nuget{
 
 		// ======== v140 ========
 		
-		/*
+/*
 		[x86,v140,release] {
 			lib: ..\msvs_solution\v140_Release\libmorda-opengl2-ren.lib;
 		}
@@ -57,29 +57,26 @@ nuget{
 		[x64,v140,debug] {
 			lib: ..\msvs_solution\x64\v140_Debug\libmorda-opengl2-ren.lib;
 		}
-		*/
+*/
 
 		// ======== v141 ========
-
+/*
 		[x86,v141,release] {
 			lib: ..\msvs_solution\v141_Release\libmorda-opengl2-ren.lib;
 		}
-
 		[x86,v141,debug] {
 			lib: ..\msvs_solution\v141_Debug\libmorda-opengl2-ren.lib;
 		}
-
 		[x64,v141,release] {
 			lib: ..\msvs_solution\x64\v141_Release\libmorda-opengl2-ren.lib;
 		}
-
 		[x64,v141,debug] {
 			lib: ..\msvs_solution\x64\v141_Debug\libmorda-opengl2-ren.lib;
 		}
-
+*/
 		// ======== v142 ========
 
-		/*
+/*
 		[x86,v142,release,MultiThreaded] {
 			lib: ..\msvs_solution\v142_Release_MT\libmorda-opengl2-ren.lib;
 		}
@@ -92,7 +89,7 @@ nuget{
 		[x64,v142,debug,MultiThreadedDebug] {
 			lib: ..\msvs_solution\x64\v142_Debug_MT\libmorda-opengl2-ren.lib;
 		}
-		*/
+*/
 		
 		[x86,v142,release,MultiThreadedDLL] {
 			lib: ..\msvs_solution\v142_Release_MD\libmorda-opengl2-ren.lib;

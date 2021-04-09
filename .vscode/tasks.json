@@ -6,10 +6,11 @@
         {
             "label": "make",
             "type": "shell",
-            "command": "make aj=t",
+            "command": "make autojobs=true",
             "problemMatcher": [
                 "$gcc"
-            ]
+            ],
+            "group": "build"
         }
     ]
 }
