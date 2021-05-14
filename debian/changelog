@@ -1,3 +1,9 @@
+libmorda-opengl2-ren (0.1.47) unstable; urgency=medium
+
+  * relink to latest libs
+
+ -- Ivan Gagis <igagis@gmail.com>  Fri, 14 May 2021 23:43:18 +0300
+
 libmorda-opengl2-ren (0.1.46) unstable; urgency=medium
 
   * deploy to jfrog
