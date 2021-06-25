@@ -1,7 +1,6 @@
 include prorab.mk
 
-
-this_name := morda-opengl2-ren
+this_name := morda-render-opengl
 
 this_soname := $(shell cat $(d)soname.txt)
 

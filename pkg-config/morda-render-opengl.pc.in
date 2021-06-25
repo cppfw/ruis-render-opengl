@@ -1,0 +1,9 @@
+Name: morda-render-opengl   # human-readable name
+Description: C++ OpenGL 2 renderer for morda GUI library
+Version: $(version)
+URL: https://github.com/cppfw/morda-render-opengl
+Requires:
+Conflicts:
+Libs: -lmorda-render-opengl
+Libs.private:
+Cflags:

@@ -1,4 +1,4 @@
-:name: morda-opengl2-ren
+:name: morda-render-opengl
 
 = {name}
 
