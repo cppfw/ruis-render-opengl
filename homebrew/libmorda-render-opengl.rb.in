@@ -1,5 +1,5 @@
-class LibmordaOpengl2Ren < Formula
-  desc "OpenGl2 renderer for morda GUI library."
+class LibmordaRenderOpengl < Formula
+  desc "OpenGl renderer for morda GUI library."
   homepage "https://github.com/cppfw/morda-render-opengl"
   url "https://github.com/cppfw/morda-render-opengl/archive/$(version).tar.gz"
   sha256 "$(sha256)"
