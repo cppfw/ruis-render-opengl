@@ -1,3 +1,9 @@
+libmorda-render-opengl (0.1.50) unstable; urgency=medium
+
+  * fix nuget headers path
+
+ -- Ivan Gagis <igagis@gmail.com>  Thu, 22 Jul 2021 14:40:35 +0300
+
 libmorda-render-opengl (0.1.49) unstable; urgency=medium
 
   * fix homebrew formula name
