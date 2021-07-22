@@ -15,18 +15,18 @@ nuget{
 	nuspec{
 		id = libmorda-render-opengl;
 		version : $(version);
-		title: OpenGL 2 renderer for morda C++ GUI library;
+		title: OpenGL renderer for morda C++ GUI library;
 		authors: {Ivan Gagis};
 		owners: {Ivan Gagis};
 		licenseUrl: "https://raw.githubusercontent.com/cppfw/morda-render-opengl/master/LICENSE";
 		projectUrl: "https://github.com/cppfw/morda-render-opengl";
 		iconUrl: "https://github.com/cppfw/morda-render-opengl/blob/master/logo.svg";
 		requireLicenseAcceptance:false;
-		summary: OpenGL 2 renderer for morda C++ GUI library;
+		summary: OpenGL renderer for morda C++ GUI library;
 
-		description: @"OpenGL 2 renderer for morda C++ GUI library";
+		description: @"OpenGL renderer for morda C++ GUI library";
 		releaseNotes: "Initial release";
-		copyright: Copyright 2016 Ivan Gagis;
+		copyright: Copyright 2016-2021 Ivan Gagis;
 		tags: { native};
 	}
 	dependencies {

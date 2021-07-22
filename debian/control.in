@@ -11,8 +11,8 @@ Package: libmorda-render-opengl$(soname)
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: OpenGL 2 renderer for morda.
- OpenGL 2 renderer for morda GUI library.
+Description: OpenGL renderer for morda.
+ OpenGL renderer for morda GUI library.
 
 Package: libmorda-render-opengl$(soname)-dbg
 Section: debug
@@ -29,8 +29,8 @@ Depends:
 		libmorda-dev,
 		${misc:Depends}
 Suggests: libmorda-render-opengl-doc
-Description: OpenGL 2 renderer for morda.
- OpenGL 2 renderer for morda GUI library.
+Description: OpenGL renderer for morda.
+ OpenGL renderer for morda GUI library.
 
 Package: libmorda-render-opengl-doc
 Section: doc
