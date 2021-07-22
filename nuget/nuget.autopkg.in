@@ -38,8 +38,8 @@ nuget{
 	files {
 		// this is needed to put headers in the base folder
 		nestedInclude: {
-			#destination = ${d_include}morda\render\opengl2;
-			"..\src\morda\render\opengl2\**\*.hpp"
+			#destination = ${d_include}morda\render\opengl;
+			"..\src\morda\render\opengl\**\*.hpp"
 		};
 
 		// ======== v140 ========
