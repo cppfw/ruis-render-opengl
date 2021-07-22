@@ -23,7 +23,11 @@ Description: debugging symbols for libmorda-render-opengl$(soname) package.
 Package: libmorda-render-opengl-dev
 Section: libdevel
 Architecture: any
-Depends: libmorda-render-opengl$(soname) (= ${binary:Version}), libmorda-render-opengl$(soname)-dbg (= ${binary:Version}), ${misc:Depends}
+Depends:
+		libmorda-render-opengl$(soname) (= ${binary:Version}),
+		libmorda-render-opengl$(soname)-dbg (= ${binary:Version}),
+		libmorda-dev,
+		${misc:Depends}
 Suggests: libmorda-render-opengl-doc
 Description: OpenGL 2 renderer for morda.
  OpenGL 2 renderer for morda GUI library.
