@@ -1,3 +1,9 @@
+libmorda-render-opengl (0.1.49) unstable; urgency=medium
+
+  * fix homebrew formula name
+
+ -- Ivan Gagis <igagis@gmail.com>  Thu, 22 Jul 2021 12:45:51 +0300
+
 libmorda-render-opengl (0.1.48) unstable; urgency=medium
 
   * deploy to own repo
