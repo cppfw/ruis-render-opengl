@@ -5,7 +5,7 @@
 
 #include <GL/glew.h>
 
-using namespace morda::render_opengl2;
+using namespace morda::render_opengl;
 
 frame_buffer::frame_buffer(std::shared_ptr<morda::texture_2d> color) :
 		morda::frame_buffer(std::move(color))

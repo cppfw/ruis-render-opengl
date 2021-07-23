@@ -1,4 +1,4 @@
-#include "factory.hpp"
+#include "render_factory.hpp"
 
 #include "vertex_buffer.hpp"
 #include "vertex_array.hpp"
@@ -16,7 +16,7 @@
 
 #include <GL/glew.h>
 
-using namespace morda::render_opengl2;
+using namespace morda::render_opengl;
 
 render_factory::render_factory(){}
 

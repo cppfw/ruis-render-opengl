@@ -4,7 +4,7 @@
 
 #include <GL/glew.h>
 
-namespace morda{ namespace render_opengl2{
+namespace morda{ namespace render_opengl{
 
 struct texture_2d : public morda::texture_2d{
 	GLuint tex;

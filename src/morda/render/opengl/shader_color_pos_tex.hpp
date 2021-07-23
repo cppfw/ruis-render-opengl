@@ -4,11 +4,11 @@
 
 #include "shader_base.hpp"
 
-namespace morda{ namespace render_opengl2{
+namespace morda{ namespace render_opengl{
 
 class shader_color_pos_tex :
 		public morda::coloring_texturing_shader,
-		public OpenGL2ShaderBase
+		public shader_base
 {
 	GLint colorUniform;
 public:

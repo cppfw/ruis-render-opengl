@@ -8,11 +8,11 @@
 
 #include "opengl_buffer.hpp"
 
-namespace morda{ namespace render_opengl2{
+namespace morda{ namespace render_opengl{
 
 class vertex_buffer : public morda::vertex_buffer, public opengl_buffer{
 public:
-	const GLint numComponents;
+	const GLint num_components;
 	const GLenum type;
 	
 	vertex_buffer(utki::span<const r4::vector4<float>> vertices);

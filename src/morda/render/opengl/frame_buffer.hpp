@@ -5,7 +5,7 @@
 
 #include <GL/glew.h>
 
-namespace morda{ namespace render_opengl2{
+namespace morda{ namespace render_opengl{
 
 class frame_buffer : public morda::frame_buffer{
 public:

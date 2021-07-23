@@ -1,9 +1,9 @@
 #include "shader_color.hpp"
 
-using namespace morda::render_opengl2;
+using namespace morda::render_opengl;
 
 shader_color::shader_color() :
-		OpenGL2ShaderBase(
+		shader_base(
 				R"qwertyuiop(
 						#ifndef GL_ES
 						#	define highp
@@ -34,13 +34,13 @@ shader_color::shader_color() :
 				)qwertyuiop"
 			)
 {
-	this->colorUniform = this->getUniform("uniformColor");
+	this->colorUniform = this->get_uniform("uniformColor");
 }
 
 void shader_color::render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color)const{
 	this->bind();
 	
-	this->setUniform4f(this->colorUniform, color.x(), color.y(), color.z(), color.w());
+	this->set_uniform4f(this->colorUniform, color.x(), color.y(), color.z(), color.w());
 	
-	this->OpenGL2ShaderBase::render(m, va);
+	this->shader_base::render(m, va);
 }

@@ -13,7 +13,7 @@
 
 #include <GL/glew.h>
 
-namespace morda{ namespace render_opengl2{
+namespace morda{ namespace render_opengl{
 
 struct shader_wrapper{
 	GLuint s;
@@ -34,22 +34,22 @@ struct program_wrapper{
 	}
 };
 
-class OpenGL2ShaderBase{
+class shader_base{
 	program_wrapper program;
 	
 	const GLint matrixUniform;
 	
-	static const OpenGL2ShaderBase* boundShader;
+	static const shader_base* boundShader;
 public:
-	OpenGL2ShaderBase(const char* vertexShaderCode, const char* fragmentShaderCode);
+	shader_base(const char* vertexShaderCode, const char* fragmentShaderCode);
 	
-	OpenGL2ShaderBase(const OpenGL2ShaderBase&) = delete;
-	OpenGL2ShaderBase& operator=(const OpenGL2ShaderBase&) = delete;
+	shader_base(const shader_base&) = delete;
+	shader_base& operator=(const shader_base&) = delete;
 	
-	virtual ~OpenGL2ShaderBase()noexcept{}
+	virtual ~shader_base()noexcept{}
 
 protected:
-	GLint getUniform(const char* n);
+	GLint get_uniform(const char* n);
 	
 	void bind()const{
 		glUseProgram(program.p);
@@ -57,28 +57,28 @@ protected:
 		boundShader = this;
 	}
 	
-	bool isBound()const noexcept{
+	bool is_bound()const noexcept{
 		return this == boundShader;
 	}
 	
-	void setUniformMatrix4f(GLint id, const r4::matrix4<float>& m)const{
+	void set_uniform_matrix4f(GLint id, const r4::matrix4<float>& m)const{
 		glUniformMatrix4fv(id, 1, GL_TRUE, reinterpret_cast<const GLfloat*>(&m));
 		assertOpenGLNoError();
 	}
 	
-	void setUniform4f(GLint id, float x, float y, float z, float a)const{
+	void set_uniform4f(GLint id, float x, float y, float z, float a)const{
 		glUniform4f(id, x, y, z, a);
 		assertOpenGLNoError();
 	}
 	
-	void setMatrix(const r4::matrix4<float>& m)const{
-		this->setUniformMatrix4f(this->matrixUniform, m);
+	void set_matrix(const r4::matrix4<float>& m)const{
+		this->set_uniform_matrix4f(this->matrixUniform, m);
 	}
 	
-	static GLenum modeMap[];
+	static GLenum mode_map[];
 	
-	static GLenum modeToGLMode(morda::vertex_array::mode mode){
-		return modeMap[unsigned(mode)];
+	static GLenum mode_to_gl_mode(morda::vertex_array::mode mode){
+		return mode_map[unsigned(mode)];
 	}
 	
 	void render(const r4::matrix4<float>& m, const morda::vertex_array& va)const;

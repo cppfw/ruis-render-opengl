@@ -10,11 +10,11 @@
 
 #include <GL/glew.h>
 
-using namespace morda::render_opengl2;
+using namespace morda::render_opengl;
 
-const OpenGL2ShaderBase* OpenGL2ShaderBase::boundShader = nullptr;
+const shader_base* shader_base::boundShader = nullptr;
 
-GLenum OpenGL2ShaderBase::modeMap[] = {
+GLenum shader_base::mode_map[] = {
 	GL_TRIANGLES,			// TRIANGLES
 	GL_TRIANGLE_FAN,		// TRIANGLE_FAN
 	GL_LINE_LOOP,			// LINE_LOOP
@@ -108,12 +108,12 @@ program_wrapper::program_wrapper(const char* vertexShaderCode, const char* fragm
 	}
 }
 
-OpenGL2ShaderBase::OpenGL2ShaderBase(const char* vertexShaderCode, const char* fragmentShaderCode) :
+shader_base::shader_base(const char* vertexShaderCode, const char* fragmentShaderCode) :
 		program(vertexShaderCode, fragmentShaderCode),
-		matrixUniform(this->getUniform("matrix"))
+		matrixUniform(this->get_uniform("matrix"))
 {}
 
-GLint OpenGL2ShaderBase::getUniform(const char* n) {
+GLint shader_base::get_uniform(const char* n) {
 	GLint ret = glGetUniformLocation(this->program.p, n);
 	if(ret < 0){
 		throw std::logic_error("no uniform found in the shader program");
@@ -121,13 +121,13 @@ GLint OpenGL2ShaderBase::getUniform(const char* n) {
 	return ret;
 }
 
-void OpenGL2ShaderBase::render(const r4::matrix4<float>& m, const morda::vertex_array& va)const{
-	ASSERT(this->isBound())
+void shader_base::render(const r4::matrix4<float>& m, const morda::vertex_array& va)const{
+	ASSERT(this->is_bound())
 	
 	ASSERT(dynamic_cast<const index_buffer*>(va.indices.operator ->()))
 	const index_buffer& ivbo = static_cast<const index_buffer&>(*va.indices);
 	
-	this->setMatrix(m);
+	this->set_matrix(m);
 	
 	for(unsigned i = 0; i != va.buffers.size(); ++i){
 		ASSERT(dynamic_cast<vertex_buffer*>(va.buffers[i].operator->()))
@@ -137,7 +137,7 @@ void OpenGL2ShaderBase::render(const r4::matrix4<float>& m, const morda::vertex_
 		
 //		TRACE(<< "vbo.numComponents = " << vbo.numComponents << " vbo.type = " << vbo.type << std::endl)
 		
-		glVertexAttribPointer(i, vbo.numComponents, vbo.type, GL_FALSE, 0, nullptr);
+		glVertexAttribPointer(i, vbo.num_components, vbo.type, GL_FALSE, 0, nullptr);
 		assertOpenGLNoError();
 		
 		glEnableVertexAttribArray(i);
@@ -153,6 +153,6 @@ void OpenGL2ShaderBase::render(const r4::matrix4<float>& m, const morda::vertex_
 	
 //	TRACE(<< "ivbo.elementsCount = " << ivbo.elementsCount << " ivbo.elementType = " << ivbo.elementType << std::endl)
 	
-	glDrawElements(modeToGLMode(va.rendering_mode), ivbo.elementsCount, ivbo.elementType, nullptr);
+	glDrawElements(mode_to_gl_mode(va.rendering_mode), ivbo.elements_count, ivbo.element_type, nullptr);
 	assertOpenGLNoError();
 }

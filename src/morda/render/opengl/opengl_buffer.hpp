@@ -2,7 +2,7 @@
 
 #include <GL/glew.h>
 
-namespace morda{ namespace render_opengl2{
+namespace morda{ namespace render_opengl{
 
 class opengl_buffer {
 public:

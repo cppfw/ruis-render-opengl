@@ -2,7 +2,7 @@
 
 #include "util.hpp"
 
-using namespace morda::render_opengl2;
+using namespace morda::render_opengl;
 
 opengl_buffer::opengl_buffer() :
 		buffer([]() -> GLuint{

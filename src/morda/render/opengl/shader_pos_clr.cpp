@@ -1,9 +1,9 @@
 #include "shader_pos_clr.hpp"
 
-using namespace morda::render_opengl2;
+using namespace morda::render_opengl;
 
 shader_pos_clr::shader_pos_clr() :
-		OpenGL2ShaderBase(
+		shader_base(
 				R"qwertyuiop(
 						#ifndef GL_ES
 						#	define highp
@@ -43,6 +43,5 @@ shader_pos_clr::shader_pos_clr() :
 void shader_pos_clr::render(const r4::matrix4<float>& m, const morda::vertex_array& va) const {
 	this->bind();
 	
-	this->OpenGL2ShaderBase::render(m, va);
+	this->shader_base::render(m, va);
 }
-

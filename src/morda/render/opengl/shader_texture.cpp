@@ -6,10 +6,10 @@
 #include "index_buffer.hpp"
 #include "util.hpp"
 
-using namespace morda::render_opengl2;
+using namespace morda::render_opengl;
 
 shader_texture::shader_texture() :
-		OpenGL2ShaderBase(
+		shader_base(
 				R"qwertyuiop(
 						#ifndef GL_ES
 						#	define highp
@@ -47,12 +47,12 @@ shader_texture::shader_texture() :
 					)qwertyuiop"
 			)
 {
-	this->textureUniform = this->getUniform("texture0");
+	this->textureUniform = this->get_uniform("texture0");
 }
 
 void shader_texture::render(const r4::matrix4<float>& m, const morda::vertex_array& va, const morda::texture_2d& tex)const{
 	static_cast<const texture_2d&>(tex).bind(0);
 	this->bind();
 	
-	this->OpenGL2ShaderBase::render(m, va);
+	this->shader_base::render(m, va);
 }

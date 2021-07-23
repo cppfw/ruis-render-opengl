@@ -4,10 +4,10 @@
 
 #include <utki/config.hpp>
 
-using namespace morda::render_opengl2;
+using namespace morda::render_opengl;
 
 namespace{
-unsigned getMaxTextureSize(){
+unsigned get_max_texture_size(){
 	GLint val;
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &val);
 	ASSERT(val > 0)
@@ -20,7 +20,7 @@ renderer::renderer(std::unique_ptr<render_factory> factory) :
 				std::move(factory),
 				[](){
 					renderer::params p;
-					p.max_texture_size = getMaxTextureSize();
+					p.max_texture_size = get_max_texture_size();
 					return p;
 				}()
 			)

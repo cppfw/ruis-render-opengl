@@ -4,7 +4,7 @@
 
 #include <GL/glew.h>
 
-namespace morda{ namespace render_opengl2{
+namespace morda{ namespace render_opengl{
 
 class vertex_array : public morda::vertex_array{
 public:	
@@ -13,7 +13,6 @@ public:
 	vertex_array(const vertex_array&) = delete;
 	vertex_array& operator=(const vertex_array&) = delete;
 
-	
 private:
 
 };

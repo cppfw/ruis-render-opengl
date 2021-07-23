@@ -4,11 +4,11 @@
 
 #include "shader_base.hpp"
 
-namespace morda{ namespace render_opengl2{
+namespace morda{ namespace render_opengl{
 
 class shader_color :
 		public morda::coloring_shader,
-		public OpenGL2ShaderBase
+		public shader_base
 {
 	GLint colorUniform;
 public:
@@ -16,7 +16,6 @@ public:
 	
 	shader_color(const shader_color&) = delete;
 	shader_color& operator=(const shader_color&) = delete;
-	
 
 	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color)const override;
 };
