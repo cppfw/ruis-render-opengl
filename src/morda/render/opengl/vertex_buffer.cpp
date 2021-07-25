@@ -6,10 +6,10 @@ using namespace morda::render_opengl;
 
 void vertex_buffer::init(GLsizeiptr size, const GLvoid* data){
 	glBindBuffer(GL_ARRAY_BUFFER, this->buffer);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	
 	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 }
 
 vertex_buffer::vertex_buffer(utki::span<const r4::vector4<float>> vertices) :

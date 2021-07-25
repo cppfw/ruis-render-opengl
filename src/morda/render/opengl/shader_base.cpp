@@ -97,7 +97,7 @@ program_wrapper::program_wrapper(const char* vertexShaderCode, const char* fragm
 		ss << "a" << i;
 //		TRACE(<< ss.str() << std::endl)
 		glBindAttribLocation(this->p, i, ss.str().c_str());
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 	}
 	
 	glLinkProgram(this->p);
@@ -133,26 +133,26 @@ void shader_base::render(const r4::matrix4<float>& m, const morda::vertex_array&
 		ASSERT(dynamic_cast<vertex_buffer*>(va.buffers[i].operator->()))
 		auto& vbo = static_cast<vertex_buffer&>(*va.buffers[i]);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo.buffer);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 		
 //		TRACE(<< "vbo.numComponents = " << vbo.numComponents << " vbo.type = " << vbo.type << std::endl)
 		
 		glVertexAttribPointer(i, vbo.num_components, vbo.type, GL_FALSE, 0, nullptr);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 		
 		glEnableVertexAttribArray(i);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 	}
 	
 	{
 		ASSERT(dynamic_cast<index_buffer*>(va.indices.operator->()))
 		auto& ivbo = static_cast<index_buffer&>(*va.indices);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ivbo.buffer);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 	}
 	
 //	TRACE(<< "ivbo.elementsCount = " << ivbo.elementsCount << " ivbo.elementType = " << ivbo.elementType << std::endl)
 	
 	glDrawElements(mode_to_gl_mode(va.rendering_mode), ivbo.elements_count, ivbo.element_type, nullptr);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 }

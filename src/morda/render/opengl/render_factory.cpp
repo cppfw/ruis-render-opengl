@@ -54,7 +54,7 @@ std::shared_ptr<morda::texture_2d> render_factory::create_texture_2d(morda::text
 
 	// we will be passing pixels to OpenGL which are 1-byte aligned.
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 
 	glTexImage2D(
 			GL_TEXTURE_2D,
@@ -67,14 +67,14 @@ std::shared_ptr<morda::texture_2d> render_factory::create_texture_2d(morda::text
 			GL_UNSIGNED_BYTE,
 			data.size() == 0 ? nullptr : &*data.begin()
 		);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 
 	// NOTE: on OpenGL ES 2 it is necessary to set the filter parameters
 	//       for every texture!!! Otherwise it may not work!
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);

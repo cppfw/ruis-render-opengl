@@ -8,7 +8,7 @@ texture_2d::texture_2d(r4::vector2<float> dims) :
 		morda::texture_2d(dims)
 {
 	glGenTextures(1, &this->tex);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	ASSERT(this->tex != 0)
 }
 
@@ -18,7 +18,7 @@ texture_2d::~texture_2d()noexcept{
 
 void texture_2d::bind(unsigned unitNum)const{
 	glActiveTexture(GL_TEXTURE0 + unitNum);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	glBindTexture(GL_TEXTURE_2D, this->tex);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 }

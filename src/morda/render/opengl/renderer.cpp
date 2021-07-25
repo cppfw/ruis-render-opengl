@@ -37,7 +37,7 @@ renderer::renderer(std::unique_ptr<render_factory> factory) :
 void renderer::set_framebuffer_internal(morda::frame_buffer* fb) {
 	if(!fb){
 		glBindFramebuffer(GL_FRAMEBUFFER, this->defaultFramebuffer);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 		return;
 	}
 	
@@ -45,23 +45,23 @@ void renderer::set_framebuffer_internal(morda::frame_buffer* fb) {
 	auto& ogl2fb = static_cast<frame_buffer&>(*fb);
 	
 	glBindFramebuffer(GL_FRAMEBUFFER, ogl2fb.fbo);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 }
 
 void renderer::clear_framebuffer() {
 	glClearColor(0, 0, 0, 1);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	glClear(GL_COLOR_BUFFER_BIT);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	
 	glClearDepth(0);
 
 	glClear(GL_DEPTH_BUFFER_BIT);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	
 	glClearStencil(0);
 	glClear(GL_STENCIL_BUFFER_BIT);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 }
 
 bool renderer::is_scissor_enabled()const{
@@ -84,7 +84,7 @@ r4::rectangle<int> renderer::get_scissor()const{
 
 void renderer::set_scissor(r4::rectangle<int> r){
 	glScissor(r.p.x(), r.p.y(), r.d.x(), r.d.y());
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 }
 
 r4::rectangle<int> renderer::get_viewport()const{
@@ -97,7 +97,7 @@ r4::rectangle<int> renderer::get_viewport()const{
 
 void renderer::set_viewport(r4::rectangle<int> r){
 	glViewport(r.p.x(), r.p.y(), r.d.x(), r.d.y());
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 }
 
 void renderer::set_blend_enabled(bool enable){
