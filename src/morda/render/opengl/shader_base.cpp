@@ -126,29 +126,17 @@ void shader_base::render(const r4::matrix4<float>& m, const morda::vertex_array&
 	
 	ASSERT(dynamic_cast<const index_buffer*>(va.indices.operator ->()))
 	const index_buffer& ivbo = static_cast<const index_buffer&>(*va.indices);
-	
+
 	this->set_matrix(m);
-	
-	for(unsigned i = 0; i != va.buffers.size(); ++i){
-		ASSERT(dynamic_cast<vertex_buffer*>(va.buffers[i].operator->()))
-		auto& vbo = static_cast<vertex_buffer&>(*va.buffers[i]);
-		glBindBuffer(GL_ARRAY_BUFFER, vbo.buffer);
+
+	ASSERT(dynamic_cast<const vertex_array*>(&va))
+	auto& ogl_va = static_cast<const vertex_array&>(va);
+
+	if(GLEW_ARB_vertex_array_object){
+		glBindVertexArray(ogl_va.vao);
 		assert_opengl_no_error();
-		
-//		TRACE(<< "vbo.numComponents = " << vbo.numComponents << " vbo.type = " << vbo.type << std::endl)
-		
-		glVertexAttribPointer(i, vbo.num_components, vbo.type, GL_FALSE, 0, nullptr);
-		assert_opengl_no_error();
-		
-		glEnableVertexAttribArray(i);
-		assert_opengl_no_error();
-	}
-	
-	{
-		ASSERT(dynamic_cast<index_buffer*>(va.indices.operator->()))
-		auto& ivbo = static_cast<index_buffer&>(*va.indices);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ivbo.buffer);
-		assert_opengl_no_error();
+	}else{
+		ogl_va.bind_buffers();
 	}
 	
 //	TRACE(<< "ivbo.elementsCount = " << ivbo.elementsCount << " ivbo.elementType = " << ivbo.elementType << std::endl)

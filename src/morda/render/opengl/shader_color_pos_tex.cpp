@@ -35,17 +35,17 @@ shader_color_pos_tex::shader_color_pos_tex() :
 		
 						uniform sampler2D texture0;
 		
-						uniform highp vec4 uniformColor;
+						uniform highp vec4 uniform_color;
 		
 						varying highp vec2 tc0;
 		
 						void main(void){
-							gl_FragColor = texture2D(texture0, tc0) * uniformColor;
+							gl_FragColor = texture2D(texture0, tc0) * uniform_color;
 						}
 					)qwertyuiop"
 			)
 {
-	this->colorUniform = this->get_uniform("uniformColor");
+	this->colorUniform = this->get_uniform("uniform_color");
 }
 
 void shader_color_pos_tex::render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color, const morda::texture_2d& tex)const{

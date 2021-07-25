@@ -15,6 +15,23 @@ unsigned get_max_texture_size(){
 }
 }
 
+#ifdef DEBUG
+namespace{
+void GLAPIENTRY opengl_error_callback(
+		GLenum source,
+		GLenum type,
+		GLuint id,
+		GLenum severity,
+		GLsizei length,
+		const GLchar* message,
+		const void* user_param
+	)
+{
+	std::cout << "OpenGL" << (type == GL_DEBUG_TYPE_ERROR ? " ERROR" : "") << ": " << message << std::endl;
+}
+}
+#endif
+
 renderer::renderer(std::unique_ptr<render_factory> factory) :
 		morda::renderer(
 				std::move(factory),
@@ -32,6 +49,11 @@ renderer::renderer(std::unique_ptr<render_factory> factory) :
 	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &oldFb);
 	TRACE(<< "oldFb = " << oldFb << std::endl)
 	this->defaultFramebuffer = GLuint(oldFb);
+
+#ifdef DEBUG
+	glEnable(GL_DEBUG_OUTPUT);
+	glDebugMessageCallback(opengl_error_callback, nullptr);
+#endif
 }
 
 void renderer::set_framebuffer_internal(morda::frame_buffer* fb) {

@@ -30,17 +30,17 @@ shader_color_pos_lum::shader_color_pos_lum() :
 						#	define lowp
 						#endif
 		
-						uniform lowp vec4 uniformColor;
+						uniform lowp vec4 uniform_color;
 		
 						varying highp float lum;
 		
 						void main(void){
-							gl_FragColor = vec4(uniformColor.x, uniformColor.y, uniformColor.z, uniformColor.w * lum);
+							gl_FragColor = vec4(uniform_color.x, uniform_color.y, uniform_color.z, uniform_color.w * lum);
 						}
 					)qwertyuiop"
 			)
 {
-	this->colorUniform = this->get_uniform("uniformColor");
+	this->colorUniform = this->get_uniform("uniform_color");
 }
 
 void shader_color_pos_lum::render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color)const{

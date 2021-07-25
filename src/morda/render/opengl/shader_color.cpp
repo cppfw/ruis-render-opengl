@@ -26,15 +26,15 @@ shader_color::shader_color() :
 						#	define lowp
 						#endif
 		
-						uniform lowp vec4 uniformColor;
+						uniform lowp vec4 uniform_color;
 		
 						void main(void){
-							gl_FragColor = uniformColor;
+							gl_FragColor = uniform_color;
 						}
 				)qwertyuiop"
 			)
 {
-	this->colorUniform = this->get_uniform("uniformColor");
+	this->colorUniform = this->get_uniform("uniform_color");
 }
 
 void shader_color::render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color)const{

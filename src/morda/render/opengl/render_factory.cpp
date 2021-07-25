@@ -23,7 +23,7 @@ render_factory::render_factory(){}
 render_factory::~render_factory()noexcept{}
 
 std::shared_ptr<morda::texture_2d> render_factory::create_texture_2d(morda::texture_2d::type type, r4::vector2<unsigned> dims, utki::span<const uint8_t> data){
-	//TODO: turn these asserts to real checks with exceptions throwing
+	// TODO: turn these asserts to real checks with exceptions throwing
 	ASSERT(data.size() % morda::texture_2d::bytes_per_pixel(type) == 0)
 	ASSERT(data.size() % dims.x() == 0)
 
@@ -31,7 +31,7 @@ std::shared_ptr<morda::texture_2d> render_factory::create_texture_2d(morda::text
 	
 	auto ret = std::make_shared<texture_2d>(dims.to<float>());
 	
-	//TODO: save previous bind and restore it after?
+	// TODO: save previous bind and restore it after?
 	ret->bind(0);
 	
 	GLint internalFormat;
@@ -39,10 +39,26 @@ std::shared_ptr<morda::texture_2d> render_factory::create_texture_2d(morda::text
 		default:
 			ASSERT(false)
 		case decltype(type)::grey:
-			internalFormat = GL_LUMINANCE;
+			// GL_LUMINANCE is deprecated in OpenGL 3, so we use GL_RED
+			internalFormat = GL_RED;
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
+			assert_opengl_no_error();
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
+			assert_opengl_no_error();
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
+			assert_opengl_no_error();
 			break;
 		case decltype(type)::grey_alpha:
-			internalFormat = GL_LUMINANCE_ALPHA;
+			// GL_LUMINANCE_ALPHA is deprecated in OpenGL 3, so we use GL_RG
+			internalFormat = GL_RG;
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
+			assert_opengl_no_error();
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
+			assert_opengl_no_error();
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
+			assert_opengl_no_error();
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_A, GL_GREEN);
+			assert_opengl_no_error();
 			break;
 		case decltype(type)::rgb:
 			internalFormat = GL_RGB;

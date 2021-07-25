@@ -17,9 +17,9 @@ shader_texture::shader_texture() :
 						#	define lowp
 						#endif
 
-						attribute highp vec4 a0; //position
+						attribute highp vec4 a0; // position
 
-						attribute highp vec2 a1; //texture coordinates
+						attribute highp vec2 a1; // texture coordinates
 
 						uniform highp mat4 matrix;
 
