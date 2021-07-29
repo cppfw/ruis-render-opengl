@@ -1,4 +1,5 @@
 include prorab.mk
+include prorab-license.mk
 
 $(eval $(call prorab-config, ../config))
 
@@ -19,3 +20,7 @@ endif
 this_ldlibs += -lmorda
 
 $(eval $(prorab-build-lib))
+
+this_license_file := ../LICENSE
+this_src_dir := .
+$(eval $(prorab-license))
