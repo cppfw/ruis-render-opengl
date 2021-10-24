@@ -65,13 +65,6 @@ renderer::renderer(std::unique_ptr<render_factory> factory) :
 {
 	LOG([](auto &o){o << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;})
 
-	// check that the OpenGL version we have supports shaders
-	if(!GLEW_ARB_vertex_shader || !GLEW_ARB_fragment_shader){
-		std::stringstream ss;
-		ss << "OpenGL version '" << glGetString(GL_VERSION) << "' does not support shaders";
-		throw std::runtime_error(ss.str());
-	}
-
 	// On some platforms the default framebuffer is not 0, so because of this
 	// check if default framebuffer value is saved or not everytime some
 	// framebuffer is going to be bound and save the value if needed.

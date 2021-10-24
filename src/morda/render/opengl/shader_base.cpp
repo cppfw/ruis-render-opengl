@@ -83,7 +83,7 @@ bool checkForLinkErrors(GLuint program){
 
 }
 
-shader_wrapper::shader_wrapper(const char* code, GLenum type) {
+shader_wrapper::shader_wrapper(const char* code, GLenum type){
 	this->s = glCreateShader(type);
 
 	if (this->s == 0) {

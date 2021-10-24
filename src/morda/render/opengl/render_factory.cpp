@@ -39,7 +39,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengl;
 
-render_factory::render_factory(){}
+render_factory::render_factory(){
+	// check that the OpenGL version we have supports shaders
+	if(!GLEW_ARB_vertex_shader || !GLEW_ARB_fragment_shader){
+		std::stringstream ss;
+		ss << "OpenGL version '" << glGetString(GL_VERSION) << "' does not support shaders";
+		throw std::runtime_error(ss.str());
+	}
+}
 
 render_factory::~render_factory()noexcept{}
 
