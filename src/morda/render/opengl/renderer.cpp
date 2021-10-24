@@ -63,6 +63,8 @@ renderer::renderer(std::unique_ptr<render_factory> factory) :
 				}()
 			)
 {
+	LOG([](auto &o){o << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;})
+
 	// On some platforms the default framebuffer is not 0, so because of this
 	// check if default framebuffer value is saved or not everytime some
 	// framebuffer is going to be bound and save the value if needed.
