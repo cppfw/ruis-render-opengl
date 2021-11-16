@@ -71,7 +71,7 @@ renderer::renderer(std::unique_ptr<render_factory> factory) :
 	GLint oldFb;
 	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &oldFb);
 	TRACE(<< "oldFb = " << oldFb << std::endl)
-	this->defaultFramebuffer = GLuint(oldFb);
+	this->default_framebuffer = GLuint(oldFb);
 
 #ifdef DEBUG
 	glEnable(GL_DEBUG_OUTPUT);
@@ -79,21 +79,21 @@ renderer::renderer(std::unique_ptr<render_factory> factory) :
 #endif
 }
 
-void renderer::set_framebuffer_internal(morda::frame_buffer* fb) {
+void renderer::set_framebuffer_internal(morda::frame_buffer* fb){
 	if(!fb){
-		glBindFramebuffer(GL_FRAMEBUFFER, this->defaultFramebuffer);
+		glBindFramebuffer(GL_FRAMEBUFFER, this->default_framebuffer);
 		assert_opengl_no_error();
 		return;
 	}
 	
 	ASSERT(dynamic_cast<frame_buffer*>(fb))
-	auto& ogl2fb = static_cast<frame_buffer&>(*fb);
+	auto& ogl_fb = static_cast<frame_buffer&>(*fb);
 	
-	glBindFramebuffer(GL_FRAMEBUFFER, ogl2fb.fbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, ogl_fb.fbo);
 	assert_opengl_no_error();
 }
 
-void renderer::clear_framebuffer() {
+void renderer::clear_framebuffer(){
 	glClearColor(0, 0, 0, 1);
 	assert_opengl_no_error();
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -155,7 +155,7 @@ void renderer::set_blend_enabled(bool enable){
 
 namespace{
 
-GLenum blendFunc[] = {
+GLenum blend_func[] = {
 	GL_ZERO,
 	GL_ONE,
 	GL_SRC_COLOR,
@@ -175,11 +175,17 @@ GLenum blendFunc[] = {
 
 }
 
-void renderer::set_blend_func(blend_factor src_color, blend_factor dst_color, blend_factor src_alpha, blend_factor dst_alpha){
+void renderer::set_blend_func(
+		blend_factor src_color,
+		blend_factor dst_color,
+		blend_factor src_alpha,
+		blend_factor dst_alpha
+	)
+{
 	glBlendFuncSeparate(
-			blendFunc[unsigned(src_color)],
-			blendFunc[unsigned(dst_color)],
-			blendFunc[unsigned(src_alpha)],
-			blendFunc[unsigned(dst_alpha)]
+			blend_func[unsigned(src_color)],
+			blend_func[unsigned(dst_color)],
+			blend_func[unsigned(src_alpha)],
+			blend_func[unsigned(dst_alpha)]
 		);
 }

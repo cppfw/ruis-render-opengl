@@ -43,6 +43,7 @@ public:
 	~vertex_array();
 
 	void bind_buffers()const;
+
 private:
 
 };

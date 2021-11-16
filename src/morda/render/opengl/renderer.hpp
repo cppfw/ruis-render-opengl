@@ -32,7 +32,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 namespace morda{ namespace render_opengl{
 
 class renderer : public morda::renderer{
-	GLuint defaultFramebuffer;
+	GLuint default_framebuffer;
 public:
 	renderer(std::unique_ptr<render_factory> factory = std::make_unique<render_factory>());
 	
@@ -57,8 +57,12 @@ public:
 	
 	void set_blend_enabled(bool enable)override;
 
-	void set_blend_func(blend_factor src_color, blend_factor dst_color, blend_factor src_alpha, blend_factor dst_alpha)override;
-
+	void set_blend_func(
+			blend_factor src_color,
+			blend_factor dst_color,
+			blend_factor src_alpha,
+			blend_factor dst_alpha
+		)override;
 };
 
 }}

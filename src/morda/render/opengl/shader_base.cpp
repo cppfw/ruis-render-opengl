@@ -173,4 +173,13 @@ void shader_base::render(
 			nullptr
 		);
 	assert_opengl_no_error();
+
+	if(GLEW_ARB_vertex_array_object){
+		// For some reason on linux when leaving bound vertex array after done with rendering a frame,
+		// the vertex array can become corrupted in some scenarios, like changing viewport size and possibly some
+		// other scenarios.
+		// Because of that, unbind the vertex array after glDrawElements() call.
+		glBindVertexArray(0);
+		assert_opengl_no_error();
+	}
 }

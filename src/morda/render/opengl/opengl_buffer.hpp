@@ -25,7 +25,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 namespace morda{ namespace render_opengl{
 
-class opengl_buffer {
+class opengl_buffer{
 public:
 	const GLuint buffer;
 
