@@ -27,8 +27,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengl;
 
-vertex_array::vertex_array(std::vector<std::shared_ptr<morda::vertex_buffer>>&& buffers, std::shared_ptr<morda::index_buffer> indices, mode rendering_mode) :
-		morda::vertex_array(std::move(buffers), std::move(indices), rendering_mode),
+vertex_array::vertex_array(
+		std::vector<std::shared_ptr<morda::vertex_buffer>>&& buffers,
+		std::shared_ptr<morda::index_buffer> indices,
+		mode rendering_mode
+	) :
+		morda::vertex_array(
+				std::move(buffers),
+				std::move(indices),
+				rendering_mode
+			),
 		vao([](){
 			if(GLEW_ARB_vertex_array_object){
 				GLuint ret;

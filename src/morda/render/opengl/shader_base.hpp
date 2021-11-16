@@ -45,10 +45,10 @@ struct shader_wrapper{
 };
 
 struct program_wrapper{
-	shader_wrapper vertexShader;
-	shader_wrapper fragmentShader;
+	shader_wrapper vertex_shader;
+	shader_wrapper fragment_shader;
 	GLuint p;
-	program_wrapper(const char* vertexShaderCode, const char* fragmentShaderCode);
+	program_wrapper(const char* vertex_shader_code, const char* fragment_shader_code);
 
 	virtual ~program_wrapper()noexcept{
 		glDeleteProgram(this->p);
@@ -58,11 +58,11 @@ struct program_wrapper{
 class shader_base{
 	program_wrapper program;
 	
-	const GLint matrixUniform;
+	const GLint matrix_uniform;
 	
-	static const shader_base* boundShader;
+	static const shader_base* bound_shader;
 public:
-	shader_base(const char* vertexShaderCode, const char* fragmentShaderCode);
+	shader_base(const char* vertex_shader_code, const char* fragment_shader_code);
 	
 	shader_base(const shader_base&) = delete;
 	shader_base& operator=(const shader_base&) = delete;
@@ -75,11 +75,11 @@ protected:
 	void bind()const{
 		glUseProgram(program.p);
 		assert_opengl_no_error();
-		boundShader = this;
+		bound_shader = this;
 	}
 	
 	bool is_bound()const noexcept{
-		return this == boundShader;
+		return this == bound_shader;
 	}
 	
 	void set_uniform_matrix4f(GLint id, const r4::matrix4<float>& m)const{
@@ -93,7 +93,7 @@ protected:
 	}
 	
 	void set_matrix(const r4::matrix4<float>& m)const{
-		this->set_uniform_matrix4f(this->matrixUniform, m);
+		this->set_uniform_matrix4f(this->matrix_uniform, m);
 	}
 	
 	static GLenum mode_map[];
@@ -102,7 +102,10 @@ protected:
 		return mode_map[unsigned(mode)];
 	}
 	
-	void render(const r4::matrix4<float>& m, const morda::vertex_array& va)const;
+	void render(
+			const r4::matrix4<float>& m,
+			const morda::vertex_array& va
+		)const;
 };
 
 }}

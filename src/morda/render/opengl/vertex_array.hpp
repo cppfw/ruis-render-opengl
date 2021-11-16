@@ -31,7 +31,11 @@ class vertex_array : public morda::vertex_array{
 public:
 	const GLuint vao;
 
-	vertex_array(std::vector<std::shared_ptr<morda::vertex_buffer>>&& buffers, std::shared_ptr<morda::index_buffer> indices, mode rendering_mode);
+	vertex_array(
+			std::vector<std::shared_ptr<morda::vertex_buffer>>&& buffers,
+			std::shared_ptr<morda::index_buffer> indices,
+			mode rendering_mode
+		);
 	
 	vertex_array(const vertex_array&) = delete;
 	vertex_array& operator=(const vertex_array&) = delete;

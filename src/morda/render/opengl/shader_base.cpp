@@ -33,7 +33,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengl;
 
-const shader_base* shader_base::boundShader = nullptr;
+const shader_base* shader_base::bound_shader = nullptr;
 
 GLenum shader_base::mode_map[] = {
 	GL_TRIANGLES,			// TRIANGLES
@@ -44,18 +44,18 @@ GLenum shader_base::mode_map[] = {
 
 namespace{
 // return true if not compiled
-bool checkForCompileErrors(GLuint shader) {
+bool check_for_compile_errors(GLuint shader){
 	GLint value = 0;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &value);
-	if (value == 0) { //if not compiled
-		GLint logLen = 0;
-		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLen);
-		if (logLen > 1) {//1 char is a terminating 0
-			std::vector<char> log(logLen);
+	if(value == 0){ // if not compiled
+		GLint log_len = 0;
+		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &log_len);
+		if(log_len > 1){ // 1 char is a terminating 0
+			std::vector<char> log(log_len);
 			GLint len;
 			glGetShaderInfoLog(shader, GLsizei(log.size()), &len, &*log.begin());
 			TRACE( << "===Compile log===\n" << &*log.begin() << std::endl)
-		} else {
+		}else{
 			TRACE( << "Shader compile log is empty" << std::endl)
 		}
 		return true;
@@ -64,14 +64,14 @@ bool checkForCompileErrors(GLuint shader) {
 }
 
 // return true if not linked
-bool checkForLinkErrors(GLuint program){
+bool check_for_link_errors(GLuint program){
 	GLint value = 0;
 	glGetProgramiv(program, GL_LINK_STATUS, &value);
-	if(value == 0){ //if not linked
-		GLint logLen = 0;
-		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &logLen);
-		if(logLen > 1){ //1 is for terminating 0 character.
-			std::vector<char> log(logLen);
+	if(value == 0){ // if not linked
+		GLint log_len = 0;
+		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &log_len);
+		if(log_len > 1){ // 1 is for terminating 0 character
+			std::vector<char> log(log_len);
 			GLint len;
 			glGetProgramInfoLog(program, GLsizei(log.size()), &len, &*log.begin());
 			TRACE(<< "===Link log===\n" << &*log.begin() << std::endl)
@@ -86,7 +86,7 @@ bool checkForLinkErrors(GLuint program){
 shader_wrapper::shader_wrapper(const char* code, GLenum type){
 	this->s = glCreateShader(type);
 
-	if (this->s == 0) {
+	if(this->s == 0){
 		throw std::runtime_error("glCreateShader() failed");
 	}
 
@@ -94,26 +94,26 @@ shader_wrapper::shader_wrapper(const char* code, GLenum type){
 
 	glShaderSource(this->s, 1, &c, 0);
 	glCompileShader(this->s);
-	if (checkForCompileErrors(this->s)) {
+	if(check_for_compile_errors(this->s)){
 		TRACE( << "Error while compiling:\n" << c << std::endl)
 		glDeleteShader(this->s);
 		throw std::logic_error("compiling shader failed");
 	}
 }
 
-program_wrapper::program_wrapper(const char* vertexShaderCode, const char* fragmentShaderCode) :
-		vertexShader(vertexShaderCode, GL_VERTEX_SHADER),
-		fragmentShader(fragmentShaderCode, GL_FRAGMENT_SHADER)
+program_wrapper::program_wrapper(const char* vertex_shader_code, const char* fragment_shader_code) :
+		vertex_shader(vertex_shader_code, GL_VERTEX_SHADER),
+		fragment_shader(fragment_shader_code, GL_FRAGMENT_SHADER)
 {
 	this->p = glCreateProgram();
-	glAttachShader(this->p, vertexShader.s);
-	glAttachShader(this->p, fragmentShader.s);
+	glAttachShader(this->p, vertex_shader.s);
+	glAttachShader(this->p, fragment_shader.s);
 	
-	GLint maxAttribs;
-	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &maxAttribs);
-	ASSERT(maxAttribs >= 0)
+	GLint max_num_attribs;
+	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &max_num_attribs);
+	ASSERT(max_num_attribs >= 0)
 	
-	for(GLuint i = 0; i < GLuint(maxAttribs); ++i){
+	for(GLuint i = 0; i < GLuint(max_num_attribs); ++i){
 		std::stringstream ss;
 		ss << "a" << i;
 //		TRACE(<< ss.str() << std::endl)
@@ -122,19 +122,19 @@ program_wrapper::program_wrapper(const char* vertexShaderCode, const char* fragm
 	}
 	
 	glLinkProgram(this->p);
-	if (checkForLinkErrors(this->p)) {
-		TRACE( << "Error while linking shader program" << vertexShaderCode << std::endl << fragmentShaderCode << std::endl)
+	if(check_for_link_errors(this->p)){
+		TRACE( << "Error while linking shader program" << vertex_shader_code << std::endl << fragment_shader_code << std::endl)
 		glDeleteProgram(this->p);
 		throw std::logic_error("linking shader program failed");
 	}
 }
 
-shader_base::shader_base(const char* vertexShaderCode, const char* fragmentShaderCode) :
-		program(vertexShaderCode, fragmentShaderCode),
-		matrixUniform(this->get_uniform("matrix"))
+shader_base::shader_base(const char* vertex_shader_code, const char* fragment_shader_code) :
+		program(vertex_shader_code, fragment_shader_code),
+		matrix_uniform(this->get_uniform("matrix"))
 {}
 
-GLint shader_base::get_uniform(const char* n) {
+GLint shader_base::get_uniform(const char* n){
 	GLint ret = glGetUniformLocation(this->program.p, n);
 	if(ret < 0){
 		throw std::logic_error("no uniform found in the shader program");
@@ -142,10 +142,14 @@ GLint shader_base::get_uniform(const char* n) {
 	return ret;
 }
 
-void shader_base::render(const r4::matrix4<float>& m, const morda::vertex_array& va)const{
+void shader_base::render(
+		const r4::matrix4<float>& m,
+		const morda::vertex_array& va
+	)const
+{
 	ASSERT(this->is_bound())
 	
-	ASSERT(dynamic_cast<const index_buffer*>(va.indices.operator ->()))
+	ASSERT(dynamic_cast<const index_buffer*>(va.indices.operator->()))
 	const index_buffer& ivbo = static_cast<const index_buffer&>(*va.indices);
 
 	this->set_matrix(m);
@@ -162,6 +166,11 @@ void shader_base::render(const r4::matrix4<float>& m, const morda::vertex_array&
 	
 //	TRACE(<< "ivbo.elementsCount = " << ivbo.elementsCount << " ivbo.elementType = " << ivbo.elementType << std::endl)
 	
-	glDrawElements(mode_to_gl_mode(va.rendering_mode), ivbo.elements_count, ivbo.element_type, nullptr);
+	glDrawElements(
+			mode_to_gl_mode(va.rendering_mode),
+			ivbo.elements_count,
+			ivbo.element_type,
+			nullptr
+		);
 	assert_opengl_no_error();
 }

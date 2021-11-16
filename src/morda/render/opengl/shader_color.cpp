@@ -58,7 +58,12 @@ shader_color::shader_color() :
 	this->colorUniform = this->get_uniform("uniform_color");
 }
 
-void shader_color::render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color)const{
+void shader_color::render(
+		const r4::matrix4<float>& m,
+		const morda::vertex_array& va,
+		r4::vector4<float> color
+	)const
+{
 	this->bind();
 	
 	this->set_uniform4f(this->colorUniform, color.x(), color.y(), color.z(), color.w());
