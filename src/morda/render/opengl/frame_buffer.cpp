@@ -34,8 +34,8 @@ frame_buffer::frame_buffer(std::shared_ptr<morda::texture_2d> color) :
 	glGenFramebuffers(1, &this->fbo);
 	assert_opengl_no_error();
 	
-	GLint oldFb;
-	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &oldFb);
+	GLint old_fb;
+	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old_fb);
 	
 	glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
 	assert_opengl_no_error();
@@ -55,7 +55,7 @@ frame_buffer::frame_buffer(std::shared_ptr<morda::texture_2d> color) :
 	}
 #endif
 	
-	glBindFramebuffer(GL_FRAMEBUFFER, oldFb);
+	glBindFramebuffer(GL_FRAMEBUFFER, old_fb);
 	assert_opengl_no_error();
 }
 
