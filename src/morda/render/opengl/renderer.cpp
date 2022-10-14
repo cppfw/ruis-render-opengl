@@ -70,7 +70,7 @@ renderer::renderer(std::unique_ptr<render_factory> factory) :
 	// framebuffer is going to be bound and save the value if needed.
 	GLint oldFb;
 	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &oldFb);
-	TRACE(<< "oldFb = " << oldFb << std::endl)
+	LOG([&](auto&o){o << "oldFb = " << oldFb << std::endl;})
 	this->default_framebuffer = GLuint(oldFb);
 
 #ifdef DEBUG

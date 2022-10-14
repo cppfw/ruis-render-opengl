@@ -54,9 +54,9 @@ bool check_for_compile_errors(GLuint shader){
 			std::vector<char> log(log_len);
 			GLint len;
 			glGetShaderInfoLog(shader, GLsizei(log.size()), &len, &*log.begin());
-			TRACE( << "===Compile log===\n" << &*log.begin() << std::endl)
+			LOG([&](auto&o){o << "===Compile log===\n" << &*log.begin() << std::endl;})
 		}else{
-			TRACE( << "Shader compile log is empty" << std::endl)
+			LOG([&](auto&o){o << "Shader compile log is empty" << std::endl;})
 		}
 		return true;
 	}
@@ -74,7 +74,7 @@ bool check_for_link_errors(GLuint program){
 			std::vector<char> log(log_len);
 			GLint len;
 			glGetProgramInfoLog(program, GLsizei(log.size()), &len, &*log.begin());
-			TRACE(<< "===Link log===\n" << &*log.begin() << std::endl)
+			LOG([&](auto&o){o << "===Link log===\n" << &*log.begin() << std::endl;})
 		}
 		return true;
 	}
@@ -95,7 +95,7 @@ shader_wrapper::shader_wrapper(const char* code, GLenum type){
 	glShaderSource(this->s, 1, &c, 0);
 	glCompileShader(this->s);
 	if(check_for_compile_errors(this->s)){
-		TRACE( << "Error while compiling:\n" << c << std::endl)
+		LOG([&](auto&o){o << "Error while compiling:\n" << c << std::endl;})
 		glDeleteShader(this->s);
 		throw std::logic_error("compiling shader failed");
 	}
@@ -123,7 +123,7 @@ program_wrapper::program_wrapper(const char* vertex_shader_code, const char* fra
 	
 	glLinkProgram(this->p);
 	if(check_for_link_errors(this->p)){
-		TRACE( << "Error while linking shader program" << vertex_shader_code << std::endl << fragment_shader_code << std::endl)
+		LOG([&](auto&o){o << "Error while linking shader program" << vertex_shader_code << std::endl << fragment_shader_code << std::endl;})
 		glDeleteProgram(this->p);
 		throw std::logic_error("linking shader program failed");
 	}
