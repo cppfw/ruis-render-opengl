@@ -68,10 +68,10 @@ renderer::renderer(std::unique_ptr<render_factory> factory) :
 	// On some platforms the default framebuffer is not 0, so because of this
 	// check if default framebuffer value is saved or not everytime some
 	// framebuffer is going to be bound and save the value if needed.
-	GLint oldFb;
-	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &oldFb);
-	LOG([&](auto&o){o << "oldFb = " << oldFb << std::endl;})
-	this->default_framebuffer = GLuint(oldFb);
+	GLint old_fb;
+	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old_fb);
+	LOG([&](auto&o){o << "oldFb = " << old_fb << std::endl;})
+	this->default_framebuffer = GLuint(old_fb);
 
 #ifdef DEBUG
 	glEnable(GL_DEBUG_OUTPUT);
