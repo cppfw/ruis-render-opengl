@@ -50,14 +50,19 @@ render_factory::render_factory(){
 
 render_factory::~render_factory()noexcept{}
 
-std::shared_ptr<morda::texture_2d> render_factory::create_texture_2d(morda::texture_2d::type type, r4::vector2<unsigned> dims, utki::span<const uint8_t> data){
+utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(
+	morda::texture_2d::type type,
+	r4::vector2<unsigned> dims,
+	utki::span<const uint8_t> data
+)
+{
 	// TODO: turn these asserts to real checks with exceptions throwing
 	ASSERT(data.size() % morda::texture_2d::bytes_per_pixel(type) == 0)
 	ASSERT(data.size() % dims.x() == 0)
 
 	ASSERT(data.size() == 0 || data.size() / morda::texture_2d::bytes_per_pixel(type) / dims.x() == dims.y())
 	
-	auto ret = std::make_shared<texture_2d>(dims.to<float>());
+	auto ret = utki::make_shared_ref<texture_2d>(dims.to<float>());
 	
 	// TODO: save previous bind and restore it after?
 	ret->bind(0);
@@ -126,33 +131,33 @@ std::shared_ptr<morda::texture_2d> render_factory::create_texture_2d(morda::text
 	return ret;
 }
 
-std::shared_ptr<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const r4::vector4<float>> vertices){
-	return std::make_shared<vertex_buffer>(vertices);
+utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const r4::vector4<float>> vertices){
+	return utki::make_shared_ref<vertex_buffer>(vertices);
 }
 
-std::shared_ptr<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const r4::vector3<float>> vertices){
-	return std::make_shared<vertex_buffer>(vertices);
+utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const r4::vector3<float>> vertices){
+	return utki::make_shared_ref<vertex_buffer>(vertices);
 }
 
-std::shared_ptr<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const r4::vector2<float>> vertices){
-	return std::make_shared<vertex_buffer>(vertices);
+utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const r4::vector2<float>> vertices){
+	return utki::make_shared_ref<vertex_buffer>(vertices);
 }
 
-std::shared_ptr<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const float> vertices){
-	return std::make_shared<vertex_buffer>(vertices);
+utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const float> vertices){
+	return utki::make_shared_ref<vertex_buffer>(vertices);
 }
 
-std::shared_ptr<morda::vertex_array> render_factory::create_vertex_array(
-		std::vector<std::shared_ptr<morda::vertex_buffer>>&& buffers,
-		std::shared_ptr<morda::index_buffer> indices,
+utki::shared_ref<morda::vertex_array> render_factory::create_vertex_array(
+		std::vector<utki::shared_ref<const morda::vertex_buffer>>&& buffers,
+		const utki::shared_ref<const morda::index_buffer>& indices,
 		morda::vertex_array::mode mode
 	)
 {
-	return std::make_shared<vertex_array>(std::move(buffers), std::move(indices), mode);
+	return utki::make_shared_ref<vertex_array>(std::move(buffers), indices, mode);
 }
 
-std::shared_ptr<morda::index_buffer> render_factory::create_index_buffer(utki::span<const uint16_t> indices){
-	return std::make_shared<index_buffer>(indices);
+utki::shared_ref<morda::index_buffer> render_factory::create_index_buffer(utki::span<const uint16_t> indices){
+	return utki::make_shared_ref<index_buffer>(indices);
 }
 
 std::unique_ptr<morda::render_factory::shaders> render_factory::create_shaders(){
@@ -165,6 +170,9 @@ std::unique_ptr<morda::render_factory::shaders> render_factory::create_shaders()
 	return ret;
 }
 
-std::shared_ptr<morda::frame_buffer> render_factory::create_framebuffer(std::shared_ptr<morda::texture_2d> color){
-	return std::make_shared<frame_buffer>(std::move(color));
+utki::shared_ref<morda::frame_buffer> render_factory::create_framebuffer(
+	const utki::shared_ref<morda::texture_2d>& color
+)
+{
+	return utki::make_shared_ref<frame_buffer>(color);
 }

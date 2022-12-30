@@ -28,8 +28,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengl;
 
-frame_buffer::frame_buffer(std::shared_ptr<morda::texture_2d> color) :
-		morda::frame_buffer(std::move(color))
+frame_buffer::frame_buffer(const utki::shared_ref<morda::texture_2d>& color) :
+		morda::frame_buffer(color)
 {
 	glGenFramebuffers(1, &this->fbo);
 	assert_opengl_no_error();

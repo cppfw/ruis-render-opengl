@@ -32,8 +32,8 @@ public:
 	const GLuint vao;
 
 	vertex_array(
-			std::vector<std::shared_ptr<morda::vertex_buffer>>&& buffers,
-			std::shared_ptr<morda::index_buffer> indices,
+			std::vector<utki::shared_ref<const morda::vertex_buffer>>&& buffers,
+			const utki::shared_ref<const morda::index_buffer>& indices,
 			mode rendering_mode
 		);
 	
