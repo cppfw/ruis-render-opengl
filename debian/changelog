@@ -1,3 +1,9 @@
+libmorda-render-opengl (0.1.57) unstable; urgency=medium
+
+  * shared_ref
+
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 19 Feb 2023 21:28:45 +0200
+
 libmorda-render-opengl (0.1.56) unstable; urgency=medium
 
   * fix vertex array object related drawing artifacts
