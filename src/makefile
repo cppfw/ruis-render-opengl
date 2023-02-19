@@ -14,7 +14,7 @@ ifeq ($(os), linux)
 else ifeq ($(os), windows)
     this_ldlibs += -lopengl32 -lglew32
 else ifeq ($(os), macosx)
-    this_ldlibs += -lGLEW
+    this_ldlibs += -lGLEW -framework OpenGL
 endif
 
 this_ldlibs += -lmorda
