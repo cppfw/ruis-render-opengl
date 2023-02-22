@@ -62,10 +62,10 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(
 
 	ASSERT(data.size() == 0 || data.size() / morda::texture_2d::bytes_per_pixel(type) / dims.x() == dims.y())
 	
-	auto ret = utki::make_shared_ref<texture_2d>(dims.to<float>());
+	auto ret = utki::make_shared<texture_2d>(dims.to<float>());
 	
 	// TODO: save previous bind and restore it after?
-	ret->bind(0);
+	ret.get().bind(0);
 	
 	GLint internalFormat;
 	switch(type){
@@ -132,19 +132,19 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(
 }
 
 utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const r4::vector4<float>> vertices){
-	return utki::make_shared_ref<vertex_buffer>(vertices);
+	return utki::make_shared<vertex_buffer>(vertices);
 }
 
 utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const r4::vector3<float>> vertices){
-	return utki::make_shared_ref<vertex_buffer>(vertices);
+	return utki::make_shared<vertex_buffer>(vertices);
 }
 
 utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const r4::vector2<float>> vertices){
-	return utki::make_shared_ref<vertex_buffer>(vertices);
+	return utki::make_shared<vertex_buffer>(vertices);
 }
 
 utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const float> vertices){
-	return utki::make_shared_ref<vertex_buffer>(vertices);
+	return utki::make_shared<vertex_buffer>(vertices);
 }
 
 utki::shared_ref<morda::vertex_array> render_factory::create_vertex_array(
@@ -153,11 +153,11 @@ utki::shared_ref<morda::vertex_array> render_factory::create_vertex_array(
 		morda::vertex_array::mode mode
 	)
 {
-	return utki::make_shared_ref<vertex_array>(std::move(buffers), indices, mode);
+	return utki::make_shared<vertex_array>(std::move(buffers), indices, mode);
 }
 
 utki::shared_ref<morda::index_buffer> render_factory::create_index_buffer(utki::span<const uint16_t> indices){
-	return utki::make_shared_ref<index_buffer>(indices);
+	return utki::make_shared<index_buffer>(indices);
 }
 
 std::unique_ptr<morda::render_factory::shaders> render_factory::create_shaders(){
@@ -174,5 +174,5 @@ utki::shared_ref<morda::frame_buffer> render_factory::create_framebuffer(
 	const utki::shared_ref<morda::texture_2d>& color
 )
 {
-	return utki::make_shared_ref<frame_buffer>(color);
+	return utki::make_shared<frame_buffer>(color);
 }

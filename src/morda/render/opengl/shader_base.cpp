@@ -150,7 +150,7 @@ void shader_base::render(
 	ASSERT(this->is_bound())
 	
 	ASSERT(dynamic_cast<const index_buffer*>(va.indices.operator->()))
-	const index_buffer& ivbo = static_cast<const index_buffer&>(*va.indices);
+	const index_buffer& ivbo = static_cast<const index_buffer&>(va.indices.get());
 
 	this->set_matrix(m);
 

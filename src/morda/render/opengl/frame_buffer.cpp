@@ -41,7 +41,7 @@ frame_buffer::frame_buffer(const utki::shared_ref<morda::texture_2d>& color) :
 	assert_opengl_no_error();
 	
 	ASSERT(dynamic_cast<texture_2d*>(this->color.operator->()))
-	auto& tex = static_cast<texture_2d&>(*this->color);
+	auto& tex = static_cast<texture_2d&>(this->color.get());
 	
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex.tex, 0);
 	assert_opengl_no_error();
