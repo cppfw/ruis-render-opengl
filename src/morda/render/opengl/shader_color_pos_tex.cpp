@@ -1,7 +1,7 @@
 /*
 morda-render-opengl - OpenGL GUI renderer
 
-Copyright (C) 2012-2021  Ivan Gagis <igagis@gmail.com>
+Copyright (C) 2012-2023  Ivan Gagis <igagis@gmail.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -28,37 +28,25 @@ using namespace morda::render_opengl;
 shader_color_pos_tex::shader_color_pos_tex() :
 		shader_base(
 				R"qwertyuiop(
-						#ifndef GL_ES
-						#	define highp
-						#	define mediump
-						#	define lowp
-						#endif
+						attribute vec4 a0;
 
-						attribute highp vec4 a0;
+						attribute vec2 a1;
 
-						attribute highp vec2 a1;
+						uniform mat4 matrix;
 
-						uniform highp mat4 matrix;
-
-						varying highp vec2 tc0;
+						varying vec2 tc0;
 
 						void main(void){
 							gl_Position = matrix * a0;
 							tc0 = a1;
 						}
 					)qwertyuiop",
-				R"qwertyuiop(
-						#ifndef GL_ES
-						#	define highp
-						#	define mediump
-						#	define lowp
-						#endif
-		
+				R"qwertyuiop(		
 						uniform sampler2D texture0;
 		
-						uniform highp vec4 uniform_color;
+						uniform vec4 uniform_color;
 		
-						varying highp vec2 tc0;
+						varying vec2 tc0;
 		
 						void main(void){
 							gl_FragColor = texture2D(texture0, tc0) * uniform_color;
