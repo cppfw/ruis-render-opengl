@@ -32,6 +32,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "shader_color.hpp"
 #include "shader_pos_clr.hpp"
 #include "shader_color_pos_tex.hpp"
+#include "shader_color_pos_tex_alpha.hpp"
 #include "shader_color_pos_lum.hpp"
 #include "frame_buffer.hpp"
 
@@ -166,6 +167,7 @@ std::unique_ptr<morda::render_factory::shaders> render_factory::create_shaders()
 	ret->color_pos = std::make_unique<shader_color>();
 	ret->pos_clr = std::make_unique<shader_pos_clr>();
 	ret->color_pos_tex = std::make_unique<shader_color_pos_tex>();
+	ret->color_pos_tex_alpha = std::make_unique<shader_color_pos_tex_alpha>();
 	ret->color_pos_lum = std::make_unique<shader_color_pos_lum>();
 	return ret;
 }
