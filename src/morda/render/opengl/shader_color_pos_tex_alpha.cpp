@@ -28,12 +28,11 @@ shader_color_pos_tex_alpha::shader_color_pos_tex_alpha() :
 						varying vec2 tc0;
 		
 						void main(void){
-                            vec4 c = texture2D(texture0, tc0);
 							gl_FragColor = vec4(
                                 uniform_color.x,
                                 uniform_color.y,
                                 uniform_color.z,
-                                uniform_color.w * c.x
+                                uniform_color.w * texture2D(texture0, tc0).x
                             );
 						}
 					)qwertyuiop"
