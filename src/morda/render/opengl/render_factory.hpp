@@ -34,6 +34,11 @@ public:
 	
 	virtual ~render_factory()noexcept;
 
+	utki::shared_ref<texture_2d> create_texture_2d(rasterimage::image_variant&& imvar)override{
+		throw std::logic_error("unimplemented");
+	}
+	utki::shared_ref<texture_2d> create_texture_2d(const rasterimage::image_variant& imvar)override;
+
 	utki::shared_ref<morda::texture_2d> create_texture_2d(morda::texture_2d::type type, r4::vector2<unsigned> dims, utki::span<const uint8_t> data)override;
 	utki::shared_ref<morda::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector4<float>> vertices)override;
 	utki::shared_ref<morda::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector3<float>> vertices)override;
