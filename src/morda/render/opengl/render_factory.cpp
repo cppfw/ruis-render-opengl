@@ -54,7 +54,7 @@ render_factory::~render_factory()noexcept{}
 utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(const rasterimage::image_variant& imvar){
 	return std::visit(
 		[this, &imvar](const auto& im){
-			auto data = im.get_pixels();
+			auto data = im.pixels();
 			return this->create_texture_2d(
 				morda::texture_2d::type(imvar.get_format()),
 				im.dims(),
