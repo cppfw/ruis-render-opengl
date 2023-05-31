@@ -63,7 +63,7 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(const rast
 					, data.size_bytes())
 			);
 		},
-		imvar.get_variant()
+		imvar.variant
 	);
 }
 
