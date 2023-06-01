@@ -55,8 +55,8 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(const rast
 	return std::visit(
 		[this, &imvar](const auto& im){
 			auto data = im.pixels();
-			return this->create_texture_2d(
-				morda::texture_2d::type(imvar.get_format()),
+			return this->create_texture_2d_internal(
+				imvar.get_format(),
 				im.dims(),
 				utki::make_span(
 					reinterpret_cast<const uint8_t*>(data.data())
@@ -67,9 +67,10 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(const rast
 	);
 }
 
-utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(
-	morda::texture_2d::type type,
-	r4::vector2<unsigned> dims,
+// TODO: refactor this function
+utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
+	rasterimage::format type,
+	rasterimage::dimensioned::dimensions_type dims,
 	utki::span<const uint8_t> data
 )
 {
@@ -98,7 +99,7 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
 			assert_opengl_no_error();
 			break;
-		case decltype(type)::grey_alpha:
+		case decltype(type)::greya:
 			// GL_LUMINANCE_ALPHA is deprecated in OpenGL 3, so we use GL_RG
 			internalFormat = GL_RG;
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
@@ -131,7 +132,7 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(
 			0, // border, should be 0!
 			internalFormat, // format of the texel data
 			GL_UNSIGNED_BYTE,
-			data.size() == 0 ? nullptr : &*data.begin()
+			data.size() == 0 ? nullptr : data.data()
 		);
 	assert_opengl_no_error();
 

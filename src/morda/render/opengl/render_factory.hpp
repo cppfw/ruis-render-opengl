@@ -36,7 +36,6 @@ public:
 
 	utki::shared_ref<texture_2d> create_texture_2d(const rasterimage::image_variant& imvar)override;
 
-	utki::shared_ref<morda::texture_2d> create_texture_2d(morda::texture_2d::type type, r4::vector2<unsigned> dims, utki::span<const uint8_t> data)override;
 	utki::shared_ref<morda::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector4<float>> vertices)override;
 	utki::shared_ref<morda::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector3<float>> vertices)override;
 	utki::shared_ref<morda::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector2<float>> vertices)override;
@@ -51,6 +50,13 @@ public:
 	std::unique_ptr<shaders> create_shaders()override;
 	
 	utki::shared_ref<morda::frame_buffer> create_framebuffer(const utki::shared_ref<morda::texture_2d>& color)override;
+
+private:
+	utki::shared_ref<morda::texture_2d> create_texture_2d_internal(
+		rasterimage::format type,
+		rasterimage::dimensioned::dimensions_type dims,
+		utki::span<const uint8_t> data
+	);
 };
 
 }}
