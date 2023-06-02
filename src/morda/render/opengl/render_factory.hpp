@@ -34,6 +34,11 @@ public:
 	
 	virtual ~render_factory()noexcept;
 
+	utki::shared_ref<texture_2d> create_texture_2d(
+		rasterimage::format format,
+		rasterimage::dimensioned::dimensions_type dims
+	)override;
+
 	utki::shared_ref<texture_2d> create_texture_2d(const rasterimage::image_variant& imvar)override;
 
 	utki::shared_ref<morda::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector4<float>> vertices)override;
