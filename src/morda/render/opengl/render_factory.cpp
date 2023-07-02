@@ -52,16 +52,44 @@ render_factory::render_factory(){
 render_factory::~render_factory()noexcept{}
 
 utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(
-	morda::texture_2d::type type,
-	r4::vector2<unsigned> dims,
+		rasterimage::format format,
+		rasterimage::dimensioned::dimensions_type dims
+	)
+{
+	return this->create_texture_2d_internal(
+				format,
+				dims,
+				nullptr);
+}
+
+utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(const rasterimage::image_variant& imvar){
+	return std::visit(
+		[this, &imvar](const auto& im){
+			auto data = im.pixels();
+			return this->create_texture_2d_internal(
+				imvar.get_format(),
+				im.dims(),
+				utki::make_span(
+					reinterpret_cast<const uint8_t*>(data.data())
+					, data.size_bytes())
+			);
+		},
+		imvar.variant
+	);
+}
+
+// TODO: refactor this function
+utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
+	rasterimage::format type,
+	rasterimage::dimensioned::dimensions_type dims,
 	utki::span<const uint8_t> data
 )
 {
 	// TODO: turn these asserts to real checks with exceptions throwing
-	ASSERT(data.size() % morda::texture_2d::bytes_per_pixel(type) == 0)
+	ASSERT(data.size() % rasterimage::to_num_channels(type) == 0)
 	ASSERT(data.size() % dims.x() == 0)
 
-	ASSERT(data.size() == 0 || data.size() / morda::texture_2d::bytes_per_pixel(type) / dims.x() == dims.y())
+	ASSERT(data.size() == 0 || data.size() / rasterimage::to_num_channels(type) / dims.x() == dims.y())
 	
 	auto ret = utki::make_shared<texture_2d>(dims.to<float>());
 	
@@ -82,7 +110,7 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
 			assert_opengl_no_error();
 			break;
-		case decltype(type)::grey_alpha:
+		case decltype(type)::greya:
 			// GL_LUMINANCE_ALPHA is deprecated in OpenGL 3, so we use GL_RG
 			internalFormat = GL_RG;
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
@@ -115,7 +143,7 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(
 			0, // border, should be 0!
 			internalFormat, // format of the texel data
 			GL_UNSIGNED_BYTE,
-			data.size() == 0 ? nullptr : &*data.begin()
+			data.size() == 0 ? nullptr : data.data()
 		);
 	assert_opengl_no_error();
 
@@ -149,7 +177,7 @@ utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(utki
 }
 
 utki::shared_ref<morda::vertex_array> render_factory::create_vertex_array(
-		std::vector<utki::shared_ref<const morda::vertex_buffer>>&& buffers,
+		std::vector<utki::shared_ref<const morda::vertex_buffer>> buffers,
 		const utki::shared_ref<const morda::index_buffer>& indices,
 		morda::vertex_array::mode mode
 	)
