@@ -1,3 +1,9 @@
+libmorda-render-opengl (0.1.59) unstable; urgency=medium
+
+  * rasterimage
+
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 02 Jul 2023 12:08:53 +0300
+
 libmorda-render-opengl (0.1.58) unstable; urgency=medium
 
   * relink
