@@ -37,6 +37,12 @@ jobs:
           repo-name: cppfw
           keys-asc: https://gagis.hopto.org/repo/cppfw/pubkey.gpg
           install: myci git
+      - name: add llvm repo (for clang-format)
+        uses: myci-actions/add-deb-repo@master
+        with:
+          repo: deb https://apt.llvm.org/${{ matrix.codename }} llvm-toolchain-${{ matrix.codename }} main
+          repo-name: llvm
+          keys-asc: https://apt.llvm.org/llvm-snapshot.gpg.key
       - name: install ci tools
         run: |
           # configure timezone to avoid 'tzdata' package to require user interaction during installation (needed for ubuntu:focal)
@@ -63,6 +69,15 @@ jobs:
   macosx:
     runs-on: macos-latest
     steps:
+    - name: workaround python2 and python3 issue when upgrading python
+      run : |
+        rm -rf /usr/local/bin/2to3*
+        rm -rf /usr/local/bin/idle3*
+        rm -rf /usr/local/bin/pydoc3*
+        rm -rf /usr/local/bin/python3
+        rm -rf /usr/local/bin/python3-config
+        rm -rf /usr/local/bin/python3*
+        rm -rf /usr/local/bin/python3*-config
     - name: git clone
       uses: myci-actions/checkout@master
     - name: install clang-tidy and clang-format
