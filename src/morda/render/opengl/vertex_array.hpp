@@ -32,7 +32,7 @@ public:
 	const GLuint vao;
 
 	vertex_array(
-			std::vector<utki::shared_ref<const morda::vertex_buffer>>&& buffers,
+			std::vector<utki::shared_ref<const morda::vertex_buffer>>&& buffers, // TODO: pass by value?
 			const utki::shared_ref<const morda::index_buffer>& indices,
 			mode rendering_mode
 		);
