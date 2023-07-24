@@ -28,7 +28,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace morda::render_opengl;
 
 vertex_array::vertex_array(
-		std::vector<utki::shared_ref<const morda::vertex_buffer>>&& buffers, // TODO: pass by value?
+		buffers_type buffers,
 		const utki::shared_ref<const morda::index_buffer>& indices,
 		mode rendering_mode
 	) :
