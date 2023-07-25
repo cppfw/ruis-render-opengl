@@ -23,9 +23,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengl;
 
-shader_color_pos_lum::shader_color_pos_lum()
-    : shader_base(
-          R"qwertyuiop(
+shader_color_pos_lum::shader_color_pos_lum() :
+	shader_base(
+		R"qwertyuiop(
 						attribute vec4 a0;
 						attribute float a1;
 
@@ -38,7 +38,7 @@ shader_color_pos_lum::shader_color_pos_lum()
 							lum = a1;
 						}
 					)qwertyuiop",
-          R"qwertyuiop(
+		R"qwertyuiop(
 						uniform vec4 uniform_color;
 		
 						varying float lum;
@@ -46,17 +46,18 @@ shader_color_pos_lum::shader_color_pos_lum()
 						void main(void){
 							gl_FragColor = vec4(uniform_color.x, uniform_color.y, uniform_color.z, uniform_color.w * lum);
 						}
-					)qwertyuiop") {
-  this->colorUniform = this->get_uniform("uniform_color");
+					)qwertyuiop"
+	)
+{
+	this->colorUniform = this->get_uniform("uniform_color");
 }
 
-void shader_color_pos_lum::render(const r4::matrix4<float> &m,
-                                  const morda::vertex_array &va,
-                                  r4::vector4<float> color) const {
-  this->bind();
+void shader_color_pos_lum::render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color)
+	const
+{
+	this->bind();
 
-  this->set_uniform4f(this->colorUniform, color.x(), color.y(), color.z(),
-                      color.w());
+	this->set_uniform4f(this->colorUniform, color.x(), color.y(), color.z(), color.w());
 
-  this->shader_base::render(m, va);
+	this->shader_base::render(m, va);
 }

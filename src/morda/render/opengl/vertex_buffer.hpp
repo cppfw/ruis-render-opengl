@@ -21,39 +21,38 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <utki/span.hpp>
-
-#include <r4/vector.hpp>
-
 #include <morda/render/vertex_buffer.hpp>
+#include <r4/vector.hpp>
+#include <utki/span.hpp>
 
 #include "opengl_buffer.hpp"
 
 namespace morda::render_opengl {
 
-class vertex_buffer : public morda::vertex_buffer, public opengl_buffer {
+class vertex_buffer : public morda::vertex_buffer, public opengl_buffer
+{
 public:
-  const GLint num_components;
-  const GLenum type;
+	const GLint num_components;
+	const GLenum type;
 
-  vertex_buffer(utki::span<const r4::vector4<float>> vertices);
+	vertex_buffer(utki::span<const r4::vector4<float>> vertices);
 
-  vertex_buffer(utki::span<const r4::vector3<float>> vertices);
+	vertex_buffer(utki::span<const r4::vector3<float>> vertices);
 
-  vertex_buffer(utki::span<const r4::vector2<float>> vertices);
+	vertex_buffer(utki::span<const r4::vector2<float>> vertices);
 
-  vertex_buffer(utki::span<const float> vertices);
+	vertex_buffer(utki::span<const float> vertices);
 
-  vertex_buffer(const vertex_buffer&) = delete;
-  vertex_buffer &operator=(const vertex_buffer&) = delete;
+	vertex_buffer(const vertex_buffer&) = delete;
+	vertex_buffer& operator=(const vertex_buffer&) = delete;
 
-  vertex_buffer(vertex_buffer&&) = delete;
-  vertex_buffer &operator=(vertex_buffer&&) = delete;
+	vertex_buffer(vertex_buffer&&) = delete;
+	vertex_buffer& operator=(vertex_buffer&&) = delete;
 
-  ~vertex_buffer() override = default;
+	~vertex_buffer() override = default;
 
 private:
-  void init(GLsizeiptr size, const GLvoid *data);
+	void init(GLsizeiptr size, const GLvoid* data);
 };
 
-} // namespace morda
+} // namespace morda::render_opengl

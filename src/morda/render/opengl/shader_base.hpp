@@ -21,85 +21,97 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+#include <vector>
+
+#include <GL/glew.h>
+#include <morda/render/vertex_array.hpp>
+#include <r4/matrix.hpp>
 #include <utki/config.hpp>
 #include <utki/debug.hpp>
 
-#include <r4/matrix.hpp>
-
-#include <vector>
-
 #include "util.hpp"
-
-#include <morda/render/vertex_array.hpp>
-
-#include <GL/glew.h>
 
 namespace morda {
 namespace render_opengl {
 
 struct shader_wrapper {
-  GLuint s;
-  shader_wrapper(const char *code, GLenum type);
-  ~shader_wrapper() noexcept { glDeleteShader(this->s); }
+	GLuint s;
+	shader_wrapper(const char* code, GLenum type);
+
+	~shader_wrapper() noexcept
+	{
+		glDeleteShader(this->s);
+	}
 };
 
 struct program_wrapper {
-  shader_wrapper vertex_shader;
-  shader_wrapper fragment_shader;
-  GLuint p;
-  program_wrapper(const char *vertex_shader_code,
-                  const char *fragment_shader_code);
+	shader_wrapper vertex_shader;
+	shader_wrapper fragment_shader;
+	GLuint p;
+	program_wrapper(const char* vertex_shader_code, const char* fragment_shader_code);
 
-  virtual ~program_wrapper() noexcept { glDeleteProgram(this->p); }
+	virtual ~program_wrapper() noexcept
+	{
+		glDeleteProgram(this->p);
+	}
 };
 
-class shader_base {
-  program_wrapper program;
+class shader_base
+{
+	program_wrapper program;
 
-  const GLint matrix_uniform;
+	const GLint matrix_uniform;
 
-  static const shader_base *bound_shader;
+	static const shader_base* bound_shader;
 
 public:
-  shader_base(const char *vertex_shader_code, const char *fragment_shader_code);
+	shader_base(const char* vertex_shader_code, const char* fragment_shader_code);
 
-  shader_base(const shader_base &) = delete;
-  shader_base &operator=(const shader_base &) = delete;
+	shader_base(const shader_base&) = delete;
+	shader_base& operator=(const shader_base&) = delete;
 
-  virtual ~shader_base() noexcept {}
+	virtual ~shader_base() noexcept {}
 
 protected:
-  GLint get_uniform(const char *n);
+	GLint get_uniform(const char* n);
 
-  void bind() const {
-    glUseProgram(program.p);
-    assert_opengl_no_error();
-    bound_shader = this;
-  }
+	void bind() const
+	{
+		glUseProgram(program.p);
+		assert_opengl_no_error();
+		bound_shader = this;
+	}
 
-  bool is_bound() const noexcept { return this == bound_shader; }
+	bool is_bound() const noexcept
+	{
+		return this == bound_shader;
+	}
 
-  void set_uniform_matrix4f(GLint id, const r4::matrix4<float> &m) const {
-    glUniformMatrix4fv(id, 1, GL_TRUE, reinterpret_cast<const GLfloat *>(&m));
-    assert_opengl_no_error();
-  }
+	void set_uniform_matrix4f(GLint id, const r4::matrix4<float>& m) const
+	{
+		glUniformMatrix4fv(id, 1, GL_TRUE, reinterpret_cast<const GLfloat*>(&m));
+		assert_opengl_no_error();
+	}
 
-  void set_uniform4f(GLint id, float x, float y, float z, float a) const {
-    glUniform4f(id, x, y, z, a);
-    assert_opengl_no_error();
-  }
+	void set_uniform4f(GLint id, float x, float y, float z, float a) const
+	{
+		glUniform4f(id, x, y, z, a);
+		assert_opengl_no_error();
+	}
 
-  void set_matrix(const r4::matrix4<float> &m) const {
-    this->set_uniform_matrix4f(this->matrix_uniform, m);
-  }
+	void set_matrix(const r4::matrix4<float>& m) const
+	{
+		this->set_uniform_matrix4f(this->matrix_uniform, m);
+	}
 
-  static GLenum mode_map[];
+	static GLenum mode_map[];
 
-  static GLenum mode_to_gl_mode(morda::vertex_array::mode mode) {
-    return mode_map[unsigned(mode)];
-  }
+	static GLenum mode_to_gl_mode(morda::vertex_array::mode mode)
+	{
+		return mode_map[unsigned(mode)];
+	}
 
-  void render(const r4::matrix4<float> &m, const morda::vertex_array &va) const;
+	void render(const r4::matrix4<float>& m, const morda::vertex_array& va) const;
 };
 
 } // namespace render_opengl

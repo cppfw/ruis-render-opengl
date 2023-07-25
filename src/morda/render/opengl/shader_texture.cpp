@@ -29,9 +29,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengl;
 
-shader_texture::shader_texture()
-    : shader_base(
-          R"qwertyuiop(
+shader_texture::shader_texture() :
+	shader_base(
+		R"qwertyuiop(
 						attribute vec4 a0; // position
 
 						attribute vec2 a1; // texture coordinates
@@ -45,7 +45,7 @@ shader_texture::shader_texture()
 							tc0 = a1;
 						}
 					)qwertyuiop",
-          R"qwertyuiop(
+		R"qwertyuiop(
 						uniform sampler2D texture0;
 		
 						varying vec2 tc0;
@@ -53,15 +53,17 @@ shader_texture::shader_texture()
 						void main(void){
 							gl_FragColor = texture2D(texture0, tc0);
 						}
-					)qwertyuiop") {
-  this->textureUniform = this->get_uniform("texture0");
+					)qwertyuiop"
+	)
+{
+	this->textureUniform = this->get_uniform("texture0");
 }
 
-void shader_texture::render(const r4::matrix4<float> &m,
-                            const morda::vertex_array &va,
-                            const morda::texture_2d &tex) const {
-  static_cast<const texture_2d &>(tex).bind(0);
-  this->bind();
+void shader_texture::render(const r4::matrix4<float>& m, const morda::vertex_array& va, const morda::texture_2d& tex)
+	const
+{
+	static_cast<const texture_2d&>(tex).bind(0);
+	this->bind();
 
-  this->shader_base::render(m, va);
+	this->shader_base::render(m, va);
 }
