@@ -23,21 +23,22 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <GL/glew.h>
 
-namespace morda{ namespace render_opengl{
+namespace morda {
+namespace render_opengl {
 
-class opengl_buffer{
+class opengl_buffer {
 public:
-	const GLuint buffer;
+  const GLuint buffer;
 
-	opengl_buffer();
-	
-	opengl_buffer(const opengl_buffer&) = delete;
-	opengl_buffer& operator=(const opengl_buffer&) = delete;
-	
-	virtual ~opengl_buffer()noexcept;
-	
+  opengl_buffer();
+
+  opengl_buffer(const opengl_buffer &) = delete;
+  opengl_buffer &operator=(const opengl_buffer &) = delete;
+
+  virtual ~opengl_buffer() noexcept;
+
 private:
-
 };
 
-}}
+} // namespace render_opengl
+} // namespace morda

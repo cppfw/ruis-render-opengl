@@ -26,20 +26,22 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <GL/glew.h>
 
-namespace morda{ namespace render_opengl{
+namespace morda {
+namespace render_opengl {
 
-class frame_buffer : public morda::frame_buffer{
+class frame_buffer : public morda::frame_buffer {
 public:
-	GLuint fbo;
-	
-	frame_buffer(const utki::shared_ref<morda::texture_2d>& color);
-	
-	frame_buffer(const frame_buffer&) = delete;
-	frame_buffer& operator=(const frame_buffer&) = delete;
-	
-	~frame_buffer()noexcept;
-private:
+  GLuint fbo;
 
+  frame_buffer(const utki::shared_ref<morda::texture_2d> &color);
+
+  frame_buffer(const frame_buffer &) = delete;
+  frame_buffer &operator=(const frame_buffer &) = delete;
+
+  ~frame_buffer() noexcept;
+
+private:
 };
 
-}}
+} // namespace render_opengl
+} // namespace morda

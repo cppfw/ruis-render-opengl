@@ -25,9 +25,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengl;
 
-shader_color_pos_tex_alpha::shader_color_pos_tex_alpha() :
-		shader_base(
-				R"qwertyuiop(
+shader_color_pos_tex_alpha::shader_color_pos_tex_alpha()
+    : shader_base(
+          R"qwertyuiop(
 						attribute vec4 a0;
 
 						attribute vec2 a1;
@@ -41,7 +41,7 @@ shader_color_pos_tex_alpha::shader_color_pos_tex_alpha() :
 							tc0 = a1;
 						}
 					)qwertyuiop",
-				R"qwertyuiop(		
+          R"qwertyuiop(		
 						uniform sampler2D texture0;
 		
 						uniform vec4 uniform_color;
@@ -56,17 +56,19 @@ shader_color_pos_tex_alpha::shader_color_pos_tex_alpha() :
                                 uniform_color.w * texture2D(texture0, tc0).x
                             );
 						}
-					)qwertyuiop"
-			)
-{
-	this->colorUniform = this->get_uniform("uniform_color");
+					)qwertyuiop") {
+  this->colorUniform = this->get_uniform("uniform_color");
 }
 
-void shader_color_pos_tex_alpha::render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color, const morda::texture_2d& tex)const{
-	static_cast<const texture_2d&>(tex).bind(0);
-	this->bind();
-	
-	this->set_uniform4f(this->colorUniform, color.x(), color.y(), color.z(), color.w());
-	
-	this->shader_base::render(m, va);
+void shader_color_pos_tex_alpha::render(const r4::matrix4<float> &m,
+                                        const morda::vertex_array &va,
+                                        r4::vector4<float> color,
+                                        const morda::texture_2d &tex) const {
+  static_cast<const texture_2d &>(tex).bind(0);
+  this->bind();
+
+  this->set_uniform4f(this->colorUniform, color.x(), color.y(), color.z(),
+                      color.w());
+
+  this->shader_base::render(m, va);
 }

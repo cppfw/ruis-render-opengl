@@ -25,27 +25,26 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <GL/glew.h>
 
-namespace morda{ namespace render_opengl{
+namespace morda {
+namespace render_opengl {
 
-class vertex_array : public morda::vertex_array{
+class vertex_array : public morda::vertex_array {
 public:
-	const GLuint vao;
+  const GLuint vao;
 
-	vertex_array(
-			buffers_type buffers,
-			const utki::shared_ref<const morda::index_buffer>& indices,
-			mode rendering_mode
-		);
-	
-	vertex_array(const vertex_array&) = delete;
-	vertex_array& operator=(const vertex_array&) = delete;
+  vertex_array(buffers_type buffers,
+               const utki::shared_ref<const morda::index_buffer> &indices,
+               mode rendering_mode);
 
-	~vertex_array();
+  vertex_array(const vertex_array &) = delete;
+  vertex_array &operator=(const vertex_array &) = delete;
 
-	void bind_buffers()const;
+  ~vertex_array();
+
+  void bind_buffers() const;
 
 private:
-
 };
 
-}}
+} // namespace render_opengl
+} // namespace morda

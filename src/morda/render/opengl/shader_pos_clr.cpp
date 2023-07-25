@@ -23,9 +23,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengl;
 
-shader_pos_clr::shader_pos_clr() :
-		shader_base(
-				R"qwertyuiop(
+shader_pos_clr::shader_pos_clr()
+    : shader_base(
+          R"qwertyuiop(
 						uniform mat4 matrix;
 
 						attribute vec4 a0;
@@ -38,19 +38,17 @@ shader_pos_clr::shader_pos_clr() :
 							color_varying = a1;
 						}
 					)qwertyuiop",
-				R"qwertyuiop(
+          R"qwertyuiop(
 						varying vec4 color_varying;
 						
 						void main(void){
 							gl_FragColor = color_varying;
 						}
-					)qwertyuiop"
-			)
-{
-}
+					)qwertyuiop") {}
 
-void shader_pos_clr::render(const r4::matrix4<float>& m, const morda::vertex_array& va) const {
-	this->bind();
-	
-	this->shader_base::render(m, va);
+void shader_pos_clr::render(const r4::matrix4<float> &m,
+                            const morda::vertex_array &va) const {
+  this->bind();
+
+  this->shader_base::render(m, va);
 }
