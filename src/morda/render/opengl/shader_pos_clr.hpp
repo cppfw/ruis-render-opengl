@@ -38,6 +38,8 @@ public:
 	shader_pos_clr(shader_pos_clr&&) = delete;
 	shader_pos_clr& operator=(shader_pos_clr&&) = delete;
 
+	~shader_pos_clr() override = default;
+
 	void render(const r4::matrix4<float>& m, const morda::vertex_array& va) const override;
 };
 
