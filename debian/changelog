@@ -1,3 +1,9 @@
+libmorda-render-opengl (0.1.60) unstable; urgency=medium
+
+  * fix lint
+
+ -- Ivan Gagis <igagis@gmail.com>  Tue, 25 Jul 2023 15:53:26 +0300
+
 libmorda-render-opengl (0.1.59) unstable; urgency=medium
 
   * rasterimage
