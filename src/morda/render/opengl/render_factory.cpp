@@ -97,7 +97,7 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
 		switch (type) {
 			default:
 				ASSERT(false)
-			case decltype(type)::grey:
+			case rasterimage::format::grey:
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
 				assert_opengl_no_error();
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
@@ -106,7 +106,7 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
 				assert_opengl_no_error();
 				// GL_LUMINANCE is deprecated in OpenGL 3, so we use GL_RED
 				return GL_RED;
-			case decltype(type)::greya:
+			case rasterimage::format::greya:
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
 				assert_opengl_no_error();
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
@@ -117,9 +117,9 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
 				assert_opengl_no_error();
 				// GL_LUMINANCE_ALPHA is deprecated in OpenGL 3, so we use GL_RG
 				return GL_RG;
-			case decltype(type)::rgb:
+			case rasterimage::format::rgb:
 				return GL_RGB;
-			case decltype(type)::rgba:
+			case rasterimage::format::rgba:
 				return GL_RGBA;
 		}
 	}();
