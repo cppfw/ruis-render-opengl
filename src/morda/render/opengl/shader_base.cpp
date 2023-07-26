@@ -35,7 +35,7 @@ using namespace morda::render_opengl;
 
 const shader_base* shader_base::bound_shader = nullptr;
 
-GLenum shader_base::mode_map[] = {
+const std::array<GLenum, 4> shader_base::mode_map = {
 	GL_TRIANGLES, // TRIANGLES
 	GL_TRIANGLE_FAN, // TRIANGLE_FAN
 	GL_LINE_LOOP, // LINE_LOOP

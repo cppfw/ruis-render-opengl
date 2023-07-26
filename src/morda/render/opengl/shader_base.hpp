@@ -104,7 +104,7 @@ protected:
 		this->set_uniform_matrix4f(this->matrix_uniform, m);
 	}
 
-	static GLenum mode_map[];
+	static const std::array<GLenum, 4> mode_map; // TODO: use enum_size
 
 	static GLenum mode_to_gl_mode(morda::vertex_array::mode mode)
 	{

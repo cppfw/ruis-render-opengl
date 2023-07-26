@@ -28,8 +28,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "render_factory.hpp"
 
-namespace morda {
-namespace render_opengl {
+namespace morda::render_opengl {
 
 class renderer : public morda::renderer
 {
@@ -38,8 +37,13 @@ class renderer : public morda::renderer
 public:
 	renderer(std::unique_ptr<render_factory> factory = std::make_unique<render_factory>());
 
-	renderer(const renderer& orig) = delete;
-	renderer& operator=(const renderer& orig) = delete;
+	renderer(const renderer&) = delete;
+	renderer& operator=(const renderer&) = delete;
+
+	renderer(renderer&&) = delete;
+	renderer& operator=(renderer&&) = delete;
+
+	~renderer()override = default;
 
 	void set_framebuffer_internal(morda::frame_buffer* fb) override;
 
@@ -63,5 +67,4 @@ public:
 		override;
 };
 
-} // namespace render_opengl
 } // namespace morda

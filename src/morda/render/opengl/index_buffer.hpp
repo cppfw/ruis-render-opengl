@@ -32,7 +32,7 @@ namespace render_opengl {
 class index_buffer : public morda::index_buffer, public opengl_buffer
 {
 public:
-	const GLenum element_type;
+	const GLenum element_type = GL_UNSIGNED_SHORT;
 	const GLsizei elements_count;
 
 	index_buffer(utki::span<const uint16_t> indices);
