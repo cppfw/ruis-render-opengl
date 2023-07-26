@@ -89,7 +89,7 @@ protected:
 
 	void set_uniform_matrix4f(GLint id, const r4::matrix4<float>& m) const
 	{
-		glUniformMatrix4fv(id, 1, GL_TRUE, reinterpret_cast<const GLfloat*>(&m));
+		glUniformMatrix4fv(id, 1, GL_TRUE, m.front().data());
 		assert_opengl_no_error();
 	}
 
