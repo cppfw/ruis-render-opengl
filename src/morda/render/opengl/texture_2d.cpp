@@ -33,7 +33,7 @@ texture_2d::texture_2d(r4::vector2<float> dims) :
 	ASSERT(this->tex != 0)
 }
 
-texture_2d::~texture_2d() noexcept
+texture_2d::~texture_2d()
 {
 	glDeleteTextures(1, &this->tex);
 }

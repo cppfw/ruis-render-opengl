@@ -25,13 +25,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <morda/render/frame_buffer.hpp>
 #include <morda/render/texture_2d.hpp>
 
-namespace morda {
-namespace render_opengl {
+namespace morda::render_opengl {
 
 class frame_buffer : public morda::frame_buffer
 {
 public:
-	GLuint fbo;
+	GLuint fbo = 0;
 
 	frame_buffer(const utki::shared_ref<morda::texture_2d>& color);
 
@@ -43,5 +42,4 @@ public:
 private:
 };
 
-} // namespace render_opengl
 } // namespace morda

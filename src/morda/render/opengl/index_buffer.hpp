@@ -26,8 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "opengl_buffer.hpp"
 
-namespace morda {
-namespace render_opengl {
+namespace morda::render_opengl {
 
 class index_buffer : public morda::index_buffer, public opengl_buffer
 {
@@ -40,8 +39,12 @@ public:
 	index_buffer(const index_buffer&) = delete;
 	index_buffer& operator=(const index_buffer&) = delete;
 
+	index_buffer(index_buffer&&) = delete;
+	index_buffer& operator=(index_buffer&&) = delete;
+
+	~index_buffer() override = default;
+
 private:
 };
 
-} // namespace render_opengl
 } // namespace morda

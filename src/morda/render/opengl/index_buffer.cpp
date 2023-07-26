@@ -33,6 +33,6 @@ index_buffer::index_buffer(utki::span<const uint16_t> indices) :
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->buffer);
 	assert_opengl_no_error();
 
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size_bytes(), indices.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, GLsizeiptr(indices.size_bytes()), indices.data(), GL_STATIC_DRAW);
 	assert_opengl_no_error();
 }

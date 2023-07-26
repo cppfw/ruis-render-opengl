@@ -27,6 +27,7 @@ using namespace morda::render_opengl;
 
 opengl_buffer::opengl_buffer() :
 	buffer([]() -> GLuint {
+		// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 		GLuint ret;
 		glGenBuffers(1, &ret);
 		assert_opengl_no_error();
