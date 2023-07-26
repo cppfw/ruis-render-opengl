@@ -29,7 +29,7 @@ namespace morda::render_opengl {
 
 class shader_color_pos_tex : public morda::coloring_texturing_shader, public shader_base
 {
-	GLint colorUniform;
+	GLint color_uniform;
 
 public:
 	shader_color_pos_tex();

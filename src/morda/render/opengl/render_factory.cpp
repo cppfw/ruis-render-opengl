@@ -48,8 +48,6 @@ render_factory::render_factory()
 	}
 }
 
-render_factory::~render_factory() noexcept {}
-
 utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(
 	rasterimage::format format,
 	rasterimage::dimensioned::dimensions_type dims
@@ -95,39 +93,36 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
 	// TODO: save previous bind and restore it after?
 	ret.get().bind(0);
 
-	GLint internalFormat;
-	switch (type) {
-		default:
-			ASSERT(false)
-		case decltype(type)::grey:
-			// GL_LUMINANCE is deprecated in OpenGL 3, so we use GL_RED
-			internalFormat = GL_RED;
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
-			assert_opengl_no_error();
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
-			assert_opengl_no_error();
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
-			assert_opengl_no_error();
-			break;
-		case decltype(type)::greya:
-			// GL_LUMINANCE_ALPHA is deprecated in OpenGL 3, so we use GL_RG
-			internalFormat = GL_RG;
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
-			assert_opengl_no_error();
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
-			assert_opengl_no_error();
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
-			assert_opengl_no_error();
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_A, GL_GREEN);
-			assert_opengl_no_error();
-			break;
-		case decltype(type)::rgb:
-			internalFormat = GL_RGB;
-			break;
-		case decltype(type)::rgba:
-			internalFormat = GL_RGBA;
-			break;
-	}
+	GLint internal_format = [&type](){
+		switch (type) {
+			default:
+				ASSERT(false)
+			case decltype(type)::grey:
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
+				assert_opengl_no_error();
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
+				assert_opengl_no_error();
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
+				assert_opengl_no_error();
+				// GL_LUMINANCE is deprecated in OpenGL 3, so we use GL_RED
+				return GL_RED;
+			case decltype(type)::greya:
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
+				assert_opengl_no_error();
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
+				assert_opengl_no_error();
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
+				assert_opengl_no_error();
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_A, GL_GREEN);
+				assert_opengl_no_error();
+				// GL_LUMINANCE_ALPHA is deprecated in OpenGL 3, so we use GL_RG
+				return GL_RG;
+			case decltype(type)::rgb:
+				return GL_RGB;
+			case decltype(type)::rgba:
+				return GL_RGBA;
+		}
+	}();
 
 	// we will be passing pixels to OpenGL which are 1-byte aligned.
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -136,11 +131,11 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
 	glTexImage2D(
 		GL_TEXTURE_2D,
 		0, // 0th level, no mipmaps
-		internalFormat, // internal format
-		dims.x(),
-		dims.y(),
+		internal_format, // internal format
+		GLsizei(dims.x()),
+		GLsizei(dims.y()),
 		0, // border, should be 0!
-		internalFormat, // format of the texel data
+		internal_format, // format of the texel data
 		GL_UNSIGNED_BYTE,
 		data.size() == 0 ? nullptr : data.data()
 	);

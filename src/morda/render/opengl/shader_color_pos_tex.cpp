@@ -52,10 +52,9 @@ shader_color_pos_tex::shader_color_pos_tex() :
 							gl_FragColor = texture2D(texture0, tc0) * uniform_color;
 						}
 					)qwertyuiop"
-	)
-{
-	this->colorUniform = this->get_uniform("uniform_color");
-}
+	),
+	color_uniform(this->get_uniform("uniform_color"))
+{}
 
 void shader_color_pos_tex::render(
 	const r4::matrix4<float>& m,
@@ -64,10 +63,12 @@ void shader_color_pos_tex::render(
 	const morda::texture_2d& tex
 ) const
 {
+	ASSERT(dynamic_cast<const texture_2d*>(&tex))
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 	static_cast<const texture_2d&>(tex).bind(0);
 	this->bind();
 
-	this->set_uniform4f(this->colorUniform, color.x(), color.y(), color.z(), color.w());
+	this->set_uniform4f(this->color_uniform, color.x(), color.y(), color.z(), color.w());
 
 	this->shader_base::render(m, va);
 }

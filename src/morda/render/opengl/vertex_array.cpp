@@ -75,6 +75,7 @@ void vertex_array::bind_buffers() const
 {
 	for (unsigned i = 0; i != this->buffers.size(); ++i) {
 		ASSERT(dynamic_cast<const vertex_buffer*>(&this->buffers[i].get()))
+		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 		const auto& vbo = static_cast<const vertex_buffer&>(this->buffers[i].get());
 		glBindBuffer(GL_ARRAY_BUFFER, vbo.buffer);
 		assert_opengl_no_error();
@@ -91,6 +92,7 @@ void vertex_array::bind_buffers() const
 
 	{
 		ASSERT(dynamic_cast<const index_buffer*>(&this->indices.get()))
+		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 		const auto& ivbo = static_cast<const index_buffer&>(this->indices.get());
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ivbo.buffer);
 		assert_opengl_no_error();

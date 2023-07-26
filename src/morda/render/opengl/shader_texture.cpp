@@ -54,14 +54,15 @@ shader_texture::shader_texture() :
 							gl_FragColor = texture2D(texture0, tc0);
 						}
 					)qwertyuiop"
-	)
-{
-	this->textureUniform = this->get_uniform("texture0");
-}
+	),
+	texture_uniform(this->get_uniform("texture0"))
+{}
 
 void shader_texture::render(const r4::matrix4<float>& m, const morda::vertex_array& va, const morda::texture_2d& tex)
 	const
 {
+	ASSERT(dynamic_cast<const texture_2d*>(&tex))
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 	static_cast<const texture_2d&>(tex).bind(0);
 	this->bind();
 

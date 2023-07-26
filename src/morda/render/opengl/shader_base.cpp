@@ -33,7 +33,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengl;
 
-const std::array<GLenum, 4> shader_base::mode_map = {
+const std::array<GLenum, 4> shader_base::mode_map = { // TODO: use enum_sze insteda of 4
 	GL_TRIANGLES, // TRIANGLES
 	GL_TRIANGLE_FAN, // TRIANGLE_FAN
 	GL_LINE_LOOP, // LINE_LOOP
@@ -51,10 +51,12 @@ bool check_for_compile_errors(GLuint shader)
 		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &log_len);
 		if (log_len > 1) { // 1 char is a terminating 0
 			std::vector<char> log(log_len);
+			// 'len' variable is used to get value via output argument, so no need to initialize it
+			// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 			GLint len;
-			glGetShaderInfoLog(shader, GLsizei(log.size()), &len, &*log.begin());
+			glGetShaderInfoLog(shader, GLsizei(log.size()), &len, log.data());
 			LOG([&](auto& o) {
-				o << "===Compile log===\n" << &*log.begin() << std::endl;
+				o << "===Compile log===\n" << log.data() << std::endl;
 			})
 		} else {
 			LOG([&](auto& o) {
@@ -76,10 +78,12 @@ bool check_for_link_errors(GLuint program)
 		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &log_len);
 		if (log_len > 1) { // 1 is for terminating 0 character
 			std::vector<char> log(log_len);
+			// 'len' variable is used to get value via output argument, so no need to initialize it
+			// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 			GLint len;
-			glGetProgramInfoLog(program, GLsizei(log.size()), &len, &*log.begin());
+			glGetProgramInfoLog(program, GLsizei(log.size()), &len, log.data());
 			LOG([&](auto& o) {
-				o << "===Link log===\n" << &*log.begin() << std::endl;
+				o << "===Link log===\n" << log.data() << std::endl;
 			})
 		}
 		return true;
@@ -89,17 +93,18 @@ bool check_for_link_errors(GLuint program)
 
 } // namespace
 
-shader_wrapper::shader_wrapper(const char* code, GLenum type)
+shader_wrapper::shader_wrapper(const char* code, GLenum type) :
+	s([&type](){
+		auto s = glCreateShader(type);
+		if (s == 0) {
+			throw std::runtime_error("glCreateShader() failed");
+		}
+		return s;
+	}())
 {
-	this->s = glCreateShader(type);
-
-	if (this->s == 0) {
-		throw std::runtime_error("glCreateShader() failed");
-	}
-
 	const char* c = code;
 
-	glShaderSource(this->s, 1, &c, 0);
+	glShaderSource(this->s, 1, &c, nullptr);
 	glCompileShader(this->s);
 	if (check_for_compile_errors(this->s)) {
 		LOG([&](auto& o) {
@@ -112,12 +117,14 @@ shader_wrapper::shader_wrapper(const char* code, GLenum type)
 
 program_wrapper::program_wrapper(const char* vertex_shader_code, const char* fragment_shader_code) :
 	vertex_shader(vertex_shader_code, GL_VERTEX_SHADER),
-	fragment_shader(fragment_shader_code, GL_FRAGMENT_SHADER)
+	fragment_shader(fragment_shader_code, GL_FRAGMENT_SHADER),
+	p(glCreateProgram())
 {
-	this->p = glCreateProgram();
 	glAttachShader(this->p, vertex_shader.s);
 	glAttachShader(this->p, fragment_shader.s);
 
+	// the variable is initialized via output argument, so no need to initialize it here
+	// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 	GLint max_num_attribs;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &max_num_attribs);
 	ASSERT(max_num_attribs >= 0)
@@ -160,12 +167,14 @@ void shader_base::render(const r4::matrix4<float>& m, const morda::vertex_array&
 	ASSERT(this->is_bound())
 
 	ASSERT(dynamic_cast<const index_buffer*>(&va.indices.get()))
-	const index_buffer& ivbo = static_cast<const index_buffer&>(va.indices.get());
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+	const auto& ivbo = static_cast<const index_buffer&>(va.indices.get());
 
 	this->set_matrix(m);
 
 	ASSERT(dynamic_cast<const vertex_array*>(&va))
-	auto& ogl_va = static_cast<const vertex_array&>(va);
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+	const auto& ogl_va = static_cast<const vertex_array&>(va);
 
 	if (GLEW_ARB_vertex_array_object) {
 		glBindVertexArray(ogl_va.vao);

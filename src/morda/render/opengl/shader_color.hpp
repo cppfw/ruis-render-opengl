@@ -29,7 +29,7 @@ namespace morda::render_opengl {
 
 class shader_color : public morda::coloring_shader, public shader_base
 {
-	GLint colorUniform;
+	GLint color_uniform;
 
 public:
 	shader_color();

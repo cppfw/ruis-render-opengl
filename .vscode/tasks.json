@@ -11,6 +11,15 @@
                 "$gcc"
             ],
             "group": "build"
+        },
+        {
+            "label": "make-dbg",
+            "type": "shell",
+            "command": "make config=dbg",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
         }
     ]
 }

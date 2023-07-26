@@ -23,8 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <morda/render/render_factory.hpp>
 
-namespace morda {
-namespace render_opengl {
+namespace morda::render_opengl {
 
 class render_factory : public morda::render_factory
 {
@@ -34,7 +33,10 @@ public:
 	render_factory(const render_factory&) = delete;
 	render_factory& operator=(const render_factory&) = delete;
 
-	virtual ~render_factory() noexcept;
+	render_factory(render_factory&&) = delete;
+	render_factory& operator=(render_factory&&) = delete;
+
+	~render_factory() override = default;
 
 	utki::shared_ref<texture_2d> create_texture_2d(
 		rasterimage::format format,
@@ -66,5 +68,4 @@ private:
 	);
 };
 
-} // namespace render_opengl
 } // namespace morda

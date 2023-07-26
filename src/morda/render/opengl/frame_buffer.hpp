@@ -37,7 +37,10 @@ public:
 	frame_buffer(const frame_buffer&) = delete;
 	frame_buffer& operator=(const frame_buffer&) = delete;
 
-	~frame_buffer() noexcept;
+	frame_buffer(frame_buffer&&) = delete;
+	frame_buffer& operator=(frame_buffer&&) = delete;
+
+	~frame_buffer()override;
 
 private:
 };

@@ -47,17 +47,16 @@ shader_color_pos_lum::shader_color_pos_lum() :
 							gl_FragColor = vec4(uniform_color.x, uniform_color.y, uniform_color.z, uniform_color.w * lum);
 						}
 					)qwertyuiop"
-	)
-{
-	this->colorUniform = this->get_uniform("uniform_color");
-}
+	),
+	color_uniform(this->get_uniform("uniform_color"))
+{}
 
 void shader_color_pos_lum::render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color)
 	const
 {
 	this->bind();
 
-	this->set_uniform4f(this->colorUniform, color.x(), color.y(), color.z(), color.w());
+	this->set_uniform4f(this->color_uniform, color.x(), color.y(), color.z(), color.w());
 
 	this->shader_base::render(m, va);
 }

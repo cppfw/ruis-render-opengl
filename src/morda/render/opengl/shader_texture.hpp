@@ -29,7 +29,7 @@ namespace morda::render_opengl {
 
 class shader_texture : public morda::texturing_shader, public shader_base
 {
-	GLint textureUniform;
+	GLint texture_uniform;
 
 public:
 	shader_texture();

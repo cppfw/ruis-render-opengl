@@ -31,6 +31,8 @@ using namespace morda::render_opengl;
 namespace {
 unsigned get_max_texture_size()
 {
+	// the variable is initialized via output argument, so no need to initialize it here
+	// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 	GLint val;
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &val);
 	ASSERT(val > 0)
@@ -69,6 +71,9 @@ renderer::renderer(std::unique_ptr<render_factory> factory) :
 	// On some platforms the default framebuffer is not 0, so because of this
 	// check if default framebuffer value is saved or not everytime some
 	// framebuffer is going to be bound and save the value if needed.
+	
+	// the variable is initialized via output argument, so no need to initialize it here
+	// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 	GLint old_fb;
 	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old_fb);
 	LOG([&](auto& o) {
@@ -91,6 +96,7 @@ void renderer::set_framebuffer_internal(morda::frame_buffer* fb)
 	}
 
 	ASSERT(dynamic_cast<frame_buffer*>(fb))
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 	auto& ogl_fb = static_cast<frame_buffer&>(*fb);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, ogl_fb.fbo);
@@ -130,9 +136,11 @@ void renderer::set_scissor_enabled(bool enabled)
 
 r4::rectangle<int> renderer::get_scissor() const
 {
-	GLint osb[4];
-	glGetIntegerv(GL_SCISSOR_BOX, osb);
-	return r4::rectangle<int>(osb[0], osb[1], osb[2], osb[3]);
+	// the variable is initialized via output argument, so no need to initialize it here
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
+	std::array<GLint, 4> osb;
+	glGetIntegerv(GL_SCISSOR_BOX, osb.data());
+	return {osb[0], osb[1], osb[2], osb[3]};
 }
 
 void renderer::set_scissor(r4::rectangle<int> r)
@@ -143,11 +151,13 @@ void renderer::set_scissor(r4::rectangle<int> r)
 
 r4::rectangle<int> renderer::get_viewport() const
 {
-	GLint vp[4];
+	// the variable is initialized via output argument, so no need to initialize it here
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
+	std::array<GLint, 4> vp;
 
-	glGetIntegerv(GL_VIEWPORT, vp);
+	glGetIntegerv(GL_VIEWPORT, vp.data());
 
-	return r4::rectangle<int>(vp[0], vp[1], vp[2], vp[3]);
+	return {vp[0], vp[1], vp[2], vp[3]};
 }
 
 void renderer::set_viewport(r4::rectangle<int> r)
@@ -167,7 +177,7 @@ void renderer::set_blend_enabled(bool enable)
 
 namespace {
 
-GLenum blend_func[] = {
+const std::array<GLenum, 15> blend_func = { // TODO: use morda::renderer::blend_factor::enum_size insteda of 15
 	GL_ZERO,
 	GL_ONE,
 	GL_SRC_COLOR,
