@@ -34,7 +34,7 @@ opengl_buffer::opengl_buffer() :
 	}())
 {}
 
-opengl_buffer::~opengl_buffer() noexcept
+opengl_buffer::~opengl_buffer()
 {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	assert_opengl_no_error();
