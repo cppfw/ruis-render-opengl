@@ -35,6 +35,7 @@ vertex_array::vertex_array(
 	morda::vertex_array(std::move(buffers), indices, rendering_mode),
 	vao([]() {
 		if (GLEW_ARB_vertex_array_object) {
+			// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 			GLuint ret;
 			glGenVertexArrays(1, &ret);
 			assert_opengl_no_error();

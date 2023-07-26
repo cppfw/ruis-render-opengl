@@ -33,8 +33,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengl;
 
-const shader_base* shader_base::bound_shader = nullptr;
-
 const std::array<GLenum, 4> shader_base::mode_map = {
 	GL_TRIANGLES, // TRIANGLES
 	GL_TRIANGLE_FAN, // TRIANGLE_FAN

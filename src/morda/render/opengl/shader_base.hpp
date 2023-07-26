@@ -31,14 +31,19 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "util.hpp"
 
-namespace morda {
-namespace render_opengl {
+namespace morda::render_opengl {
 
 struct shader_wrapper {
 	GLuint s;
 	shader_wrapper(const char* code, GLenum type);
 
-	~shader_wrapper() noexcept
+	shader_wrapper(const shader_wrapper&) = delete;
+	shader_wrapper& operator=(const shader_wrapper&) = delete;
+
+	shader_wrapper(shader_wrapper&&) = delete;
+	shader_wrapper& operator=(shader_wrapper&&) = delete;
+
+	~shader_wrapper()
 	{
 		glDeleteShader(this->s);
 	}
@@ -48,9 +53,16 @@ struct program_wrapper {
 	shader_wrapper vertex_shader;
 	shader_wrapper fragment_shader;
 	GLuint p;
+
 	program_wrapper(const char* vertex_shader_code, const char* fragment_shader_code);
 
-	virtual ~program_wrapper() noexcept
+	program_wrapper(const program_wrapper&) = delete;
+	program_wrapper& operator=(const program_wrapper&) = delete;
+
+	program_wrapper(program_wrapper&&) = delete;
+	program_wrapper& operator=(program_wrapper&&) = delete;
+
+	virtual ~program_wrapper()
 	{
 		glDeleteProgram(this->p);
 	}
@@ -62,29 +74,33 @@ class shader_base
 
 	const GLint matrix_uniform;
 
-	static const shader_base* bound_shader;
-
 public:
 	shader_base(const char* vertex_shader_code, const char* fragment_shader_code);
 
 	shader_base(const shader_base&) = delete;
 	shader_base& operator=(const shader_base&) = delete;
 
-	virtual ~shader_base() noexcept {}
+	shader_base(shader_base&&) = delete;
+	shader_base& operator=(shader_base&&) = delete;
+
+	virtual ~shader_base() = default;
 
 protected:
 	GLint get_uniform(const char* n);
 
 	void bind() const
 	{
-		glUseProgram(program.p);
+		glUseProgram(this->program.p);
 		assert_opengl_no_error();
-		bound_shader = this;
 	}
 
 	bool is_bound() const noexcept
 	{
-		return this == bound_shader;
+		GLint prog = 0;
+		glGetIntegerv(GL_CURRENT_PROGRAM, &prog);
+
+		ASSERT(prog >= 0)
+		return GLuint(prog) == this->program.p;
 	}
 
 	void set_uniform_matrix4f(GLint id, const r4::matrix4<float>& m) const
@@ -114,5 +130,4 @@ protected:
 	void render(const r4::matrix4<float>& m, const morda::vertex_array& va) const;
 };
 
-} // namespace render_opengl
 } // namespace morda

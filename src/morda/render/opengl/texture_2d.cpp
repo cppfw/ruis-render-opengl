@@ -38,9 +38,9 @@ texture_2d::~texture_2d()
 	glDeleteTextures(1, &this->tex);
 }
 
-void texture_2d::bind(unsigned unitNum) const
+void texture_2d::bind(unsigned unit_num) const
 {
-	glActiveTexture(GL_TEXTURE0 + unitNum);
+	glActiveTexture(GL_TEXTURE0 + unit_num);
 	assert_opengl_no_error();
 	glBindTexture(GL_TEXTURE_2D, this->tex);
 	assert_opengl_no_error();

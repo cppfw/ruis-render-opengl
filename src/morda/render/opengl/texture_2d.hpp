@@ -27,7 +27,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 namespace morda::render_opengl {
 
 struct texture_2d : public morda::texture_2d {
-	GLuint tex;
+	GLuint tex = 0;
 
 	texture_2d(r4::vector2<float> dims);
 
