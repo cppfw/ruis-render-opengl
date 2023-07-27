@@ -40,7 +40,7 @@ public:
 	shader_color_pos_tex_alpha(shader_color_pos_tex_alpha&&) = delete;
 	shader_color_pos_tex_alpha& operator=(shader_color_pos_tex_alpha&&) = delete;
 
-	~shader_color_pos_tex_alpha()override = default;
+	~shader_color_pos_tex_alpha() override = default;
 
 	void render(
 		const r4::matrix4<float>& m,
@@ -50,4 +50,4 @@ public:
 	) const override;
 };
 
-} // namespace morda
+} // namespace morda::render_opengl

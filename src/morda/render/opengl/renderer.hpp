@@ -43,7 +43,7 @@ public:
 	renderer(renderer&&) = delete;
 	renderer& operator=(renderer&&) = delete;
 
-	~renderer()override = default;
+	~renderer() override = default;
 
 	void set_framebuffer_internal(morda::frame_buffer* fb) override;
 
@@ -67,4 +67,4 @@ public:
 		override;
 };
 
-} // namespace morda
+} // namespace morda::render_opengl

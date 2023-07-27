@@ -33,7 +33,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengl;
 
-const std::array<GLenum, 4> shader_base::mode_map = { // TODO: use enum_sze insteda of 4
+const std::array<GLenum, 4> shader_base::mode_map = {
+	// TODO: use enum_sze insteda of 4
 	GL_TRIANGLES, // TRIANGLES
 	GL_TRIANGLE_FAN, // TRIANGLE_FAN
 	GL_LINE_LOOP, // LINE_LOOP
@@ -94,7 +95,7 @@ bool check_for_link_errors(GLuint program)
 } // namespace
 
 shader_wrapper::shader_wrapper(const char* code, GLenum type) :
-	s([&type](){
+	s([&type]() {
 		auto s = glCreateShader(type);
 		if (s == 0) {
 			throw std::runtime_error("glCreateShader() failed");

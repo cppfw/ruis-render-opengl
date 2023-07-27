@@ -47,4 +47,4 @@ public:
 	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color) const override;
 };
 
-} // namespace morda
+} // namespace morda::render_opengl

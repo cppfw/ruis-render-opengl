@@ -68,4 +68,4 @@ private:
 	);
 };
 
-} // namespace morda
+} // namespace morda::render_opengl

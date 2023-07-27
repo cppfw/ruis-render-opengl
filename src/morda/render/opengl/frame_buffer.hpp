@@ -40,9 +40,9 @@ public:
 	frame_buffer(frame_buffer&&) = delete;
 	frame_buffer& operator=(frame_buffer&&) = delete;
 
-	~frame_buffer()override;
+	~frame_buffer() override;
 
 private:
 };
 
-} // namespace morda
+} // namespace morda::render_opengl

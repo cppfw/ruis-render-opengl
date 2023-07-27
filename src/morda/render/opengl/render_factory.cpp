@@ -60,9 +60,9 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(const rast
 {
 	return std::visit(
 		[this, &imvar](const auto& im) -> utki::shared_ref<morda::texture_2d> {
-			if constexpr (sizeof(im.pixels().front().front()) != 1){
+			if constexpr (sizeof(im.pixels().front().front()) != 1) {
 				throw std::logic_error("render_factory::create_texture_2d(): non-8bit images are not supported");
-			}else{
+			} else {
 				auto data = im.pixels();
 				return this->create_texture_2d_internal(
 					imvar.get_format(),
@@ -93,7 +93,7 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
 	// TODO: save previous bind and restore it after?
 	ret.get().bind(0);
 
-	GLint internal_format = [&type](){
+	GLint internal_format = [&type]() {
 		switch (type) {
 			default:
 				ASSERT(false)

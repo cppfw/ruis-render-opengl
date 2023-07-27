@@ -71,7 +71,7 @@ renderer::renderer(std::unique_ptr<render_factory> factory) :
 	// On some platforms the default framebuffer is not 0, so because of this
 	// check if default framebuffer value is saved or not everytime some
 	// framebuffer is going to be bound and save the value if needed.
-	
+
 	// the variable is initialized via output argument, so no need to initialize it here
 	// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 	GLint old_fb;
