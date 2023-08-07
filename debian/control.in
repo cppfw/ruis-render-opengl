@@ -2,8 +2,14 @@ Source: libmorda-render-opengl
 Section: libs
 Priority: extra
 Maintainer: Ivan Gagis <igagis@gmail.com>
-Build-Depends: debhelper (>= 9), prorab, prorab-extra,
-		libmorda-dev (>= 0.5.160), libglew-dev
+Build-Depends:
+	debhelper (>= 9),
+	prorab,
+	prorab-extra,
+	clang-format,
+	clang-tidy,
+	libmorda-dev (>= 0.5.160),
+	libglew-dev
 Build-Depends-Indep: doxygen
 Standards-Version: 3.9.2
 
