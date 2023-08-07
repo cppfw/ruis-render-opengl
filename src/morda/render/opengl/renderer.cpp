@@ -177,7 +177,7 @@ void renderer::set_blend_enabled(bool enable)
 
 namespace {
 
-const std::array<GLenum, 15> blend_func = { // TODO: use morda::renderer::blend_factor::enum_size insteda of 15
+const std::array<GLenum, size_t(morda::renderer::blend_factor::enum_size)> blend_func = {
 	GL_ZERO,
 	GL_ONE,
 	GL_SRC_COLOR,
@@ -205,9 +205,13 @@ void renderer::set_blend_func(
 )
 {
 	glBlendFuncSeparate(
+		// NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
 		blend_func[unsigned(src_color)],
+		// NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
 		blend_func[unsigned(dst_color)],
+		// NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
 		blend_func[unsigned(src_alpha)],
+		// NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
 		blend_func[unsigned(dst_alpha)]
 	);
 }
