@@ -85,6 +85,8 @@ renderer::renderer(std::unique_ptr<render_factory> factory) :
 	glEnable(GL_DEBUG_OUTPUT);
 	glDebugMessageCallback(opengl_error_callback, nullptr);
 #endif
+
+	glEnable(GL_CULL_FACE);
 }
 
 void renderer::set_framebuffer_internal(morda::frame_buffer* fb)
