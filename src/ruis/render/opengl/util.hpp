@@ -24,7 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <GL/glew.h>
 #include <utki/debug.hpp>
 
-namespace morda::render_opengl {
+namespace ruis::render_opengl {
 
 inline void assert_opengl_no_error()
 {
@@ -68,4 +68,4 @@ inline void assert_opengl_no_error()
 #endif
 }
 
-} // namespace morda::render_opengl
+} // namespace ruis::render_opengl

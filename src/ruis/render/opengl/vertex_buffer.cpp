@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "util.hpp"
 
-using namespace morda::render_opengl;
+using namespace ruis::render_opengl;
 
 void vertex_buffer::init(GLsizeiptr size, const GLvoid* data)
 {
@@ -35,7 +35,7 @@ void vertex_buffer::init(GLsizeiptr size, const GLvoid* data)
 }
 
 vertex_buffer::vertex_buffer(utki::span<const r4::vector4<float>> vertices) :
-	morda::vertex_buffer(vertices.size()),
+	ruis::vertex_buffer(vertices.size()),
 	num_components(4),
 	type(GL_FLOAT)
 {
@@ -43,7 +43,7 @@ vertex_buffer::vertex_buffer(utki::span<const r4::vector4<float>> vertices) :
 }
 
 vertex_buffer::vertex_buffer(utki::span<const r4::vector3<float>> vertices) :
-	morda::vertex_buffer(vertices.size()),
+	ruis::vertex_buffer(vertices.size()),
 	num_components(3),
 	type(GL_FLOAT)
 {
@@ -51,7 +51,7 @@ vertex_buffer::vertex_buffer(utki::span<const r4::vector3<float>> vertices) :
 }
 
 vertex_buffer::vertex_buffer(utki::span<const r4::vector2<float>> vertices) :
-	morda::vertex_buffer(vertices.size()),
+	ruis::vertex_buffer(vertices.size()),
 	num_components(2),
 	type(GL_FLOAT)
 {
@@ -59,7 +59,7 @@ vertex_buffer::vertex_buffer(utki::span<const r4::vector2<float>> vertices) :
 }
 
 vertex_buffer::vertex_buffer(utki::span<const float> vertices) :
-	morda::vertex_buffer(vertices.size()),
+	ruis::vertex_buffer(vertices.size()),
 	num_components(1),
 	type(GL_FLOAT)
 {

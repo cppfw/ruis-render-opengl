@@ -25,7 +25,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "util.hpp"
 
-using namespace morda::render_opengl;
+using namespace ruis::render_opengl;
 
 index_buffer::index_buffer(utki::span<const uint16_t> indices) :
 	elements_count(GLsizei(indices.size()))

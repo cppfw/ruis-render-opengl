@@ -36,7 +36,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "vertex_array.hpp"
 #include "vertex_buffer.hpp"
 
-using namespace morda::render_opengl;
+using namespace ruis::render_opengl;
 
 render_factory::render_factory()
 {
@@ -48,7 +48,7 @@ render_factory::render_factory()
 	}
 }
 
-utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(
+utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d(
 	rasterimage::format format,
 	rasterimage::dimensioned::dimensions_type dims
 )
@@ -56,10 +56,10 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(
 	return this->create_texture_2d_internal(format, dims, nullptr);
 }
 
-utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(const rasterimage::image_variant& imvar)
+utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d(const rasterimage::image_variant& imvar)
 {
 	return std::visit(
-		[this, &imvar](const auto& im) -> utki::shared_ref<morda::texture_2d> {
+		[this, &imvar](const auto& im) -> utki::shared_ref<ruis::texture_2d> {
 			if constexpr (sizeof(im.pixels().front().front()) != 1) {
 				throw std::logic_error("render_factory::create_texture_2d(): non-8bit images are not supported");
 			} else {
@@ -76,7 +76,7 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(const rast
 }
 
 // TODO: refactor this function
-utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
+utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d_internal(
 	rasterimage::format type,
 	rasterimage::dimensioned::dimensions_type dims,
 	utki::span<const uint8_t> data
@@ -154,49 +154,49 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
 	return ret;
 }
 
-utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(
+utki::shared_ref<ruis::vertex_buffer> render_factory::create_vertex_buffer(
 	utki::span<const r4::vector4<float>> vertices
 )
 {
 	return utki::make_shared<vertex_buffer>(vertices);
 }
 
-utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(
+utki::shared_ref<ruis::vertex_buffer> render_factory::create_vertex_buffer(
 	utki::span<const r4::vector3<float>> vertices
 )
 {
 	return utki::make_shared<vertex_buffer>(vertices);
 }
 
-utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(
+utki::shared_ref<ruis::vertex_buffer> render_factory::create_vertex_buffer(
 	utki::span<const r4::vector2<float>> vertices
 )
 {
 	return utki::make_shared<vertex_buffer>(vertices);
 }
 
-utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const float> vertices)
+utki::shared_ref<ruis::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const float> vertices)
 {
 	return utki::make_shared<vertex_buffer>(vertices);
 }
 
-utki::shared_ref<morda::vertex_array> render_factory::create_vertex_array(
-	std::vector<utki::shared_ref<const morda::vertex_buffer>> buffers,
-	const utki::shared_ref<const morda::index_buffer>& indices,
-	morda::vertex_array::mode mode
+utki::shared_ref<ruis::vertex_array> render_factory::create_vertex_array(
+	std::vector<utki::shared_ref<const ruis::vertex_buffer>> buffers,
+	const utki::shared_ref<const ruis::index_buffer>& indices,
+	ruis::vertex_array::mode mode
 )
 {
 	return utki::make_shared<vertex_array>(std::move(buffers), indices, mode);
 }
 
-utki::shared_ref<morda::index_buffer> render_factory::create_index_buffer(utki::span<const uint16_t> indices)
+utki::shared_ref<ruis::index_buffer> render_factory::create_index_buffer(utki::span<const uint16_t> indices)
 {
 	return utki::make_shared<index_buffer>(indices);
 }
 
-std::unique_ptr<morda::render_factory::shaders> render_factory::create_shaders()
+std::unique_ptr<ruis::render_factory::shaders> render_factory::create_shaders()
 {
-	auto ret = std::make_unique<morda::render_factory::shaders>();
+	auto ret = std::make_unique<ruis::render_factory::shaders>();
 	ret->pos_tex = std::make_unique<shader_texture>();
 	ret->color_pos = std::make_unique<shader_color>();
 	ret->pos_clr = std::make_unique<shader_pos_clr>();
@@ -206,8 +206,8 @@ std::unique_ptr<morda::render_factory::shaders> render_factory::create_shaders()
 	return ret;
 }
 
-utki::shared_ref<morda::frame_buffer> render_factory::create_framebuffer(
-	const utki::shared_ref<morda::texture_2d>& color
+utki::shared_ref<ruis::frame_buffer> render_factory::create_framebuffer(
+	const utki::shared_ref<ruis::texture_2d>& color
 )
 {
 	return utki::make_shared<frame_buffer>(color);

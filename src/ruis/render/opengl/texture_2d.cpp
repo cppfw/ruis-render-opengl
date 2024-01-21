@@ -23,10 +23,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "util.hpp"
 
-using namespace morda::render_opengl;
+using namespace ruis::render_opengl;
 
 texture_2d::texture_2d(r4::vector2<float> dims) :
-	morda::texture_2d(dims)
+	ruis::texture_2d(dims)
 {
 	glGenTextures(1, &this->tex);
 	assert_opengl_no_error();

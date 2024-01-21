@@ -25,9 +25,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "shader_base.hpp"
 
-namespace morda::render_opengl {
+namespace ruis::render_opengl {
 
-class shader_pos_clr : public morda::shader, public shader_base
+class shader_pos_clr : public ruis::shader, public shader_base
 {
 public:
 	shader_pos_clr();
@@ -40,7 +40,7 @@ public:
 
 	~shader_pos_clr() override = default;
 
-	void render(const r4::matrix4<float>& m, const morda::vertex_array& va) const override;
+	void render(const r4::matrix4<float>& m, const ruis::vertex_array& va) const override;
 };
 
-} // namespace morda::render_opengl
+} // namespace ruis::render_opengl

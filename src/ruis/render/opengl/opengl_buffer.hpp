@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <GL/glew.h>
 
-namespace morda::render_opengl {
+namespace ruis::render_opengl {
 
 class opengl_buffer
 {
@@ -43,4 +43,4 @@ public:
 private:
 };
 
-} // namespace morda::render_opengl
+} // namespace ruis::render_opengl

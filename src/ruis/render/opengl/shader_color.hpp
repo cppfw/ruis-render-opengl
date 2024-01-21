@@ -25,9 +25,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "shader_base.hpp"
 
-namespace morda::render_opengl {
+namespace ruis::render_opengl {
 
-class shader_color : public morda::coloring_shader, public shader_base
+class shader_color : public ruis::coloring_shader, public shader_base
 {
 	GLint color_uniform;
 
@@ -42,7 +42,7 @@ public:
 
 	~shader_color() override = default;
 
-	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color) const override;
+	void render(const r4::matrix4<float>& m, const ruis::vertex_array& va, r4::vector4<float> color) const override;
 };
 
-} // namespace morda::render_opengl
+} // namespace ruis::render_opengl

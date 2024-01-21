@@ -25,17 +25,17 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "shader_base.hpp"
 
-namespace morda::render_opengl {
+namespace ruis::render_opengl {
 
-class shader_texture : public morda::texturing_shader, public shader_base
+class shader_texture : public ruis::texturing_shader, public shader_base
 {
 	GLint texture_uniform;
 
 public:
 	shader_texture();
 
-	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, const morda::texture_2d& tex)
+	void render(const r4::matrix4<float>& m, const ruis::vertex_array& va, const ruis::texture_2d& tex)
 		const override;
 };
 
-} // namespace morda::render_opengl
+} // namespace ruis::render_opengl

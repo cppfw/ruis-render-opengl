@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "shader_pos_clr.hpp"
 
-using namespace morda::render_opengl;
+using namespace ruis::render_opengl;
 
 shader_pos_clr::shader_pos_clr() :
 	shader_base(
@@ -48,7 +48,7 @@ shader_pos_clr::shader_pos_clr() :
 	)
 {}
 
-void shader_pos_clr::render(const r4::matrix4<float>& m, const morda::vertex_array& va) const
+void shader_pos_clr::render(const r4::matrix4<float>& m, const ruis::vertex_array& va) const
 {
 	this->bind();
 

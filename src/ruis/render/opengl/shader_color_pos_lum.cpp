@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "shader_color_pos_lum.hpp"
 
-using namespace morda::render_opengl;
+using namespace ruis::render_opengl;
 
 shader_color_pos_lum::shader_color_pos_lum() :
 	shader_base(
@@ -51,7 +51,7 @@ shader_color_pos_lum::shader_color_pos_lum() :
 	color_uniform(this->get_uniform("uniform_color"))
 {}
 
-void shader_color_pos_lum::render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color)
+void shader_color_pos_lum::render(const r4::matrix4<float>& m, const ruis::vertex_array& va, r4::vector4<float> color)
 	const
 {
 	this->bind();

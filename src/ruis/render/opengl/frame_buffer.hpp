@@ -25,14 +25,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <ruis/render/frame_buffer.hpp>
 #include <ruis/render/texture_2d.hpp>
 
-namespace morda::render_opengl {
+namespace ruis::render_opengl {
 
-class frame_buffer : public morda::frame_buffer
+class frame_buffer : public ruis::frame_buffer
 {
 public:
 	GLuint fbo = 0;
 
-	frame_buffer(const utki::shared_ref<morda::texture_2d>& color);
+	frame_buffer(const utki::shared_ref<ruis::texture_2d>& color);
 
 	frame_buffer(const frame_buffer&) = delete;
 	frame_buffer& operator=(const frame_buffer&) = delete;
@@ -45,4 +45,4 @@ public:
 private:
 };
 
-} // namespace morda::render_opengl
+} // namespace ruis::render_opengl
