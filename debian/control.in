@@ -1,4 +1,4 @@
-Source: libmorda-render-opengl
+Source: libruis-render-opengl
 Section: libs
 Priority: extra
 Maintainer: Ivan Gagis <igagis@gmail.com>
@@ -13,34 +13,34 @@ Build-Depends:
 Build-Depends-Indep: doxygen
 Standards-Version: 3.9.2
 
-Package: libmorda-render-opengl$(soname)
+Package: libruis-render-opengl$(soname)
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: OpenGL renderer for morda.
  OpenGL renderer for morda GUI library.
 
-Package: libmorda-render-opengl$(soname)-dbg
+Package: libruis-render-opengl$(soname)-dbg
 Section: debug
 Architecture: any
-Depends: libmorda-render-opengl$(soname) (= ${binary:Version}), ${misc:Depends}
-Description: debugging symbols for libmorda-render-opengl$(soname) package.
+Depends: libruis-render-opengl$(soname) (= ${binary:Version}), ${misc:Depends}
+Description: debugging symbols for libruis-render-opengl$(soname) package.
 
-Package: libmorda-render-opengl-dev
+Package: libruis-render-opengl-dev
 Section: libdevel
 Architecture: any
 Depends:
-		libmorda-render-opengl$(soname) (= ${binary:Version}),
-		libmorda-render-opengl$(soname)-dbg (= ${binary:Version}),
+		libruis-render-opengl$(soname) (= ${binary:Version}),
+		libruis-render-opengl$(soname)-dbg (= ${binary:Version}),
 		libmorda-dev,
 		${misc:Depends}
-Suggests: libmorda-render-opengl-doc
+Suggests: libruis-render-opengl-doc
 Description: OpenGL renderer for morda.
  OpenGL renderer for morda GUI library.
 
-Package: libmorda-render-opengl-doc
+Package: libruis-render-opengl-doc
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}
-Description: documentation for libmorda-render-opengl library.
- For more details see description to libmorda-render-opengl-dev package.
+Description: documentation for libruis-render-opengl library.
+ For more details see description to libruis-render-opengl-dev package.

@@ -13,14 +13,14 @@ configurations {
 
 nuget{
 	nuspec{
-		id = libmorda-render-opengl;
+		id = libruis-render-opengl;
 		version : $(version);
 		title: OpenGL renderer for morda C++ GUI library;
 		authors: {Ivan Gagis};
 		owners: {Ivan Gagis};
-		licenseUrl: "https://raw.githubusercontent.com/cppfw/morda-render-opengl/master/LICENSE";
-		projectUrl: "https://github.com/cppfw/morda-render-opengl";
-		iconUrl: "https://github.com/cppfw/morda-render-opengl/blob/master/logo.svg";
+		licenseUrl: "https://raw.githubusercontent.com/cppfw/ruis-render-opengl/master/LICENSE";
+		projectUrl: "https://github.com/cppfw/ruis-render-opengl";
+		iconUrl: "https://github.com/cppfw/ruis-render-opengl/blob/master/logo.svg";
 		requireLicenseAcceptance:false;
 		summary: OpenGL renderer for morda C++ GUI library;
 
@@ -46,62 +46,62 @@ nuget{
 		
 /*
 		[x86,v140,release] {
-			lib: ..\msvs_solution\v140_Release\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\v140_Release\libruis-render-opengl.lib;
 		}
 		[x86,v140,debug] {
-			lib: ..\msvs_solution\v140_Debug\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\v140_Debug\libruis-render-opengl.lib;
 		}
 		[x64,v140,release] {
-			lib: ..\msvs_solution\x64\v140_Release\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\x64\v140_Release\libruis-render-opengl.lib;
 		}
 		[x64,v140,debug] {
-			lib: ..\msvs_solution\x64\v140_Debug\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\x64\v140_Debug\libruis-render-opengl.lib;
 		}
 */
 
 		// ======== v141 ========
 /*
 		[x86,v141,release] {
-			lib: ..\msvs_solution\v141_Release\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\v141_Release\libruis-render-opengl.lib;
 		}
 		[x86,v141,debug] {
-			lib: ..\msvs_solution\v141_Debug\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\v141_Debug\libruis-render-opengl.lib;
 		}
 		[x64,v141,release] {
-			lib: ..\msvs_solution\x64\v141_Release\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\x64\v141_Release\libruis-render-opengl.lib;
 		}
 		[x64,v141,debug] {
-			lib: ..\msvs_solution\x64\v141_Debug\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\x64\v141_Debug\libruis-render-opengl.lib;
 		}
 */
 		// ======== v142 ========
 
 /*
 		[x86,v142,release,MultiThreaded] {
-			lib: ..\msvs_solution\v142_Release_MT\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\v142_Release_MT\libruis-render-opengl.lib;
 		}
 		[x86,v142,debug,MultiThreadedDebug] {
-			lib: ..\msvs_solution\v142_Debug_MT\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\v142_Debug_MT\libruis-render-opengl.lib;
 		}
 		[x64,v142,release,MultiThreaded] {
-			lib: ..\msvs_solution\x64\v142_Release_MT\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\x64\v142_Release_MT\libruis-render-opengl.lib;
 		}
 		[x64,v142,debug,MultiThreadedDebug] {
-			lib: ..\msvs_solution\x64\v142_Debug_MT\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\x64\v142_Debug_MT\libruis-render-opengl.lib;
 		}
 */
 		
 		[x86,v142,release,MultiThreadedDLL] {
-			lib: ..\msvs_solution\v142_Release_MD\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\v142_Release_MD\libruis-render-opengl.lib;
 		}
 		[x86,v142,debug,MultiThreadedDebugDLL] {
-			lib: ..\msvs_solution\v142_Debug_MD\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\v142_Debug_MD\libruis-render-opengl.lib;
 		}
 		[x64,v142,release,MultiThreadedDLL] {
-			lib: ..\msvs_solution\x64\v142_Release_MD\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\x64\v142_Release_MD\libruis-render-opengl.lib;
 		}
 		[x64,v142,debug,MultiThreadedDebugDLL] {
-			lib: ..\msvs_solution\x64\v142_Debug_MD\libmorda-render-opengl.lib;
+			lib: ..\msvs_solution\x64\v142_Debug_MD\libruis-render-opengl.lib;
 		}
 	}
 }

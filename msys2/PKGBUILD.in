@@ -17,7 +17,7 @@ else
 	exit 1
 fi
 
-packageName=morda-render-opengl
+packageName=ruis-render-opengl
 
 pkgname="${pkgPrefix}${packageName}"
 pkgver=$(version)

@@ -1,4 +1,4 @@
-:name: morda-render-opengl
+:name: ruis-render-opengl
 
 = {name}
 
