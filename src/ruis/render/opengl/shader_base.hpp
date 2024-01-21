@@ -24,7 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <vector>
 
 #include <GL/glew.h>
-#include <morda/render/vertex_array.hpp>
+#include <ruis/render/vertex_array.hpp>
 #include <r4/matrix.hpp>
 #include <utki/config.hpp>
 #include <utki/debug.hpp>

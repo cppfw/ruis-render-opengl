@@ -21,28 +21,33 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/render/coloring_shader.hpp>
+#include <ruis/render/coloring_texturing_shader.hpp>
 
 #include "shader_base.hpp"
 
 namespace morda::render_opengl {
 
-class shader_color : public morda::coloring_shader, public shader_base
+class shader_color_pos_tex : public morda::coloring_texturing_shader, public shader_base
 {
 	GLint color_uniform;
 
 public:
-	shader_color();
+	shader_color_pos_tex();
 
-	shader_color(const shader_color&) = delete;
-	shader_color& operator=(const shader_color&) = delete;
+	shader_color_pos_tex(const shader_color_pos_tex&) = delete;
+	shader_color_pos_tex& operator=(const shader_color_pos_tex&) = delete;
 
-	shader_color(shader_color&&) = delete;
-	shader_color& operator=(shader_color&&) = delete;
+	shader_color_pos_tex(shader_color_pos_tex&&) = delete;
+	shader_color_pos_tex& operator=(shader_color_pos_tex&&) = delete;
 
-	~shader_color() override = default;
+	~shader_color_pos_tex() override = default;
 
-	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color) const override;
+	void render(
+		const r4::matrix4<float>& m,
+		const morda::vertex_array& va,
+		r4::vector4<float> color,
+		const morda::texture_2d& tex
+	) const override;
 };
 
 } // namespace morda::render_opengl

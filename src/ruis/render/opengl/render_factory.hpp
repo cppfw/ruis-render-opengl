@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/render/render_factory.hpp>
+#include <ruis/render/render_factory.hpp>
 
 namespace morda::render_opengl {
 

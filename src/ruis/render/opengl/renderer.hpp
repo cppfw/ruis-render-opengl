@@ -24,7 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <memory>
 
 #include <GL/glew.h>
-#include <morda/render/renderer.hpp>
+#include <ruis/render/renderer.hpp>
 
 #include "render_factory.hpp"
 

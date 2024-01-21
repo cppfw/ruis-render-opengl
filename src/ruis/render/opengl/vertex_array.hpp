@@ -21,28 +21,27 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/render/index_buffer.hpp>
-#include <utki/span.hpp>
-
-#include "opengl_buffer.hpp"
+#include <GL/glew.h>
+#include <ruis/render/vertex_array.hpp>
 
 namespace morda::render_opengl {
 
-class index_buffer : public morda::index_buffer, public opengl_buffer
+class vertex_array : public morda::vertex_array
 {
 public:
-	const GLenum element_type = GL_UNSIGNED_SHORT;
-	const GLsizei elements_count;
+	const GLuint vao;
 
-	index_buffer(utki::span<const uint16_t> indices);
+	vertex_array(buffers_type buffers, const utki::shared_ref<const morda::index_buffer>& indices, mode rendering_mode);
 
-	index_buffer(const index_buffer&) = delete;
-	index_buffer& operator=(const index_buffer&) = delete;
+	vertex_array(const vertex_array&) = delete;
+	vertex_array& operator=(const vertex_array&) = delete;
 
-	index_buffer(index_buffer&&) = delete;
-	index_buffer& operator=(index_buffer&&) = delete;
+	vertex_array(vertex_array&&) = delete;
+	vertex_array& operator=(vertex_array&&) = delete;
 
-	~index_buffer() override = default;
+	~vertex_array() override;
+
+	void bind_buffers() const;
 
 private:
 };

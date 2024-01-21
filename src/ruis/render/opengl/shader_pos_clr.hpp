@@ -21,28 +21,26 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <GL/glew.h>
-#include <morda/render/frame_buffer.hpp>
-#include <morda/render/texture_2d.hpp>
+#include <ruis/render/shader.hpp>
+
+#include "shader_base.hpp"
 
 namespace morda::render_opengl {
 
-class frame_buffer : public morda::frame_buffer
+class shader_pos_clr : public morda::shader, public shader_base
 {
 public:
-	GLuint fbo = 0;
+	shader_pos_clr();
 
-	frame_buffer(const utki::shared_ref<morda::texture_2d>& color);
+	shader_pos_clr(const shader_pos_clr&) = delete;
+	shader_pos_clr& operator=(const shader_pos_clr&) = delete;
 
-	frame_buffer(const frame_buffer&) = delete;
-	frame_buffer& operator=(const frame_buffer&) = delete;
+	shader_pos_clr(shader_pos_clr&&) = delete;
+	shader_pos_clr& operator=(shader_pos_clr&&) = delete;
 
-	frame_buffer(frame_buffer&&) = delete;
-	frame_buffer& operator=(frame_buffer&&) = delete;
+	~shader_pos_clr() override = default;
 
-	~frame_buffer() override;
-
-private:
+	void render(const r4::matrix4<float>& m, const morda::vertex_array& va) const override;
 };
 
 } // namespace morda::render_opengl

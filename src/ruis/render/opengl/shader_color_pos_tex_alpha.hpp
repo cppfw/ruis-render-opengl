@@ -21,38 +21,33 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/render/vertex_buffer.hpp>
-#include <r4/vector.hpp>
-#include <utki/span.hpp>
+#include <ruis/render/coloring_texturing_shader.hpp>
 
-#include "opengl_buffer.hpp"
+#include "shader_base.hpp"
 
 namespace morda::render_opengl {
 
-class vertex_buffer : public morda::vertex_buffer, public opengl_buffer
+class shader_color_pos_tex_alpha : public morda::coloring_texturing_shader, public shader_base
 {
+	GLint color_uniform;
+
 public:
-	const GLint num_components;
-	const GLenum type;
+	shader_color_pos_tex_alpha();
 
-	vertex_buffer(utki::span<const r4::vector4<float>> vertices);
+	shader_color_pos_tex_alpha(const shader_color_pos_tex_alpha&) = delete;
+	shader_color_pos_tex_alpha& operator=(const shader_color_pos_tex_alpha&) = delete;
 
-	vertex_buffer(utki::span<const r4::vector3<float>> vertices);
+	shader_color_pos_tex_alpha(shader_color_pos_tex_alpha&&) = delete;
+	shader_color_pos_tex_alpha& operator=(shader_color_pos_tex_alpha&&) = delete;
 
-	vertex_buffer(utki::span<const r4::vector2<float>> vertices);
+	~shader_color_pos_tex_alpha() override = default;
 
-	vertex_buffer(utki::span<const float> vertices);
-
-	vertex_buffer(const vertex_buffer&) = delete;
-	vertex_buffer& operator=(const vertex_buffer&) = delete;
-
-	vertex_buffer(vertex_buffer&&) = delete;
-	vertex_buffer& operator=(vertex_buffer&&) = delete;
-
-	~vertex_buffer() override = default;
-
-private:
-	void init(GLsizeiptr size, const GLvoid* data);
+	void render(
+		const r4::matrix4<float>& m,
+		const morda::vertex_array& va,
+		r4::vector4<float> color,
+		const morda::texture_2d& tex
+	) const override;
 };
 
 } // namespace morda::render_opengl

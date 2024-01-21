@@ -22,26 +22,25 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 #include <GL/glew.h>
-#include <morda/render/vertex_array.hpp>
+#include <ruis/render/frame_buffer.hpp>
+#include <ruis/render/texture_2d.hpp>
 
 namespace morda::render_opengl {
 
-class vertex_array : public morda::vertex_array
+class frame_buffer : public morda::frame_buffer
 {
 public:
-	const GLuint vao;
+	GLuint fbo = 0;
 
-	vertex_array(buffers_type buffers, const utki::shared_ref<const morda::index_buffer>& indices, mode rendering_mode);
+	frame_buffer(const utki::shared_ref<morda::texture_2d>& color);
 
-	vertex_array(const vertex_array&) = delete;
-	vertex_array& operator=(const vertex_array&) = delete;
+	frame_buffer(const frame_buffer&) = delete;
+	frame_buffer& operator=(const frame_buffer&) = delete;
 
-	vertex_array(vertex_array&&) = delete;
-	vertex_array& operator=(vertex_array&&) = delete;
+	frame_buffer(frame_buffer&&) = delete;
+	frame_buffer& operator=(frame_buffer&&) = delete;
 
-	~vertex_array() override;
-
-	void bind_buffers() const;
+	~frame_buffer() override;
 
 private:
 };

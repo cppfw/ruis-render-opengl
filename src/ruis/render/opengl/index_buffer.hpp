@@ -21,33 +21,30 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/render/coloring_texturing_shader.hpp>
+#include <ruis/render/index_buffer.hpp>
+#include <utki/span.hpp>
 
-#include "shader_base.hpp"
+#include "opengl_buffer.hpp"
 
 namespace morda::render_opengl {
 
-class shader_color_pos_tex : public morda::coloring_texturing_shader, public shader_base
+class index_buffer : public morda::index_buffer, public opengl_buffer
 {
-	GLint color_uniform;
-
 public:
-	shader_color_pos_tex();
+	const GLenum element_type = GL_UNSIGNED_SHORT;
+	const GLsizei elements_count;
 
-	shader_color_pos_tex(const shader_color_pos_tex&) = delete;
-	shader_color_pos_tex& operator=(const shader_color_pos_tex&) = delete;
+	index_buffer(utki::span<const uint16_t> indices);
 
-	shader_color_pos_tex(shader_color_pos_tex&&) = delete;
-	shader_color_pos_tex& operator=(shader_color_pos_tex&&) = delete;
+	index_buffer(const index_buffer&) = delete;
+	index_buffer& operator=(const index_buffer&) = delete;
 
-	~shader_color_pos_tex() override = default;
+	index_buffer(index_buffer&&) = delete;
+	index_buffer& operator=(index_buffer&&) = delete;
 
-	void render(
-		const r4::matrix4<float>& m,
-		const morda::vertex_array& va,
-		r4::vector4<float> color,
-		const morda::texture_2d& tex
-	) const override;
+	~index_buffer() override = default;
+
+private:
 };
 
 } // namespace morda::render_opengl

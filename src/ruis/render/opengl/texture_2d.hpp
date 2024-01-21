@@ -21,21 +21,25 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/render/texturing_shader.hpp>
-
-#include "shader_base.hpp"
+#include <GL/glew.h>
+#include <ruis/render/texture_2d.hpp>
 
 namespace morda::render_opengl {
 
-class shader_texture : public morda::texturing_shader, public shader_base
-{
-	GLint texture_uniform;
+struct texture_2d : public morda::texture_2d {
+	GLuint tex = 0;
 
-public:
-	shader_texture();
+	texture_2d(r4::vector2<float> dims);
 
-	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, const morda::texture_2d& tex)
-		const override;
+	texture_2d(const texture_2d&) = delete;
+	texture_2d& operator=(const texture_2d&) = delete;
+
+	texture_2d(texture_2d&&) = delete;
+	texture_2d& operator=(texture_2d&&) = delete;
+
+	~texture_2d() override;
+
+	void bind(unsigned unit_num) const;
 };
 
 } // namespace morda::render_opengl
