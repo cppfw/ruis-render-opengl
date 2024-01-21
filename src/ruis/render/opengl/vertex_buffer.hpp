@@ -1,5 +1,5 @@
 /*
-morda-render-opengl - OpenGL GUI renderer
+ruis-render-opengl - OpenGL GUI renderer
 
 Copyright (C) 2012-2023  Ivan Gagis <igagis@gmail.com>
 
@@ -21,8 +21,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <ruis/render/vertex_buffer.hpp>
 #include <r4/vector.hpp>
+#include <ruis/render/vertex_buffer.hpp>
 #include <utki/span.hpp>
 
 #include "opengl_buffer.hpp"

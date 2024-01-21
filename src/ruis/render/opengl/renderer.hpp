@@ -1,5 +1,5 @@
 /*
-morda-render-opengl - OpenGL GUI renderer
+ruis-render-opengl - OpenGL GUI renderer
 
 Copyright (C) 2012-2023  Ivan Gagis <igagis@gmail.com>
 

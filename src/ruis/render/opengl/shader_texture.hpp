@@ -1,5 +1,5 @@
 /*
-morda-render-opengl - OpenGL GUI renderer
+ruis-render-opengl - OpenGL GUI renderer
 
 Copyright (C) 2012-2023  Ivan Gagis <igagis@gmail.com>
 
@@ -34,8 +34,7 @@ class shader_texture : public ruis::texturing_shader, public shader_base
 public:
 	shader_texture();
 
-	void render(const r4::matrix4<float>& m, const ruis::vertex_array& va, const ruis::texture_2d& tex)
-		const override;
+	void render(const r4::matrix4<float>& m, const ruis::vertex_array& va, const ruis::texture_2d& tex) const override;
 };
 
 } // namespace ruis::render_opengl
