@@ -15,16 +15,16 @@ nuget{
 	nuspec{
 		id = libruis-render-opengl;
 		version : $(version);
-		title: OpenGL renderer for morda C++ GUI library;
+		title: OpenGL renderer for ruis C++ GUI library;
 		authors: {Ivan Gagis};
 		owners: {Ivan Gagis};
 		licenseUrl: "https://raw.githubusercontent.com/cppfw/ruis-render-opengl/master/LICENSE";
 		projectUrl: "https://github.com/cppfw/ruis-render-opengl";
 		iconUrl: "https://github.com/cppfw/ruis-render-opengl/blob/master/logo.svg";
 		requireLicenseAcceptance:false;
-		summary: OpenGL renderer for morda C++ GUI library;
+		summary: OpenGL renderer for ruis C++ GUI library;
 
-		description: @"OpenGL renderer for morda C++ GUI library";
+		description: @"OpenGL renderer for ruis C++ GUI library";
 		releaseNotes: "Initial release";
 		copyright: Copyright 2016-2021 Ivan Gagis;
 		tags: { native};
@@ -32,14 +32,14 @@ nuget{
 	dependencies {
 		packages : {
 			glew.v140/1.12.0;
-			libmorda/0.5.163;
+			libruis/0.5.163;
 		};
 	}
 	files {
 		// this is needed to put headers in the base folder
 		nestedInclude: {
-			#destination = ${d_include}morda\render\opengl;
-			"..\src\morda\render\opengl\**\*.hpp"
+			#destination = ${d_include}ruis\render\opengl;
+			"..\src\ruis\render\opengl\**\*.hpp"
 		};
 
 		// ======== v140 ========

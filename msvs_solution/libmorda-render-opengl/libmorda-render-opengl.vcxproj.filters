@@ -21,46 +21,46 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\morda\render\opengl2\factory.cpp">
+    <ClCompile Include="..\..\src\ruis\render\opengl2\factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\morda\render\opengl2\frame_buffer.cpp">
+    <ClCompile Include="..\..\src\ruis\render\opengl2\frame_buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\morda\render\opengl2\index_buffer.cpp">
+    <ClCompile Include="..\..\src\ruis\render\opengl2\index_buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\morda\render\opengl2\opengl_buffer.cpp">
+    <ClCompile Include="..\..\src\ruis\render\opengl2\opengl_buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\morda\render\opengl2\renderer.cpp">
+    <ClCompile Include="..\..\src\ruis\render\opengl2\renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\morda\render\opengl2\shader_base.cpp">
+    <ClCompile Include="..\..\src\ruis\render\opengl2\shader_base.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\morda\render\opengl2\shader_color.cpp">
+    <ClCompile Include="..\..\src\ruis\render\opengl2\shader_color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\morda\render\opengl2\shader_color_pos_lum.cpp">
+    <ClCompile Include="..\..\src\ruis\render\opengl2\shader_color_pos_lum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\morda\render\opengl2\shader_color_pos_tex.cpp">
+    <ClCompile Include="..\..\src\ruis\render\opengl2\shader_color_pos_tex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\morda\render\opengl2\shader_pos_clr.cpp">
+    <ClCompile Include="..\..\src\ruis\render\opengl2\shader_pos_clr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\morda\render\opengl2\shader_texture.cpp">
+    <ClCompile Include="..\..\src\ruis\render\opengl2\shader_texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\morda\render\opengl2\texture_2d.cpp">
+    <ClCompile Include="..\..\src\ruis\render\opengl2\texture_2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\morda\render\opengl2\vertex_array.cpp">
+    <ClCompile Include="..\..\src\ruis\render\opengl2\vertex_array.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\morda\render\opengl2\vertex_buffer.cpp">
+    <ClCompile Include="..\..\src\ruis\render\opengl2\vertex_buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

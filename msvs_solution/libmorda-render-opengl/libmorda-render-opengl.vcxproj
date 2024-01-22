@@ -69,7 +69,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{48379684-A77A-41E9-9052-4D472C286665}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>libmordaopengl2ren</RootNamespace>
+    <RootNamespace>libruisopengl2ren</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -594,7 +594,7 @@
     <Import Project="..\packages\libsvgdom.0.3.70\build\native\libsvgdom.targets" Condition="Exists('..\packages\libsvgdom.0.3.70\build\native\libsvgdom.targets')" />
     <Import Project="..\packages\libsvgren.0.5.16\build\native\libsvgren.targets" Condition="Exists('..\packages\libsvgren.0.5.16\build\native\libsvgren.targets')" />
     <Import Project="..\packages\libtreeml.0.1.49\build\native\libtreeml.targets" Condition="Exists('..\packages\libtreeml.0.1.49\build\native\libtreeml.targets')" />
-    <Import Project="..\packages\libmorda.0.5.169\build\native\libmorda.targets" Condition="Exists('..\packages\libmorda.0.5.169\build\native\libmorda.targets')" />
+    <Import Project="..\packages\libruis.0.5.169\build\native\libruis.targets" Condition="Exists('..\packages\libruis.0.5.169\build\native\libruis.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -614,6 +614,6 @@
     <Error Condition="!Exists('..\packages\libsvgdom.0.3.70\build\native\libsvgdom.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libsvgdom.0.3.70\build\native\libsvgdom.targets'))" />
     <Error Condition="!Exists('..\packages\libsvgren.0.5.16\build\native\libsvgren.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libsvgren.0.5.16\build\native\libsvgren.targets'))" />
     <Error Condition="!Exists('..\packages\libtreeml.0.1.49\build\native\libtreeml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libtreeml.0.1.49\build\native\libtreeml.targets'))" />
-    <Error Condition="!Exists('..\packages\libmorda.0.5.169\build\native\libmorda.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libmorda.0.5.169\build\native\libmorda.targets'))" />
+    <Error Condition="!Exists('..\packages\libruis.0.5.169\build\native\libruis.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libruis.0.5.169\build\native\libruis.targets'))" />
   </Target>
 </Project>

@@ -1,12 +1,12 @@
-class LibmordaRenderOpengl < Formula
-  desc "OpenGl renderer for morda GUI library."
+class LibRuisRenderOpengl < Formula
+  desc "OpenGl renderer for ruis GUI library."
   homepage "https://github.com/cppfw/ruis-render-opengl"
   url "https://github.com/cppfw/ruis-render-opengl/archive/$(version).tar.gz"
   sha256 "$(sha256)"
 
   depends_on "prorab" => :build
   depends_on "prorab-extra" => :build
-  depends_on "libmorda"
+  depends_on "libruis"
   depends_on "glew"
   depends_on "libr4"
 

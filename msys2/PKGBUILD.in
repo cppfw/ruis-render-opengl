@@ -23,13 +23,13 @@ pkgname="${pkgPrefix}${packageName}"
 pkgver=$(version)
 pkgrel=1
 epoch=
-pkgdesc="OpenGL renderer for morda"
+pkgdesc="OpenGL renderer for ruis"
 #arch=('any') #defined above
 url="http://github.com/cppfw/${packageName}"
 license=('MIT')
 groups=()
 
-depends=("${pkgPrefix}morda" "${pkgPrefix}glew")
+depends=("${pkgPrefix}ruis" "${pkgPrefix}glew")
 
 makedepends=(
 	'myci'
