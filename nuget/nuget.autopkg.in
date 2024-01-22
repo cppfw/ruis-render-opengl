@@ -32,7 +32,7 @@ nuget{
 	dependencies {
 		packages : {
 			glew.v140/1.12.0;
-			libruis/0.5.163;
+			libruis/0.5.210;
 		};
 	}
 	files {
