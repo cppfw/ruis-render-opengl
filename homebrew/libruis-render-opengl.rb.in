@@ -1,4 +1,4 @@
-class LibRuisRenderOpengl < Formula
+class LibruisRenderOpengl < Formula
   desc "OpenGl renderer for ruis GUI library."
   homepage "https://github.com/cppfw/ruis-render-opengl"
   url "https://github.com/cppfw/ruis-render-opengl/archive/$(version).tar.gz"
