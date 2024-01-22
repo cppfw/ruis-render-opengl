@@ -1,3 +1,9 @@
+libruis-render-opengl (0.1.63) unstable; urgency=medium
+
+  * rename to ruis-render-opengl
+
+ -- Ivan Gagis <igagis@gmail.com>  Mon, 22 Jan 2024 16:39:11 +0200
+
 libruis-render-opengl (0.1.62) unstable; urgency=medium
 
   * relink
