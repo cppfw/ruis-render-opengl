@@ -2,7 +2,7 @@ configurations {
 	UserPlatformToolset {
 		// Needed because autopackage lacks VS2015+ support
 		key = "PlatformToolset";
-		choices: "v140,v141,v142";
+		choices: "v140,v141,v142,v143";
 	};
 
 	RuntimeLibrary {
@@ -26,13 +26,13 @@ nuget{
 
 		description: @"OpenGL renderer for ruis C++ GUI library";
 		releaseNotes: "Initial release";
-		copyright: Copyright 2016-2021 Ivan Gagis;
+		copyright: Copyright 2016-2024 Ivan Gagis;
 		tags: { native};
 	}
 	dependencies {
 		packages : {
 			glew.v140/1.12.0;
-			libruis/0.5.210;
+			libruis/0.5.213;
 		};
 	}
 	files {
@@ -90,7 +90,7 @@ nuget{
 			lib: ..\msvs_solution\x64\v142_Debug_MT\libruis-render-opengl.lib;
 		}
 */
-		
+/*		
 		[x86,v142,release,MultiThreadedDLL] {
 			lib: ..\msvs_solution\v142_Release_MD\libruis-render-opengl.lib;
 		}
@@ -102,6 +102,37 @@ nuget{
 		}
 		[x64,v142,debug,MultiThreadedDebugDLL] {
 			lib: ..\msvs_solution\x64\v142_Debug_MD\libruis-render-opengl.lib;
+		}
+*/
+
+		// ======== v143 ========
+
+/*
+		[x86,v143,release,MultiThreaded] {
+			lib: ..\msvs_solution\v143_Release_MT\libruis-render-opengl.lib;
+		}
+		[x86,v143,debug,MultiThreadedDebug] {
+			lib: ..\msvs_solution\v143_Debug_MT\libruis-render-opengl.lib;
+		}
+		[x64,v143,release,MultiThreaded] {
+			lib: ..\msvs_solution\x64\v143_Release_MT\libruis-render-opengl.lib;
+		}
+		[x64,v143,debug,MultiThreadedDebug] {
+			lib: ..\msvs_solution\x64\v143_Debug_MT\libruis-render-opengl.lib;
+		}
+*/
+		
+		[x86,v143,release,MultiThreadedDLL] {
+			lib: ..\msvs_solution\v143_Release_MD\libruis-render-opengl.lib;
+		}
+		[x86,v143,debug,MultiThreadedDebugDLL] {
+			lib: ..\msvs_solution\v143_Debug_MD\libruis-render-opengl.lib;
+		}
+		[x64,v143,release,MultiThreadedDLL] {
+			lib: ..\msvs_solution\x64\v143_Release_MD\libruis-render-opengl.lib;
+		}
+		[x64,v143,debug,MultiThreadedDebugDLL] {
+			lib: ..\msvs_solution\x64\v143_Debug_MD\libruis-render-opengl.lib;
 		}
 	}
 }
