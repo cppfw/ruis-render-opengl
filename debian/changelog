@@ -1,3 +1,9 @@
+libruis-render-opengl (0.1.66) unstable; urgency=medium
+
+  * aptian
+
+ -- Ivan Gagis <igagis@gmail.com>  Fri, 01 Mar 2024 11:31:32 +0200
+
 libruis-render-opengl (0.1.65) unstable; urgency=medium
 
   * msvs: v143
