@@ -31,7 +31,9 @@ using namespace ruis::render_opengl;
 namespace {
 unsigned get_max_texture_size()
 {
-	// the variable is initialized via output argument, so no need to initialize it here
+	// the val variable is initialized via output argument, so no need to initialize
+	// it here
+
 	// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 	GLint val;
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &val);
@@ -72,7 +74,9 @@ renderer::renderer(std::unique_ptr<render_factory> factory) :
 	// check if default framebuffer value is saved or not everytime some
 	// framebuffer is going to be bound and save the value if needed.
 
-	// the variable is initialized via output argument, so no need to initialize it here
+	// the old_fb variable is initialized via output argument, so no need to initialize
+	// it here
+
 	// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 	GLint old_fb;
 	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old_fb);
@@ -138,7 +142,9 @@ void renderer::set_scissor_enabled(bool enabled)
 
 r4::rectangle<int> renderer::get_scissor() const
 {
-	// the variable is initialized via output argument, so no need to initialize it here
+	// the osb variable is initialized via output argument, so no need to initialize
+	// it here
+
 	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
 	std::array<GLint, 4> osb;
 	glGetIntegerv(GL_SCISSOR_BOX, osb.data());
@@ -153,7 +159,9 @@ void renderer::set_scissor(r4::rectangle<int> r)
 
 r4::rectangle<int> renderer::get_viewport() const
 {
-	// the variable is initialized via output argument, so no need to initialize it here
+	// the vp variable is initialized via output argument, so no need to initialize
+	// it here
+
 	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
 	std::array<GLint, 4> vp;
 

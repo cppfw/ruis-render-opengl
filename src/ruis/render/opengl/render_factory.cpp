@@ -61,7 +61,10 @@ utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d(const raste
 	return std::visit(
 		[this, &imvar](const auto& im) -> utki::shared_ref<ruis::texture_2d> {
 			if constexpr (sizeof(im.pixels().front().front()) != 1) {
-				throw std::logic_error("render_factory::create_texture_2d(): non-8bit images are not supported");
+				throw std::logic_error(
+					"render_factory::create_texture_2d(): "
+					"non-8bit images are not supported"
+				);
 			} else {
 				auto data = im.pixels();
 				return this->create_texture_2d_internal(

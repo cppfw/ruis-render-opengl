@@ -51,7 +51,9 @@ bool check_for_compile_errors(GLuint shader)
 		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &log_len);
 		if (log_len > 1) { // 1 char is a terminating 0
 			std::vector<char> log(log_len);
-			// 'len' variable is used to get value via output argument, so no need to initialize it
+			// 'len' variable is used to get value via output argument, so no need to
+			// initialize it
+
 			// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 			GLint len;
 			glGetShaderInfoLog(shader, GLsizei(log.size()), &len, log.data());
@@ -78,7 +80,9 @@ bool check_for_link_errors(GLuint program)
 		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &log_len);
 		if (log_len > 1) { // 1 is for terminating 0 character
 			std::vector<char> log(log_len);
-			// 'len' variable is used to get value via output argument, so no need to initialize it
+			// 'len' variable is used to get value via output argument, so no need to
+			// initialize it
+
 			// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 			GLint len;
 			glGetProgramInfoLog(program, GLsizei(log.size()), &len, log.data());
@@ -123,7 +127,9 @@ program_wrapper::program_wrapper(const char* vertex_shader_code, const char* fra
 	glAttachShader(this->p, vertex_shader.s);
 	glAttachShader(this->p, fragment_shader.s);
 
-	// the variable is initialized via output argument, so no need to initialize it here
+	// the variable is initialized via output argument, so no need to initialize
+	// it here
+
 	// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 	GLint max_num_attribs;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &max_num_attribs);

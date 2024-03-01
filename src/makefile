@@ -23,7 +23,7 @@ this_ldlibs += -lruis
 $(eval $(prorab-build-lib))
 
 this_license_file := ../LICENSE
-this_src_dir := .
+this_src_dir := ruis
 $(eval $(prorab-license))
 
 $(eval $(prorab-clang-format))
