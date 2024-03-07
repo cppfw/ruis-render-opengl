@@ -1,3 +1,9 @@
+libruis-render-opengl (0.1.67) unstable; urgency=medium
+
+  * bookworm
+
+ -- Ivan Gagis <igagis@gmail.com>  Thu, 07 Mar 2024 17:26:32 +0200
+
 libruis-render-opengl (0.1.66) unstable; urgency=medium
 
   * aptian
