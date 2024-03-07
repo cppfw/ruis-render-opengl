@@ -197,11 +197,17 @@ utki::shared_ref<ruis::index_buffer> render_factory::create_index_buffer(utki::s
 std::unique_ptr<ruis::render_factory::shaders> render_factory::create_shaders()
 {
 	auto ret = std::make_unique<ruis::render_factory::shaders>();
+	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
 	ret->pos_tex = std::make_unique<shader_texture>();
+	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
 	ret->color_pos = std::make_unique<shader_color>();
+	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
 	ret->pos_clr = std::make_unique<shader_pos_clr>();
+	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
 	ret->color_pos_tex = std::make_unique<shader_color_pos_tex>();
+	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
 	ret->color_pos_tex_alpha = std::make_unique<shader_color_pos_tex_alpha>();
+	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
 	ret->color_pos_lum = std::make_unique<shader_color_pos_lum>();
 	return ret;
 }
