@@ -27,12 +27,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 namespace ruis::render_opengl {
 
-class shader_texture : public ruis::texturing_shader, public shader_base
+class shader_pos_tex :
+	public ruis::texturing_shader, //
+	public shader_base
 {
 	GLint texture_uniform;
 
 public:
-	shader_texture();
+	shader_pos_tex();
 
 	void render(const r4::matrix4<float>& m, const ruis::vertex_array& va, const ruis::texture_2d& tex) const override;
 };

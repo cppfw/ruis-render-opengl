@@ -103,6 +103,12 @@ protected:
 		return GLuint(prog) == this->program.p;
 	}
 
+	void set_uniform_sampler(GLint id, GLint texture_unit_num) const
+	{
+		glUniform1i(id, texture_unit_num);
+		assert_opengl_no_error();
+	}
+
 	void set_uniform_matrix4f(GLint id, const r4::matrix4<float>& m) const
 	{
 		glUniformMatrix4fv(id, 1, GL_TRUE, m.front().data());

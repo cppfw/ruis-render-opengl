@@ -53,6 +53,7 @@ shader_color_pos_tex::shader_color_pos_tex() :
 						}
 					)qwertyuiop"
 	),
+	texture_uniform(this->get_uniform("texture0")),
 	color_uniform(this->get_uniform("uniform_color"))
 {}
 
@@ -63,11 +64,14 @@ void shader_color_pos_tex::render(
 	const ruis::texture_2d& tex
 ) const
 {
+	constexpr auto texture_unit_number = 0;
+
 	ASSERT(dynamic_cast<const texture_2d*>(&tex))
 	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-	static_cast<const texture_2d&>(tex).bind(0);
+	static_cast<const texture_2d&>(tex).bind(texture_unit_number);
 	this->bind();
 
+	this->set_uniform_sampler(this->texture_uniform, texture_unit_number);
 	this->set_uniform4f(this->color_uniform, color.x(), color.y(), color.z(), color.w());
 
 	this->shader_base::render(m, va);

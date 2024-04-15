@@ -30,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "shader_color_pos_tex.hpp"
 #include "shader_color_pos_tex_alpha.hpp"
 #include "shader_pos_clr.hpp"
-#include "shader_texture.hpp"
+#include "shader_pos_tex.hpp"
 #include "texture_2d.hpp"
 #include "util.hpp"
 #include "vertex_array.hpp"
@@ -198,7 +198,7 @@ std::unique_ptr<ruis::render_factory::shaders> render_factory::create_shaders()
 {
 	auto ret = std::make_unique<ruis::render_factory::shaders>();
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret->pos_tex = std::make_unique<shader_texture>();
+	ret->pos_tex = std::make_unique<shader_pos_tex>();
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
 	ret->color_pos = std::make_unique<shader_color>();
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")

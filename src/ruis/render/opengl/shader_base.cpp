@@ -25,6 +25,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <GL/glew.h>
 #include <utki/debug.hpp>
+#include <utki/string.hpp>
 
 #include "index_buffer.hpp"
 #include "util.hpp"
@@ -163,7 +164,7 @@ GLint shader_base::get_uniform(const char* n)
 {
 	GLint ret = glGetUniformLocation(this->program.p, n);
 	if (ret < 0) {
-		throw std::logic_error("no uniform found in the shader program");
+		throw std::logic_error(utki::cat("no uniform found in the shader program: ", n));
 	}
 	return ret;
 }
