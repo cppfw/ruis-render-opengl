@@ -23,17 +23,19 @@ Description: OpenGL renderer for ruis.
 Package: libruis-render-opengl$(soname)-dbgsrc
 Section: debug
 Architecture: all
-Depends: libruis-render-opengl$(soname)-dbgsym (= ${binary:Version}), ${misc:Depends}
+Depends:
+	libruis-render-opengl$(soname)-dbgsym (= ${binary:Version}),
+	${misc:Depends}
 Description: debugging sources for libruis-render-opengl$(soname) package.
 
 Package: libruis-render-opengl-dev
 Section: libdevel
 Architecture: any
 Depends:
-		libruis-render-opengl$(soname) (= ${binary:Version}),
-		libruis-render-opengl$(soname)-dbg (= ${binary:Version}),
-		libruis-dev,
-		${misc:Depends}
+	libruis-render-opengl$(soname) (= ${binary:Version}),
+	libruis-render-opengl$(soname)-dbgsrc (= ${binary:Version}),
+	libruis-dev,
+	${misc:Depends}
 Suggests: libruis-render-opengl-doc
 Description: OpenGL renderer for ruis.
  OpenGL renderer for ruis GUI library.
