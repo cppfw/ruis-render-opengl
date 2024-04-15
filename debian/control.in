@@ -20,11 +20,11 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: OpenGL renderer for ruis.
  OpenGL renderer for ruis GUI library.
 
-Package: libruis-render-opengl$(soname)-dbg
+Package: libruis-render-opengl$(soname)-dbgsrc
 Section: debug
-Architecture: any
-Depends: libruis-render-opengl$(soname) (= ${binary:Version}), ${misc:Depends}
-Description: debugging symbols for libruis-render-opengl$(soname) package.
+Architecture: all
+Depends: libruis-render-opengl$(soname)-dbgsym (= ${binary:Version}), ${misc:Depends}
+Description: debugging sources for libruis-render-opengl$(soname) package.
 
 Package: libruis-render-opengl-dev
 Section: libdevel
