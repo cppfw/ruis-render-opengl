@@ -1,3 +1,9 @@
+libruis-render-opengl (0.1.68) unstable; urgency=medium
+
+  * dbgsrc
+
+ -- Ivan Gagis <igagis@gmail.com>  Tue, 16 Apr 2024 00:32:59 +0300
+
 libruis-render-opengl (0.1.67) unstable; urgency=medium
 
   * bookworm
