@@ -33,7 +33,6 @@ Section: libdevel
 Architecture: any
 Depends:
 	libruis-render-opengl$(soname) (= ${binary:Version}),
-	libruis-render-opengl$(soname)-dbgsrc (= ${binary:Version}),
 	libruis-dev,
 	${misc:Depends}
 Suggests: libruis-render-opengl-doc
