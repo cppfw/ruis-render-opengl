@@ -116,12 +116,11 @@ void renderer::clear_framebuffer()
 	glClear(GL_COLOR_BUFFER_BIT);
 	assert_opengl_no_error();
 
-	glClearDepth(0);
-
+	// Default clear depth value is 1, see glClearDepth()
 	glClear(GL_DEPTH_BUFFER_BIT);
 	assert_opengl_no_error();
 
-	glClearStencil(0);
+	// Default clear stencil value is 0, see glClearStencil()
 	glClear(GL_STENCIL_BUFFER_BIT);
 	assert_opengl_no_error();
 }
