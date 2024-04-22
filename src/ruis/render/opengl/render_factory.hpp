@@ -43,7 +43,10 @@ public:
 		rasterimage::dimensioned::dimensions_type dims
 	) override;
 
-	utki::shared_ref<texture_2d> create_texture_2d(const rasterimage::image_variant& imvar) override;
+	utki::shared_ref<texture_2d> create_texture_2d(
+		const rasterimage::image_variant& imvar,
+		texture_2d_parameters params
+	) override;
 
 	utki::shared_ref<ruis::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector4<float>> vertices) override;
 	utki::shared_ref<ruis::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector3<float>> vertices) override;
@@ -64,7 +67,8 @@ private:
 	utki::shared_ref<ruis::texture_2d> create_texture_2d_internal(
 		rasterimage::format type,
 		rasterimage::dimensioned::dimensions_type dims,
-		utki::span<const uint8_t> data
+		utki::span<const uint8_t> data,
+		texture_2d_parameters params
 	);
 };
 

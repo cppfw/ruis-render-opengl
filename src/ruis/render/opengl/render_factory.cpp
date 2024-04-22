@@ -54,13 +54,16 @@ utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d(
 	rasterimage::dimensioned::dimensions_type dims
 )
 {
-	return this->create_texture_2d_internal(format, dims, nullptr);
+	return this->create_texture_2d_internal(format, dims, nullptr, {});
 }
 
-utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d(const rasterimage::image_variant& imvar)
+utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d(
+	const rasterimage::image_variant& imvar,
+	texture_2d_parameters params
+)
 {
 	return std::visit(
-		[this, &imvar](const auto& im) -> utki::shared_ref<ruis::texture_2d> {
+		[this, &imvar, &params](const auto& im) -> utki::shared_ref<ruis::texture_2d> {
 			if constexpr (sizeof(im.pixels().front().front()) != 1) {
 				throw std::logic_error(
 					"render_factory::create_texture_2d(): "
@@ -71,7 +74,8 @@ utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d(const raste
 				return this->create_texture_2d_internal(
 					imvar.get_format(),
 					im.dims(),
-					utki::make_span(data.front().data(), data.size_bytes())
+					utki::make_span(data.front().data(), data.size_bytes()),
+					std::move(params)
 				);
 			}
 		},
@@ -79,11 +83,12 @@ utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d(const raste
 	);
 }
 
-// TODO: refactor this function
+// TODO: refactor this function. How?
 utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d_internal(
 	rasterimage::format type,
 	rasterimage::dimensioned::dimensions_type dims,
-	utki::span<const uint8_t> data
+	utki::span<const uint8_t> data,
+	texture_2d_parameters params
 )
 {
 	// TODO: turn these asserts to real checks with exceptions throwing
@@ -145,15 +150,56 @@ utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d_internal(
 	);
 	assert_opengl_no_error();
 
-	// NOTE: on OpenGL ES 2 it is necessary to set the filter parameters
-	//       for every texture!!! Otherwise it may not work!
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	if (!data.empty() && params.mipmap != texture_2d::mipmap::none) {
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+
+	auto to_gl_filter = [](texture_2d::filter f) {
+		switch (f) {
+			case texture_2d::filter::nearest:
+				return GL_NEAREST;
+			case texture_2d::filter::linear:
+				return GL_LINEAR;
+		}
+		return GL_NEAREST;
+	};
+
+	GLint mag_filter = to_gl_filter(params.mag_filter);
+
+	GLint min_filter = [&]() {
+		switch (params.mipmap) {
+			case texture_2d::mipmap::none:
+				return to_gl_filter(params.min_filter);
+			case texture_2d::mipmap::nearest:
+				switch (params.min_filter) {
+					case texture_2d::filter::nearest:
+						return GL_NEAREST_MIPMAP_NEAREST;
+					case texture_2d::filter::linear:
+						return GL_LINEAR_MIPMAP_NEAREST;
+				}
+				break;
+			case texture_2d::mipmap::linear:
+				switch (params.min_filter) {
+					case texture_2d::filter::nearest:
+						return GL_NEAREST_MIPMAP_LINEAR;
+					case texture_2d::filter::linear:
+						return GL_LINEAR_MIPMAP_LINEAR;
+				}
+				break;
+		}
+		return GL_NEAREST;
+	}();
+
+	// It is necessary to set filter parameters for every texture. Otherwise it may not work.
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter);
 	assert_opengl_no_error();
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter);
 	assert_opengl_no_error();
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	assert_opengl_no_error();
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	assert_opengl_no_error();
 
 	return ret;
 }
