@@ -23,14 +23,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <GL/glew.h>
 
-#include "frame_buffer.hpp"
-#include "index_buffer.hpp"
 #include "shaders/shader_color.hpp"
 #include "shaders/shader_color_pos_lum.hpp"
 #include "shaders/shader_color_pos_tex.hpp"
 #include "shaders/shader_color_pos_tex_alpha.hpp"
 #include "shaders/shader_pos_clr.hpp"
 #include "shaders/shader_pos_tex.hpp"
+
+#include "frame_buffer.hpp"
+#include "index_buffer.hpp"
 #include "texture_2d.hpp"
 #include "util.hpp"
 #include "vertex_array.hpp"
