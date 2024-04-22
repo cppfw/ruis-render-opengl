@@ -19,45 +19,50 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /* ================ LICENSE END ================ */
 
-#include "shader_color_pos_tex.hpp"
+#include "shader_color_pos_tex_alpha.hpp"
 
-#include "texture_2d.hpp"
+#include "../texture_2d.hpp"
 
 using namespace ruis::render_opengl;
 
-shader_color_pos_tex::shader_color_pos_tex() :
+shader_color_pos_tex_alpha::shader_color_pos_tex_alpha() :
 	shader_base(
 		R"qwertyuiop(
-						attribute vec4 a0;
+			attribute vec4 a0;
 
-						attribute vec2 a1;
+			attribute vec2 a1;
 
-						uniform mat4 matrix;
+			uniform mat4 matrix;
 
-						varying vec2 tc0;
+			varying vec2 tc0;
 
-						void main(void){
-							gl_Position = matrix * a0;
-							tc0 = a1;
-						}
-					)qwertyuiop",
+			void main(void){
+				gl_Position = matrix * a0;
+				tc0 = a1;
+			}
+		)qwertyuiop",
 		R"qwertyuiop(		
-						uniform sampler2D texture0;
-		
-						uniform vec4 uniform_color;
-		
-						varying vec2 tc0;
-		
-						void main(void){
-							gl_FragColor = texture2D(texture0, tc0) * uniform_color;
-						}
-					)qwertyuiop"
+			uniform sampler2D texture0;
+
+			uniform vec4 uniform_color;
+
+			varying vec2 tc0;
+
+			void main(void){
+				gl_FragColor = vec4(
+					uniform_color.x,
+					uniform_color.y,
+					uniform_color.z,
+					uniform_color.w * texture2D(texture0, tc0).x
+				);
+			}
+		)qwertyuiop"
 	),
 	texture_uniform(this->get_uniform("texture0")),
 	color_uniform(this->get_uniform("uniform_color"))
 {}
 
-void shader_color_pos_tex::render(
+void shader_color_pos_tex_alpha::render(
 	const r4::matrix4<float>& m,
 	const ruis::vertex_array& va,
 	r4::vector4<float> color,

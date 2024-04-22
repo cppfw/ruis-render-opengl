@@ -21,36 +21,28 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <ruis/render/coloring_texturing_shader.hpp>
+#include <ruis/render/shader.hpp>
 
-#include "shader_base.hpp"
+#include "../shader_base.hpp"
 
 namespace ruis::render_opengl {
 
-class shader_color_pos_tex_alpha :
-	public ruis::coloring_texturing_shader, //
+class shader_pos_clr :
+	public ruis::shader, //
 	public shader_base
 {
-	GLint texture_uniform;
-	GLint color_uniform;
-
 public:
-	shader_color_pos_tex_alpha();
+	shader_pos_clr();
 
-	shader_color_pos_tex_alpha(const shader_color_pos_tex_alpha&) = delete;
-	shader_color_pos_tex_alpha& operator=(const shader_color_pos_tex_alpha&) = delete;
+	shader_pos_clr(const shader_pos_clr&) = delete;
+	shader_pos_clr& operator=(const shader_pos_clr&) = delete;
 
-	shader_color_pos_tex_alpha(shader_color_pos_tex_alpha&&) = delete;
-	shader_color_pos_tex_alpha& operator=(shader_color_pos_tex_alpha&&) = delete;
+	shader_pos_clr(shader_pos_clr&&) = delete;
+	shader_pos_clr& operator=(shader_pos_clr&&) = delete;
 
-	~shader_color_pos_tex_alpha() override = default;
+	~shader_pos_clr() override = default;
 
-	void render(
-		const r4::matrix4<float>& m,
-		const ruis::vertex_array& va,
-		r4::vector4<float> color,
-		const ruis::texture_2d& tex
-	) const override;
+	void render(const r4::matrix4<float>& m, const ruis::vertex_array& va) const override;
 };
 
 } // namespace ruis::render_opengl

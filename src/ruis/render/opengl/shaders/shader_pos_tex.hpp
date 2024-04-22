@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <ruis/render/texturing_shader.hpp>
 
-#include "shader_base.hpp"
+#include "../shader_base.hpp"
 
 namespace ruis::render_opengl {
 

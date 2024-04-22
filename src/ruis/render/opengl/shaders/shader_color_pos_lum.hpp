@@ -23,11 +23,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <ruis/render/coloring_shader.hpp>
 
-#include "shader_base.hpp"
+#include "../shader_base.hpp"
 
 namespace ruis::render_opengl {
 
-class shader_color_pos_lum : public ruis::coloring_shader, private ruis::render_opengl::shader_base
+class shader_color_pos_lum :
+	public ruis::coloring_shader, //
+	private ruis::render_opengl::shader_base
 {
 	GLint color_uniform;
 

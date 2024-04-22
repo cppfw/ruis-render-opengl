@@ -26,27 +26,27 @@ using namespace ruis::render_opengl;
 shader_color_pos_lum::shader_color_pos_lum() :
 	shader_base(
 		R"qwertyuiop(
-						attribute vec4 a0;
-						attribute float a1;
+			attribute vec4 a0;
+			attribute float a1;
 
-						uniform mat4 matrix;
+			uniform mat4 matrix;
 
-						varying float lum;
+			varying float lum;
 
-						void main(void){
-							gl_Position = matrix * a0;
-							lum = a1;
-						}
-					)qwertyuiop",
+			void main(void){
+				gl_Position = matrix * a0;
+				lum = a1;
+			}
+		)qwertyuiop",
 		R"qwertyuiop(
-						uniform vec4 uniform_color;
-		
-						varying float lum;
-		
-						void main(void){
-							gl_FragColor = vec4(uniform_color.x, uniform_color.y, uniform_color.z, uniform_color.w * lum);
-						}
-					)qwertyuiop"
+			uniform vec4 uniform_color;
+
+			varying float lum;
+
+			void main(void){
+				gl_FragColor = vec4(uniform_color.x, uniform_color.y, uniform_color.z, uniform_color.w * lum);
+			}
+		)qwertyuiop"
 	),
 	color_uniform(this->get_uniform("uniform_color"))
 {}

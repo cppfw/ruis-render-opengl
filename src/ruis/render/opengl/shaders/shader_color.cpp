@@ -19,28 +19,37 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /* ================ LICENSE END ================ */
 
-#pragma once
+#include "shader_color.hpp"
 
-#include <ruis/render/shader.hpp>
+using namespace ruis::render_opengl;
 
-#include "shader_base.hpp"
+shader_color::shader_color() :
+	shader_base(
+		R"qwertyuiop(
+			attribute vec4 a0;
 
-namespace ruis::render_opengl {
+			uniform mat4 matrix;
+			
+			void main(void){
+				gl_Position = matrix * a0;
+			}
+		)qwertyuiop",
+		R"qwertyuiop(
+			uniform vec4 uniform_color;
 
-class shader_pos_clr : public ruis::shader, public shader_base
+			void main(void){
+				gl_FragColor = uniform_color;
+			}
+		)qwertyuiop"
+	),
+	color_uniform(this->get_uniform("uniform_color"))
+{}
+
+void shader_color::render(const r4::matrix4<float>& m, const ruis::vertex_array& va, r4::vector4<float> color) const
 {
-public:
-	shader_pos_clr();
+	this->bind();
 
-	shader_pos_clr(const shader_pos_clr&) = delete;
-	shader_pos_clr& operator=(const shader_pos_clr&) = delete;
+	this->set_uniform4f(this->color_uniform, color.x(), color.y(), color.z(), color.w());
 
-	shader_pos_clr(shader_pos_clr&&) = delete;
-	shader_pos_clr& operator=(shader_pos_clr&&) = delete;
-
-	~shader_pos_clr() override = default;
-
-	void render(const r4::matrix4<float>& m, const ruis::vertex_array& va) const override;
-};
-
-} // namespace ruis::render_opengl
+	this->shader_base::render(m, va);
+}

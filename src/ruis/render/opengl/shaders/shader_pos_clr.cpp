@@ -26,25 +26,25 @@ using namespace ruis::render_opengl;
 shader_pos_clr::shader_pos_clr() :
 	shader_base(
 		R"qwertyuiop(
-						uniform mat4 matrix;
+			uniform mat4 matrix;
 
-						attribute vec4 a0;
-						attribute vec4 a1;
+			attribute vec4 a0;
+			attribute vec4 a1;
 
-						varying vec4 color_varying;
+			varying vec4 color_varying;
 
-						void main(void){
-							gl_Position = matrix * a0;
-							color_varying = a1;
-						}
-					)qwertyuiop",
+			void main(void){
+				gl_Position = matrix * a0;
+				color_varying = a1;
+			}
+		)qwertyuiop",
 		R"qwertyuiop(
-						varying vec4 color_varying;
-						
-						void main(void){
-							gl_FragColor = color_varying;
-						}
-					)qwertyuiop"
+			varying vec4 color_varying;
+			
+			void main(void){
+				gl_FragColor = color_varying;
+			}
+		)qwertyuiop"
 	)
 {}
 
