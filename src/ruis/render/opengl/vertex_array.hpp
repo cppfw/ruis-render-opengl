@@ -24,14 +24,18 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <GL/glew.h>
 #include <ruis/render/vertex_array.hpp>
 
-namespace ruis::render_opengl {
+namespace ruis::render::opengl {
 
-class vertex_array : public ruis::vertex_array
+class vertex_array : public ruis::render::vertex_array
 {
 public:
 	const GLuint vao;
 
-	vertex_array(buffers_type buffers, const utki::shared_ref<const ruis::index_buffer>& indices, mode rendering_mode);
+	vertex_array(
+		buffers_type buffers,
+		const utki::shared_ref<const ruis::render::index_buffer>& indices,
+		mode rendering_mode
+	);
 
 	vertex_array(const vertex_array&) = delete;
 	vertex_array& operator=(const vertex_array&) = delete;
@@ -46,4 +50,4 @@ public:
 private:
 };
 
-} // namespace ruis::render_opengl
+} // namespace ruis::render::opengl

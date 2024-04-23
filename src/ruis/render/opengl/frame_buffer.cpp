@@ -26,10 +26,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "texture_2d.hpp"
 #include "util.hpp"
 
-using namespace ruis::render_opengl;
+using namespace ruis::render::opengl;
 
-frame_buffer::frame_buffer(const utki::shared_ref<ruis::texture_2d>& color) :
-	ruis::frame_buffer(color)
+frame_buffer::frame_buffer(const utki::shared_ref<ruis::render::texture_2d>& color) :
+	ruis::render::frame_buffer(color)
 {
 	glGenFramebuffers(1, &this->fbo);
 	assert_opengl_no_error();

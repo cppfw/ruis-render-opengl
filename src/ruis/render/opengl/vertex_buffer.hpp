@@ -27,9 +27,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "opengl_buffer.hpp"
 
-namespace ruis::render_opengl {
+namespace ruis::render::opengl {
 
-class vertex_buffer : public ruis::vertex_buffer, public opengl_buffer
+class vertex_buffer :
+	public ruis::render::vertex_buffer, //
+	public opengl_buffer
 {
 public:
 	const GLint num_components;
@@ -55,4 +57,4 @@ private:
 	void init(GLsizeiptr size, const GLvoid* data);
 };
 
-} // namespace ruis::render_opengl
+} // namespace ruis::render::opengl

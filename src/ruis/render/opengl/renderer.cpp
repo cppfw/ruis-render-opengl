@@ -26,7 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "frame_buffer.hpp"
 #include "util.hpp"
 
-using namespace ruis::render_opengl;
+using namespace ruis::render::opengl;
 
 namespace {
 unsigned get_max_texture_size()
@@ -60,7 +60,7 @@ void GLAPIENTRY opengl_error_callback(
 #endif
 
 renderer::renderer(std::unique_ptr<render_factory> factory) :
-	ruis::renderer(std::move(factory), []() {
+	ruis::render::renderer(std::move(factory), []() {
 		renderer::params p;
 		p.max_texture_size = get_max_texture_size();
 		return p;
@@ -93,7 +93,7 @@ renderer::renderer(std::unique_ptr<render_factory> factory) :
 	glEnable(GL_CULL_FACE);
 }
 
-void renderer::set_framebuffer_internal(ruis::frame_buffer* fb)
+void renderer::set_framebuffer_internal(ruis::render::frame_buffer* fb)
 {
 	if (!fb) {
 		glBindFramebuffer(GL_FRAMEBUFFER, this->default_framebuffer);
@@ -186,7 +186,7 @@ void renderer::set_blend_enabled(bool enable)
 
 namespace {
 
-const std::array<GLenum, size_t(ruis::renderer::blend_factor::enum_size)> blend_func = {
+const std::array<GLenum, size_t(ruis::render::renderer::blend_factor::enum_size)> blend_func = {
 	GL_ZERO,
 	GL_ONE,
 	GL_SRC_COLOR,

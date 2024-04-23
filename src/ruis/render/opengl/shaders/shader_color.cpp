@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "shader_color.hpp"
 
-using namespace ruis::render_opengl;
+using namespace ruis::render::opengl;
 
 shader_color::shader_color() :
 	shader_base(
@@ -45,7 +45,8 @@ shader_color::shader_color() :
 	color_uniform(this->get_uniform("uniform_color"))
 {}
 
-void shader_color::render(const r4::matrix4<float>& m, const ruis::vertex_array& va, r4::vector4<float> color) const
+void shader_color::render(const r4::matrix4<float>& m, const ruis::render::vertex_array& va, r4::vector4<float> color)
+	const
 {
 	this->bind();
 

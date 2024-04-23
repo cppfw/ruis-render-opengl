@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "../texture_2d.hpp"
 
-using namespace ruis::render_opengl;
+using namespace ruis::render::opengl;
 
 shader_color_pos_tex_alpha::shader_color_pos_tex_alpha() :
 	shader_base(
@@ -64,9 +64,9 @@ shader_color_pos_tex_alpha::shader_color_pos_tex_alpha() :
 
 void shader_color_pos_tex_alpha::render(
 	const r4::matrix4<float>& m,
-	const ruis::vertex_array& va,
+	const ruis::render::vertex_array& va,
 	r4::vector4<float> color,
-	const ruis::texture_2d& tex
+	const ruis::render::texture_2d& tex
 ) const
 {
 	constexpr auto texture_unit_number = 0;

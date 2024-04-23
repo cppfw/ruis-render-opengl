@@ -25,14 +25,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "util.hpp"
 #include "vertex_buffer.hpp"
 
-using namespace ruis::render_opengl;
+using namespace ruis::render::opengl;
 
 vertex_array::vertex_array(
 	buffers_type buffers,
-	const utki::shared_ref<const ruis::index_buffer>& indices,
+	const utki::shared_ref<const ruis::render::index_buffer>& indices,
 	mode rendering_mode
 ) :
-	ruis::vertex_array(std::move(buffers), indices, rendering_mode),
+	ruis::render::vertex_array(std::move(buffers), indices, rendering_mode),
 	vao([]() {
 		if (GLEW_ARB_vertex_array_object) {
 			// NOLINTNEXTLINE(cppcoreguidelines-init-variables)

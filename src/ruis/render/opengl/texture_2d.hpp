@@ -24,9 +24,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <GL/glew.h>
 #include <ruis/render/texture_2d.hpp>
 
-namespace ruis::render_opengl {
+namespace ruis::render::opengl {
 
-struct texture_2d : public ruis::texture_2d {
+struct texture_2d : public ruis::render::texture_2d {
 	GLuint tex = 0;
 
 	texture_2d(r4::vector2<float> dims);
@@ -42,4 +42,4 @@ struct texture_2d : public ruis::texture_2d {
 	void bind(unsigned unit_num) const;
 };
 
-} // namespace ruis::render_opengl
+} // namespace ruis::render::opengl

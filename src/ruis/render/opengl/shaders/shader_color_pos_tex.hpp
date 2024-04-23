@@ -25,10 +25,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "../shader_base.hpp"
 
-namespace ruis::render_opengl {
+namespace ruis::render::opengl {
 
 class shader_color_pos_tex :
-	public ruis::coloring_texturing_shader, //
+	public ruis::render::coloring_texturing_shader, //
 	public shader_base
 {
 	GLint texture_uniform;
@@ -47,10 +47,10 @@ public:
 
 	void render(
 		const r4::matrix4<float>& m,
-		const ruis::vertex_array& va,
+		const ruis::render::vertex_array& va,
 		r4::vector4<float> color,
-		const ruis::texture_2d& tex
+		const ruis::render::texture_2d& tex
 	) const override;
 };
 
-} // namespace ruis::render_opengl
+} // namespace ruis::render::opengl

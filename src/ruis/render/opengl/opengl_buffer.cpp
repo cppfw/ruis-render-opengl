@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "util.hpp"
 
-using namespace ruis::render_opengl;
+using namespace ruis::render::opengl;
 
 opengl_buffer::opengl_buffer() :
 	buffer([]() -> GLuint {

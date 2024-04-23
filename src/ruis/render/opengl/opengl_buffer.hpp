@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <GL/glew.h>
 
-namespace ruis::render_opengl {
+namespace ruis::render::opengl {
 
 class opengl_buffer
 {
@@ -43,4 +43,4 @@ public:
 private:
 };
 
-} // namespace ruis::render_opengl
+} // namespace ruis::render::opengl

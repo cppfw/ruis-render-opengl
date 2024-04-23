@@ -28,9 +28,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "render_factory.hpp"
 
-namespace ruis::render_opengl {
+namespace ruis::render::opengl {
 
-class renderer : public ruis::renderer
+class renderer : public ruis::render::renderer
 {
 	GLuint default_framebuffer;
 
@@ -45,7 +45,7 @@ public:
 
 	~renderer() override = default;
 
-	void set_framebuffer_internal(ruis::frame_buffer* fb) override;
+	void set_framebuffer_internal(ruis::render::frame_buffer* fb) override;
 
 	void clear_framebuffer() override;
 
@@ -67,4 +67,4 @@ public:
 		override;
 };
 
-} // namespace ruis::render_opengl
+} // namespace ruis::render::opengl
