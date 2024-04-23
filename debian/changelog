@@ -1,3 +1,9 @@
+libruis-render-opengl (0.1.72) unstable; urgency=medium
+
+  * update
+
+ -- Ivan Gagis <igagis@gmail.com>  Tue, 23 Apr 2024 21:15:03 +0300
+
 libruis-render-opengl (0.1.71) unstable; urgency=medium
 
   * clear depth buffer to 1
