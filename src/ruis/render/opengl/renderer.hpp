@@ -57,9 +57,9 @@ public:
 
 	void set_scissor(r4::rectangle<int> r) override;
 
-	r4::rectangle<int> get_viewport() const override;
+	r4::rectangle<uint32_t> get_viewport() const override;
 
-	void set_viewport(r4::rectangle<int> r) override;
+	void set_viewport(r4::rectangle<uint32_t> r) override;
 
 	void set_blend_enabled(bool enable) override;
 

@@ -156,20 +156,27 @@ void renderer::set_scissor(r4::rectangle<int> r)
 	assert_opengl_no_error();
 }
 
-r4::rectangle<int> renderer::get_viewport() const
+r4::rectangle<uint32_t> renderer::get_viewport() const
 {
-	// the vp variable is initialized via output argument, so no need to initialize
-	// it here
-
-	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
-	std::array<GLint, 4> vp;
+	std::array<GLint, 4> vp{};
 
 	glGetIntegerv(GL_VIEWPORT, vp.data());
 
-	return {vp[0], vp[1], vp[2], vp[3]};
+#ifdef DEBUG
+	for (auto n : vp) {
+		ASSERT(n >= 0)
+	}
+#endif
+
+	return {
+		uint32_t(vp[0]), //
+		uint32_t(vp[1]),
+		uint32_t(vp[2]),
+		uint32_t(vp[3])
+	};
 }
 
-void renderer::set_viewport(r4::rectangle<int> r)
+void renderer::set_viewport(r4::rectangle<uint32_t> r)
 {
 	glViewport(r.p.x(), r.p.y(), r.d.x(), r.d.y());
 	assert_opengl_no_error();
