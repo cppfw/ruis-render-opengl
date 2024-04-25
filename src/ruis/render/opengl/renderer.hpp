@@ -53,9 +53,9 @@ public:
 
 	void set_scissor_enabled(bool enabled) override;
 
-	r4::rectangle<int> get_scissor() const override;
+	r4::rectangle<uint32_t> get_scissor() const override;
 
-	void set_scissor(r4::rectangle<int> r) override;
+	void set_scissor(r4::rectangle<uint32_t> r) override;
 
 	r4::rectangle<uint32_t> get_viewport() const override;
 

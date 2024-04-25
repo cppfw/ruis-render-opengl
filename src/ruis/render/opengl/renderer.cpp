@@ -139,18 +139,26 @@ void renderer::set_scissor_enabled(bool enabled)
 	}
 }
 
-r4::rectangle<int> renderer::get_scissor() const
+r4::rectangle<uint32_t> renderer::get_scissor() const
 {
-	// the osb variable is initialized via output argument, so no need to initialize
-	// it here
-
-	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
-	std::array<GLint, 4> osb;
+	std::array<GLint, 4> osb{};
 	glGetIntegerv(GL_SCISSOR_BOX, osb.data());
-	return {osb[0], osb[1], osb[2], osb[3]};
+
+#ifdef DEBUG
+	for (auto n : osb) {
+		ASSERT(n >= 0)
+	}
+#endif
+
+	return {
+		uint32_t(osb[0]), //
+		uint32_t(osb[1]),
+		uint32_t(osb[2]),
+		uint32_t(osb[3])
+	};
 }
 
-void renderer::set_scissor(r4::rectangle<int> r)
+void renderer::set_scissor(r4::rectangle<uint32_t> r)
 {
 	glScissor(r.p.x(), r.p.y(), r.d.x(), r.d.y());
 	assert_opengl_no_error();
