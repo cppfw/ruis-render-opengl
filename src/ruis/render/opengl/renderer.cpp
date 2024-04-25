@@ -127,13 +127,14 @@ void renderer::clear_framebuffer()
 
 r4::vector2<uint32_t> renderer::to_window_coords(ruis::vec2 point) const
 {
-	auto vp = this->get_viewport().to<real>();
+	auto vp = this->get_viewport();
 
 	point += ruis::vec2(1, 1);
+	point = max(point, {0, 0}); // clamp to >= 0
 	point /= 2;
-	point.comp_multiply(vp.d);
-	point += vp.p;
-	return max(round(point), {0, 0}).to<uint32_t>();
+	point.comp_multiply(vp.d.to<real>());
+	point = round(point);
+	return point.to<uint32_t>() + vp.p;
 }
 
 bool renderer::is_scissor_enabled() const
