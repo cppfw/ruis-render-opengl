@@ -125,6 +125,17 @@ void renderer::clear_framebuffer()
 	assert_opengl_no_error();
 }
 
+r4::vector2<uint32_t> renderer::to_window_coords(ruis::vec2 point) const
+{
+	auto vp = this->get_viewport().to<real>();
+
+	point += ruis::vec2(1, 1);
+	point /= 2;
+	point.comp_multiply(vp.d);
+	point += vp.p;
+	return max(round(point), {0, 0}).to<uint32_t>();
+}
+
 bool renderer::is_scissor_enabled() const
 {
 	return glIsEnabled(GL_SCISSOR_TEST) ? true : false; // "? true : false" is to avoid warning under MSVC

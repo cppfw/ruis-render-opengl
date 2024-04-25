@@ -49,6 +49,8 @@ public:
 
 	void clear_framebuffer() override;
 
+	r4::vector2<uint32_t> to_window_coords(ruis::vec2 point) const override;
+
 	bool is_scissor_enabled() const override;
 
 	void set_scissor_enabled(bool enabled) override;
