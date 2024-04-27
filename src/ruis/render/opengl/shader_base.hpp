@@ -109,9 +109,27 @@ protected:
 		assert_opengl_no_error();
 	}
 
+	void set_uniform_matrix3f(GLint id, const r4::matrix3<float>& m) const
+	{
+		glUniformMatrix3fv(id, 1, GL_TRUE, m.front().data());
+		assert_opengl_no_error();
+	}
+
 	void set_uniform_matrix4f(GLint id, const r4::matrix4<float>& m) const
 	{
 		glUniformMatrix4fv(id, 1, GL_TRUE, m.front().data());
+		assert_opengl_no_error();
+	}
+
+	void set_uniform2f(GLint id, float x, float y) const
+	{
+		glUniform2f(id, x, y);
+		assert_opengl_no_error();
+	}
+
+	void set_uniform3f(GLint id, float x, float y, float z) const
+	{
+		glUniform3f(id, x, y, z);
 		assert_opengl_no_error();
 	}
 
