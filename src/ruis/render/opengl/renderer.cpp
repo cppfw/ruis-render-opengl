@@ -60,11 +60,21 @@ void GLAPIENTRY opengl_error_callback(
 #endif
 
 renderer::renderer(std::unique_ptr<render_factory> factory) :
-	ruis::render::renderer(std::move(factory), []() {
-		renderer::params p;
-		p.max_texture_size = get_max_texture_size();
-		return p;
-	}())
+	ruis::render::renderer(
+		std::move(factory),
+		{.max_texture_size = get_max_texture_size(),
+		 .initial_matrix = ruis::matrix4()
+							   // OpenGL identity matrix:
+							   //   viewport edges: left = -1, right = 1, top = 1, bottom = -1
+							   //   z-axis towards viewer
+							   .set_identity()
+							   // x-axis right, y-axis down, z-axis away
+							   .scale(1, -1, -1)
+							   // viewport edges: left = 0, top = 0
+							   .translate(-1, -1)
+							   // viewport edges: right = 1, bottom = 1
+							   .scale(2, 2)}
+	)
 {
 	LOG([](auto& o) {
 		o << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
