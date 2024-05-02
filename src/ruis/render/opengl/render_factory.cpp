@@ -63,14 +63,24 @@ utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d(
 	texture_2d_parameters params
 )
 {
+	auto imvar_copy = imvar;
+	return this->create_texture_2d(std::move(imvar_copy), std::move(params));
+}
+
+utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d(
+	rasterimage::image_variant&& imvar,
+	texture_2d_parameters params
+)
+{
 	return std::visit(
-		[this, &imvar, &params](const auto& im) -> utki::shared_ref<ruis::render::texture_2d> {
+		[this, &imvar, &params](auto&& im) -> utki::shared_ref<ruis::render::texture_2d> {
 			if constexpr (sizeof(im.pixels().front().front()) != 1) {
 				throw std::logic_error(
 					"render_factory::create_texture_2d(): "
 					"non-8bit images are not supported"
 				);
 			} else {
+				im.span().flip_vertical();
 				auto data = im.pixels();
 				return this->create_texture_2d_internal(
 					imvar.get_format(),

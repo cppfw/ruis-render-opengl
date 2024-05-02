@@ -38,7 +38,7 @@ shader_color_pos_tex::shader_color_pos_tex() :
 
 			void main(void){
 				gl_Position = matrix * a0;
-				tc0 = a1;
+				tc0 = vec2(a1.x, 1.0f - a1.y);
 			}
 		)qwertyuiop",
 		R"qwertyuiop(		
