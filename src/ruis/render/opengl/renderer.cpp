@@ -266,3 +266,12 @@ void renderer::set_blend_func(
 		blend_func[unsigned(dst_alpha)]
 	);
 }
+
+void renderer::set_depth_test_enabled(bool enable)
+{
+	if (enable) {
+		glEnable(GL_DEPTH_TEST);
+	} else {
+		glDisable(GL_DEPTH_TEST);
+	}
+}

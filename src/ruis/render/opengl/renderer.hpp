@@ -71,6 +71,8 @@ public:
 
 	void set_blend_func(blend_factor src_color, blend_factor dst_color, blend_factor src_alpha, blend_factor dst_alpha)
 		override;
+
+	void set_depth_test_enabled(bool enable) override;
 };
 
 } // namespace ruis::render::opengl
