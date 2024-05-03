@@ -47,7 +47,11 @@ public:
 
 	void set_framebuffer_internal(ruis::render::frame_buffer* fb) override;
 
-	void clear_framebuffer() override;
+	void clear_framebuffer_color() override;
+
+	void clear_framebuffer_depth() override;
+
+	void clear_framebuffer_stencil() override;
 
 	r4::vector2<uint32_t> to_window_coords(ruis::vec2 point) const override;
 

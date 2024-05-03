@@ -119,17 +119,22 @@ void renderer::set_framebuffer_internal(ruis::render::frame_buffer* fb)
 	assert_opengl_no_error();
 }
 
-void renderer::clear_framebuffer()
+void renderer::clear_framebuffer_color()
 {
-	glClearColor(0, 0, 0, 1);
-	assert_opengl_no_error();
+	// Default clear color is RGBA = (0, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	assert_opengl_no_error();
+}
 
+void renderer::clear_framebuffer_depth()
+{
 	// Default clear depth value is 1, see glClearDepth()
 	glClear(GL_DEPTH_BUFFER_BIT);
 	assert_opengl_no_error();
+}
 
+void renderer::clear_framebuffer_stencil()
+{
 	// Default clear stencil value is 0, see glClearStencil()
 	glClear(GL_STENCIL_BUFFER_BIT);
 	assert_opengl_no_error();
