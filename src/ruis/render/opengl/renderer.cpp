@@ -187,7 +187,7 @@ r4::rectangle<uint32_t> renderer::get_scissor() const
 
 void renderer::set_scissor(r4::rectangle<uint32_t> r)
 {
-	glScissor(r.p.x(), r.p.y(), r.d.x(), r.d.y());
+	glScissor(GLint(r.p.x()), GLint(r.p.y()), GLint(r.d.x()), GLint(r.d.y()));
 	assert_opengl_no_error();
 }
 
@@ -213,7 +213,7 @@ r4::rectangle<uint32_t> renderer::get_viewport() const
 
 void renderer::set_viewport(r4::rectangle<uint32_t> r)
 {
-	glViewport(r.p.x(), r.p.y(), r.d.x(), r.d.y());
+	glViewport(GLint(r.p.x()), GLint(r.p.y()), GLint(r.d.x()), GLint(r.d.y()));
 	assert_opengl_no_error();
 }
 

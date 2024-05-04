@@ -72,8 +72,9 @@ utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d(
 	texture_2d_parameters params
 )
 {
+	auto iv = std::move(imvar);
 	return std::visit(
-		[this, &imvar, &params](auto&& im) -> utki::shared_ref<ruis::render::texture_2d> {
+		[this, &imvar = iv, &params](auto&& im) -> utki::shared_ref<ruis::render::texture_2d> {
 			if constexpr (sizeof(im.pixels().front().front()) != 1) {
 				throw std::logic_error(
 					"render_factory::create_texture_2d(): "
@@ -90,7 +91,7 @@ utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d(
 				);
 			}
 		},
-		imvar.variant
+		iv.variant
 	);
 }
 

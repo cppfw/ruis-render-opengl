@@ -49,10 +49,8 @@ public:
 		texture_2d_parameters params
 	) override;
 
-	virtual utki::shared_ref<texture_2d> create_texture_2d(
-		rasterimage::image_variant&& imvar,
-		texture_2d_parameters params
-	) override;
+	utki::shared_ref<texture_2d> create_texture_2d(rasterimage::image_variant&& imvar, texture_2d_parameters params)
+		override;
 
 	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector4<float>> vertices
 	) override;
