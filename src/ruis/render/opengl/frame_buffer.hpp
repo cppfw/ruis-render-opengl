@@ -32,7 +32,7 @@ class frame_buffer : public ruis::render::frame_buffer
 public:
 	GLuint fbo = 0;
 
-	frame_buffer(const utki::shared_ref<ruis::render::texture_2d>& color);
+	frame_buffer(utki::shared_ref<ruis::render::texture_2d> color);
 
 	frame_buffer(const frame_buffer&) = delete;
 	frame_buffer& operator=(const frame_buffer&) = delete;

@@ -22,14 +22,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "frame_buffer.hpp"
 
 #include <GL/glew.h>
+#include <utki/string.hpp>
 
 #include "texture_2d.hpp"
 #include "util.hpp"
 
 using namespace ruis::render::opengl;
 
-frame_buffer::frame_buffer(const utki::shared_ref<ruis::render::texture_2d>& color) :
-	ruis::render::frame_buffer(color)
+frame_buffer::frame_buffer(utki::shared_ref<ruis::render::texture_2d> color) :
+	ruis::render::frame_buffer(std::move(color))
 {
 	glGenFramebuffers(1, &this->fbo);
 	assert_opengl_no_error();
@@ -51,13 +52,15 @@ frame_buffer::frame_buffer(const utki::shared_ref<ruis::render::texture_2d>& col
 	assert_opengl_no_error();
 
 	// check for completeness
-#ifdef DEBUG
 	{
 		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 		assert_opengl_no_error();
-		ASSERT(status == GL_FRAMEBUFFER_COMPLETE)
+		if (status != GL_FRAMEBUFFER_COMPLETE) {
+			throw std::runtime_error(
+				utki::cat("frame_buffer(): OpenGL framebuffer is incomplete: status = ", unsigned(status))
+			);
+		}
 	}
-#endif
 
 	glBindFramebuffer(GL_FRAMEBUFFER, old_fb);
 	assert_opengl_no_error();
