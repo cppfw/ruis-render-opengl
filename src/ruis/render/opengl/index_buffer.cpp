@@ -27,12 +27,21 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace ruis::render::opengl;
 
-index_buffer::index_buffer(utki::span<const uint16_t> indices) :
-	elements_count(GLsizei(indices.size()))
+index_buffer::index_buffer(const void* data, size_t size_bytes, size_t size, GLenum element_type) :
+	element_type(element_type),
+	elements_count(GLsizei(size))
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->buffer);
 	assert_opengl_no_error();
 
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, GLsizeiptr(indices.size_bytes()), indices.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, GLsizeiptr(size_bytes), data, GL_STATIC_DRAW);
 	assert_opengl_no_error();
 }
+
+index_buffer::index_buffer(utki::span<const uint16_t> indices) :
+	index_buffer(indices.data(), indices.size_bytes(), indices.size(), GL_UNSIGNED_SHORT)
+{}
+
+index_buffer::index_buffer(utki::span<const uint32_t> indices) :
+	index_buffer(indices.data(), indices.size_bytes(), indices.size(), GL_UNSIGNED_INT)
+{}

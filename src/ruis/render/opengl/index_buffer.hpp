@@ -31,10 +31,15 @@ namespace ruis::render::opengl {
 class index_buffer : public ruis::render::index_buffer, public opengl_buffer
 {
 public:
-	const GLenum element_type = GL_UNSIGNED_SHORT;
+	const GLenum element_type;
 	const GLsizei elements_count;
 
+private:
+	index_buffer(const void* data, size_t size_bytes, size_t size, GLenum element_type);
+
+public:
 	index_buffer(utki::span<const uint16_t> indices);
+	index_buffer(utki::span<const uint32_t> indices);
 
 	index_buffer(const index_buffer&) = delete;
 	index_buffer& operator=(const index_buffer&) = delete;

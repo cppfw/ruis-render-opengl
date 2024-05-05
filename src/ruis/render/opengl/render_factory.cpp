@@ -253,6 +253,11 @@ utki::shared_ref<ruis::render::index_buffer> render_factory::create_index_buffer
 	return utki::make_shared<index_buffer>(indices);
 }
 
+utki::shared_ref<ruis::render::index_buffer> render_factory::create_index_buffer(utki::span<const uint32_t> indices)
+{
+	return utki::make_shared<index_buffer>(indices);
+}
+
 std::unique_ptr<ruis::render::render_factory::shaders> render_factory::create_shaders()
 {
 	auto ret = std::make_unique<ruis::render::render_factory::shaders>();
