@@ -29,7 +29,7 @@ namespace ruis::render::opengl {
 struct texture_2d : public ruis::render::texture_2d {
 	GLuint tex = 0;
 
-	texture_2d(r4::vector2<float> dims);
+	texture_2d(r4::vector2<uint32_t> dims);
 
 	texture_2d(const texture_2d&) = delete;
 	texture_2d& operator=(const texture_2d&) = delete;

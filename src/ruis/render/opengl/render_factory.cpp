@@ -106,7 +106,7 @@ utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d_int
 	ASSERT(data.size() % dims.x() == 0)
 	ASSERT(data.size() == 0 || data.size() / rasterimage::to_num_channels(type) / dims.x() == dims.y())
 
-	auto ret = utki::make_shared<texture_2d>(dims.to<float>());
+	auto ret = utki::make_shared<texture_2d>(dims);
 
 	// TODO: save previous bind and restore it after?
 	ret.get().bind(0);

@@ -25,7 +25,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace ruis::render::opengl;
 
-texture_2d::texture_2d(r4::vector2<float> dims) :
+texture_2d::texture_2d(r4::vector2<uint32_t> dims) :
 	ruis::render::texture_2d(dims)
 {
 	glGenTextures(1, &this->tex);
