@@ -152,14 +152,14 @@ r4::vector2<uint32_t> renderer::to_window_coords(ruis::vec2 point) const
 	return point.to<uint32_t>() + vp.p;
 }
 
-bool renderer::is_scissor_enabled() const
+bool renderer::is_scissor_enabled() const noexcept
 {
 	return glIsEnabled(GL_SCISSOR_TEST) ? true : false; // "? true : false" is to avoid warning under MSVC
 }
 
-void renderer::set_scissor_enabled(bool enabled)
+void renderer::enable_scissor(bool enable)
 {
-	if (enabled) {
+	if (enable) {
 		glEnable(GL_SCISSOR_TEST);
 	} else {
 		glDisable(GL_SCISSOR_TEST);
@@ -217,7 +217,7 @@ void renderer::set_viewport(r4::rectangle<uint32_t> r)
 	assert_opengl_no_error();
 }
 
-void renderer::set_blend_enabled(bool enable)
+void renderer::enable_blend(bool enable)
 {
 	if (enable) {
 		glEnable(GL_BLEND);
@@ -267,7 +267,12 @@ void renderer::set_blend_func(
 	);
 }
 
-void renderer::set_depth_test_enabled(bool enable)
+bool renderer::is_depth_enabled() const noexcept
+{
+	return glIsEnabled(GL_DEPTH_TEST) ? true : false; // "? true : false" is to avoid warning under MSVC
+}
+
+void renderer::enable_depth(bool enable)
 {
 	if (enable) {
 		glEnable(GL_DEPTH_TEST);

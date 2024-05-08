@@ -55,9 +55,9 @@ public:
 
 	r4::vector2<uint32_t> to_window_coords(ruis::vec2 point) const override;
 
-	bool is_scissor_enabled() const override;
+	bool is_scissor_enabled() const noexcept override;
 
-	void set_scissor_enabled(bool enabled) override;
+	void enable_scissor(bool enable) override;
 
 	r4::rectangle<uint32_t> get_scissor() const override;
 
@@ -67,12 +67,14 @@ public:
 
 	void set_viewport(r4::rectangle<uint32_t> r) override;
 
-	void set_blend_enabled(bool enable) override;
+	void enable_blend(bool enable) override;
 
 	void set_blend_func(blend_factor src_color, blend_factor dst_color, blend_factor src_alpha, blend_factor dst_alpha)
 		override;
 
-	void set_depth_test_enabled(bool enable) override;
+	bool is_depth_enabled() const noexcept override;
+
+	void enable_depth(bool enable) override;
 };
 
 } // namespace ruis::render::opengl
