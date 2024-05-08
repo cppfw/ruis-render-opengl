@@ -34,7 +34,11 @@ frame_buffer::frame_buffer(
 	std::shared_ptr<ruis::render::texture_2d> color,
 	std::shared_ptr<ruis::render::texture_depth> depth
 ) :
-	ruis::render::frame_buffer(std::move(color), std::move(depth))
+	ruis::render::frame_buffer( //
+		std::move(color),
+		std::move(depth),
+		nullptr
+	)
 {
 	glGenFramebuffers(1, &this->fbo);
 	assert_opengl_no_error();
