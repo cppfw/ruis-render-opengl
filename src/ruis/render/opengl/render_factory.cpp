@@ -187,5 +187,9 @@ utki::shared_ref<ruis::render::frame_buffer> render_factory::create_framebuffer(
 	std::shared_ptr<ruis::render::texture_stencil> stencil
 )
 {
-	return utki::make_shared<frame_buffer>(color, nullptr);
+	return utki::make_shared<frame_buffer>( //
+		std::move(color),
+		std::move(depth),
+		std::move(stencil)
+	);
 }

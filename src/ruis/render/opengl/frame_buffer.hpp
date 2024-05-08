@@ -23,8 +23,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <GL/glew.h>
 #include <ruis/render/frame_buffer.hpp>
-#include <ruis/render/texture_2d.hpp>
-#include <ruis/render/texture_depth.hpp>
 
 namespace ruis::render::opengl {
 
@@ -33,7 +31,11 @@ class frame_buffer : public ruis::render::frame_buffer
 public:
 	GLuint fbo = 0;
 
-	frame_buffer(std::shared_ptr<ruis::render::texture_2d> color, std::shared_ptr<ruis::render::texture_depth> depth);
+	frame_buffer( //
+		std::shared_ptr<ruis::render::texture_2d> color,
+		std::shared_ptr<ruis::render::texture_depth> depth,
+		std::shared_ptr<ruis::render::texture_stencil> stencil
+	);
 
 	frame_buffer(const frame_buffer&) = delete;
 	frame_buffer& operator=(const frame_buffer&) = delete;
