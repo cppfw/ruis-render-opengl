@@ -25,7 +25,7 @@ public:
 	texture_2d(texture_2d&&) = default;
 	texture_2d& operator=(texture_2d&&) = default;
 
-	~texture_2d() = default;
+	~texture_2d() override = default;
 };
 
 } // namespace ruis::render::opengl

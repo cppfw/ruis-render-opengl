@@ -19,7 +19,7 @@ public:
 	texture_depth(texture_depth&&) = delete;
 	texture_depth& operator=(texture_depth&&) = delete;
 
-	~texture_depth() = default;
+	~texture_depth() override = default;
 };
 
 } // namespace ruis::render::opengl
