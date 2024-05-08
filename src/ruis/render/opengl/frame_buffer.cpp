@@ -30,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace ruis::render::opengl;
 
 frame_buffer::frame_buffer(utki::shared_ref<ruis::render::texture_2d> color) :
-	ruis::render::frame_buffer(std::move(color))
+	ruis::render::frame_buffer(std::move(color), nullptr)
 {
 	glGenFramebuffers(1, &this->fbo);
 	assert_opengl_no_error();
