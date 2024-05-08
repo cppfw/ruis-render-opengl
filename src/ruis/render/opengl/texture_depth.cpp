@@ -1,5 +1,5 @@
 /*
-ruis-render-opengl - OpenGL GUI renderer
+ruis-render-opengl - OpenGL renderer
 
 Copyright (C) 2012-2024  Ivan Gagis <igagis@gmail.com>
 
