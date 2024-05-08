@@ -44,9 +44,9 @@ frame_buffer::frame_buffer(utki::shared_ref<ruis::render::texture_2d> color) :
 	glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
 	assert_opengl_no_error();
 
-	ASSERT(dynamic_cast<texture_2d*>(&this->color.get()))
+	ASSERT(dynamic_cast<texture_2d*>(this->color.get()))
 	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-	auto& tex = static_cast<texture_2d&>(this->color.get());
+	auto& tex = static_cast<texture_2d&>(*this->color);
 
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex.tex, 0);
 	assert_opengl_no_error();
