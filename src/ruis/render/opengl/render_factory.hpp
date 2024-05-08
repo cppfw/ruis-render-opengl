@@ -38,19 +38,21 @@ public:
 
 	~render_factory() override = default;
 
-	utki::shared_ref<texture_2d> create_texture_2d(
+	utki::shared_ref<ruis::render::texture_2d> create_texture_2d(
 		rasterimage::format format,
 		rasterimage::dimensioned::dimensions_type dims,
 		texture_2d_parameters params
 	) override;
 
-	utki::shared_ref<texture_2d> create_texture_2d(
+	utki::shared_ref<ruis::render::texture_2d> create_texture_2d(
 		const rasterimage::image_variant& imvar,
 		texture_2d_parameters params
 	) override;
 
-	utki::shared_ref<texture_2d> create_texture_2d(rasterimage::image_variant&& imvar, texture_2d_parameters params)
-		override;
+	utki::shared_ref<ruis::render::texture_2d> create_texture_2d(
+		rasterimage::image_variant&& imvar,
+		texture_2d_parameters params
+	) override;
 
 	utki::shared_ref<ruis::render::texture_depth> create_texture_depth(rasterimage::dimensioned::dimensions_type dims
 	) override;
