@@ -25,12 +25,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <utki/string.hpp>
 
 #include "texture_2d.hpp"
+#include "texture_depth.hpp"
 #include "util.hpp"
 
 using namespace ruis::render::opengl;
 
-frame_buffer::frame_buffer(utki::shared_ref<ruis::render::texture_2d> color) :
-	ruis::render::frame_buffer(std::move(color), nullptr)
+frame_buffer::frame_buffer(
+	std::shared_ptr<ruis::render::texture_2d> color,
+	std::shared_ptr<ruis::render::texture_depth> depth
+) :
+	ruis::render::frame_buffer(std::move(color), std::move(depth))
 {
 	glGenFramebuffers(1, &this->fbo);
 	assert_opengl_no_error();
@@ -44,12 +48,24 @@ frame_buffer::frame_buffer(utki::shared_ref<ruis::render::texture_2d> color) :
 	glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
 	assert_opengl_no_error();
 
-	ASSERT(dynamic_cast<texture_2d*>(this->color.get()))
-	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-	auto& tex = static_cast<texture_2d&>(*this->color);
+	if (this->color) {
+		ASSERT(dynamic_cast<texture_2d*>(this->color.get()))
+		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+		auto& tex = static_cast<texture_2d&>(*this->color);
 
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex.tex, 0);
-	assert_opengl_no_error();
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex.tex, 0);
+		assert_opengl_no_error();
+	}
+
+	if (this->depth) {
+		// TODO:
+		// ASSERT(dynamic_cast<texture_depth*>(this->depth.get()))
+		// // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+		// auto& tex = static_cast<texture_depth&>(*this->depth);
+
+		// glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, tex.tex, 0);
+		// assert_opengl_no_error();
+	}
 
 	// check for completeness
 	{

@@ -28,7 +28,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 namespace ruis::render::opengl {
 
-class index_buffer : public ruis::render::index_buffer, public opengl_buffer
+class index_buffer :
+	public ruis::render::index_buffer, //
+	public opengl_buffer
 {
 public:
 	const GLenum element_type;

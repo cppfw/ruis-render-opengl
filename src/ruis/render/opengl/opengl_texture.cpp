@@ -19,31 +19,28 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /* ================ LICENSE END ================ */
 
-#pragma once
+#include "opengl_texture.hpp"
 
-#include <GL/glew.h>
-#include <ruis/render/frame_buffer.hpp>
-#include <ruis/render/texture_2d.hpp>
-#include <ruis/render/texture_depth.hpp>
+#include "util.hpp"
 
-namespace ruis::render::opengl {
+using namespace ruis::render::opengl;
 
-class frame_buffer : public ruis::render::frame_buffer
+opengl_texture::opengl_texture()
 {
-public:
-	GLuint fbo = 0;
+	glGenTextures(1, &this->tex);
+	assert_opengl_no_error();
+	ASSERT(this->tex != 0)
+}
 
-	frame_buffer(std::shared_ptr<ruis::render::texture_2d> color, std::shared_ptr<ruis::render::texture_depth> depth);
+opengl_texture::~opengl_texture()
+{
+	glDeleteTextures(1, &this->tex);
+}
 
-	frame_buffer(const frame_buffer&) = delete;
-	frame_buffer& operator=(const frame_buffer&) = delete;
-
-	frame_buffer(frame_buffer&&) = delete;
-	frame_buffer& operator=(frame_buffer&&) = delete;
-
-	~frame_buffer() override;
-
-private:
-};
-
-} // namespace ruis::render::opengl
+void opengl_texture::bind(unsigned unit_num) const
+{
+	glActiveTexture(GL_TEXTURE0 + unit_num);
+	assert_opengl_no_error();
+	glBindTexture(GL_TEXTURE_2D, this->tex);
+	assert_opengl_no_error();
+}
