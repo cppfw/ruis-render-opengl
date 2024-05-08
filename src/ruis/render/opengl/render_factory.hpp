@@ -74,8 +74,10 @@ public:
 
 	std::unique_ptr<shaders> create_shaders() override;
 
-	utki::shared_ref<ruis::render::frame_buffer> create_framebuffer(
-		const utki::shared_ref<ruis::render::texture_2d>& color
+	utki::shared_ref<ruis::render::frame_buffer> create_framebuffer( //
+		std::shared_ptr<ruis::render::texture_2d> color,
+		std::shared_ptr<ruis::render::texture_depth> depth,
+		std::shared_ptr<ruis::render::texture_stencil> stencil
 	) override;
 
 private:
