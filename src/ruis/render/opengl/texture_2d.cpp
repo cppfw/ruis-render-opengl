@@ -16,7 +16,6 @@ texture_2d::texture_2d(
 	ASSERT(data.size() % dims.x() == 0)
 	ASSERT(data.size() == 0 || data.size() / rasterimage::to_num_channels(type) / dims.x() == dims.y())
 
-	// TODO: save previous bind and restore it after?
 	this->bind(0);
 
 	GLint internal_format = [&type]() {
@@ -62,8 +61,8 @@ texture_2d::texture_2d(
 		GLsizei(dims.y()),
 		0, // border, should be 0!
 		internal_format, // format of the texel data
-		GL_UNSIGNED_BYTE,
-		data.size() == 0 ? nullptr : data.data()
+		GL_UNSIGNED_BYTE, // data type of the texel data
+		data.size() == 0 ? nullptr : data.data() // texel data
 	);
 	assert_opengl_no_error();
 
