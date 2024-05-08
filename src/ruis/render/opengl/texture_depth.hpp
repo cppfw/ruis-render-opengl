@@ -10,6 +10,7 @@ class texture_depth :
 	public opengl_texture, //
 	public ruis::render::texture_depth
 {
+public:
 	texture_depth(r4::vector2<uint32_t> dims);
 
 	texture_depth(const texture_depth&) = delete;

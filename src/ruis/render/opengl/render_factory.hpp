@@ -52,6 +52,9 @@ public:
 	utki::shared_ref<texture_2d> create_texture_2d(rasterimage::image_variant&& imvar, texture_2d_parameters params)
 		override;
 
+	utki::shared_ref<ruis::render::texture_depth> create_texture_depth(rasterimage::dimensioned::dimensions_type dims
+	) override;
+
 	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector4<float>> vertices
 	) override;
 	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector3<float>> vertices

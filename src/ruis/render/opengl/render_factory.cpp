@@ -33,6 +33,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "frame_buffer.hpp"
 #include "index_buffer.hpp"
 #include "texture_2d.hpp"
+#include "texture_depth.hpp"
 #include "util.hpp"
 #include "vertex_array.hpp"
 #include "vertex_buffer.hpp"
@@ -108,6 +109,13 @@ utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d_int
 		data,
 		params
 	);
+}
+
+utki::shared_ref<ruis::render::texture_depth> render_factory::create_texture_depth(
+	rasterimage::dimensioned::dimensions_type dims
+)
+{
+	return utki::make_shared<texture_depth>(dims);
 }
 
 utki::shared_ref<ruis::render::vertex_buffer> render_factory::create_vertex_buffer(
