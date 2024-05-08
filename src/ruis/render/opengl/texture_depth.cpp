@@ -33,12 +33,12 @@ texture_depth::texture_depth(r4::vector2<uint32_t> dims) :
 	glTexImage2D( //
 		GL_TEXTURE_2D,
 		0, // 0th level, no mipmaps
-		GL_DEPTH_COMPONENT, // TODO: GL_DEPTH_COMPONENT16? // internal format
+		GL_DEPTH_COMPONENT, // internal format
 		GLsizei(dims.x()),
 		GLsizei(dims.y()),
 		0, // border, deprecated, should be 0
 		GL_DEPTH_COMPONENT, // format of the texel data
-		GL_FLOAT, // TODO: GL_UNSIGNED_SHORT? // data type of the texel data
+		GL_FLOAT, // data type of the texel data
 		nullptr // texel data
 	);
 	assert_opengl_no_error();
