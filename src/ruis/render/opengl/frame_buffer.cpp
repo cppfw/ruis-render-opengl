@@ -55,6 +55,8 @@ frame_buffer::frame_buffer(
 
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex.tex, 0);
 		assert_opengl_no_error();
+	}else{
+		// TODO: glDrawBuffer(GL_NONE) ? See https://gamedev.stackexchange.com/a/152047
 	}
 
 	if (this->depth) {
