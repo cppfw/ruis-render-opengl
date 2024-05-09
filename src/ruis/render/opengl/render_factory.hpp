@@ -57,6 +57,15 @@ public:
 	utki::shared_ref<ruis::render::texture_depth> create_texture_depth(rasterimage::dimensioned::dimensions_type dims
 	) override;
 
+	utki::shared_ref<ruis::render::texture_cube> create_texture_cube(
+		rasterimage::image_variant&& positive_x,
+		rasterimage::image_variant&& negative_x,
+		rasterimage::image_variant&& positive_y,
+		rasterimage::image_variant&& negative_y,
+		rasterimage::image_variant&& positive_z,
+		rasterimage::image_variant&& negative_z
+	) override;
+
 	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector4<float>> vertices
 	) override;
 	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector3<float>> vertices

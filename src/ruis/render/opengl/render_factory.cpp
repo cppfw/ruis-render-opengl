@@ -33,6 +33,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "frame_buffer.hpp"
 #include "index_buffer.hpp"
 #include "texture_2d.hpp"
+#include "texture_cube.hpp"
 #include "texture_depth.hpp"
 #include "util.hpp"
 #include "vertex_array.hpp"
@@ -116,6 +117,53 @@ utki::shared_ref<ruis::render::texture_depth> render_factory::create_texture_dep
 )
 {
 	return utki::make_shared<texture_depth>(dims);
+}
+
+utki::shared_ref<ruis::render::texture_cube> render_factory::create_texture_cube(
+	rasterimage::image_variant&& positive_x,
+	rasterimage::image_variant&& negative_x,
+	rasterimage::image_variant&& positive_y,
+	rasterimage::image_variant&& negative_y,
+	rasterimage::image_variant&& positive_z,
+	rasterimage::image_variant&& negative_z
+)
+{
+	constexpr auto num_cube_sides = 6;
+	std::array<rasterimage::image_variant, num_cube_sides> sides = {
+		std::move(positive_x),
+		std::move(negative_x),
+		std::move(positive_y),
+		std::move(negative_y),
+		std::move(positive_z),
+		std::move(negative_z)
+	};
+	std::array<texture_cube::cube_face_image, num_cube_sides> faces;
+
+	auto face = faces.begin();
+	for (auto& side : sides) {
+		ASSERT(face != faces.end())
+		std::visit(
+			[&](auto& im) {
+				if constexpr (sizeof(im.pixels().front().front()) != 1) {
+					throw std::logic_error(
+						"render_factory::create_texture_cube(): "
+						"non-8bit images are not supported"
+					);
+				} else {
+					im.span().flip_vertical();
+					auto data = im.pixels();
+
+					face->type = side.get_format();
+					face->dims = im.dims();
+					face->data = utki::make_span(data.front().data(), data.size_bytes());
+				}
+			},
+			side.variant
+		);
+		++face;
+	}
+
+	return utki::make_shared<texture_cube>(faces);
 }
 
 utki::shared_ref<ruis::render::vertex_buffer> render_factory::create_vertex_buffer(

@@ -22,6 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 #include <GL/glew.h>
+#include <rasterimage/image_variant.hpp>
 
 namespace ruis::render::opengl {
 
@@ -39,6 +40,11 @@ struct opengl_texture {
 	~opengl_texture();
 
 	void bind(unsigned unit_num) const;
+
+protected:
+	void set_active_texture(unsigned unit_num) const;
+
+	GLint set_swizzeling(rasterimage::format f) const;
 };
 
 } // namespace ruis::render::opengl

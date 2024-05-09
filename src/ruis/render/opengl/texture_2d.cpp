@@ -39,36 +39,7 @@ texture_2d::texture_2d(
 
 	this->bind(0);
 
-	GLint internal_format = [&type]() {
-		switch (type) {
-			default:
-				ASSERT(false)
-			case rasterimage::format::grey:
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
-				assert_opengl_no_error();
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
-				assert_opengl_no_error();
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
-				assert_opengl_no_error();
-				// GL_LUMINANCE is deprecated in OpenGL 3, so we use GL_RED
-				return GL_RED;
-			case rasterimage::format::greya:
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
-				assert_opengl_no_error();
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
-				assert_opengl_no_error();
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
-				assert_opengl_no_error();
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_A, GL_GREEN);
-				assert_opengl_no_error();
-				// GL_LUMINANCE_ALPHA is deprecated in OpenGL 3, so we use GL_RG
-				return GL_RG;
-			case rasterimage::format::rgb:
-				return GL_RGB;
-			case rasterimage::format::rgba:
-				return GL_RGBA;
-		}
-	}();
+	GLint internal_format = this->set_swizzeling(type);
 
 	// we will be passing pixels to OpenGL which are 1-byte aligned.
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
