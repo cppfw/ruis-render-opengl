@@ -40,11 +40,11 @@ public:
 		ruis::render::render_factory::texture_2d_parameters params
 	);
 
-	texture_2d(const texture_2d&) = default;
-	texture_2d& operator=(const texture_2d&) = default;
+	texture_2d(const texture_2d&) = delete;
+	texture_2d& operator=(const texture_2d&) = delete;
 
-	texture_2d(texture_2d&&) = default;
-	texture_2d& operator=(texture_2d&&) = default;
+	texture_2d(texture_2d&&) = delete;
+	texture_2d& operator=(texture_2d&&) = delete;
 
 	~texture_2d() override = default;
 };
