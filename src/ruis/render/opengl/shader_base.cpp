@@ -112,9 +112,9 @@ shader_wrapper::shader_wrapper(const char* code, GLenum type) :
 	glShaderSource(this->s, 1, &c, nullptr);
 	glCompileShader(this->s);
 	if (check_for_compile_errors(this->s)) {
-		LOG([&](auto& o) {
+		utki::log([&](auto& o) {
 			o << "Error while compiling:\n" << c << std::endl;
-		})
+		});
 		glDeleteShader(this->s);
 		throw std::logic_error("compiling shader failed");
 	}
