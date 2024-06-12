@@ -29,7 +29,7 @@ texture_2d::texture_2d(
 	rasterimage::format type,
 	rasterimage::dimensioned::dimensions_type dims,
 	utki::span<const uint8_t> data,
-	ruis::render::render_factory::texture_2d_parameters params
+	ruis::render::factory::texture_2d_parameters params
 ) :
 	ruis::render::texture_2d(dims)
 {

@@ -21,11 +21,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <ruis/render/render_factory.hpp>
+#include <ruis/render/factory.hpp>
 
 namespace ruis::render::opengl {
 
-class render_factory : public ruis::render::render_factory
+class render_factory : public ruis::render::factory
 {
 public:
 	render_factory();

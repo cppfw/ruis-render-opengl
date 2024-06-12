@@ -211,9 +211,9 @@ utki::shared_ref<ruis::render::index_buffer> render_factory::create_index_buffer
 	return utki::make_shared<index_buffer>(indices);
 }
 
-std::unique_ptr<ruis::render::render_factory::shaders> render_factory::create_shaders()
+std::unique_ptr<ruis::render::factory::shaders> render_factory::create_shaders()
 {
-	auto ret = std::make_unique<ruis::render::render_factory::shaders>();
+	auto ret = std::make_unique<ruis::render::factory::shaders>();
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
 	ret->pos_tex = std::make_unique<shader_pos_tex>();
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")

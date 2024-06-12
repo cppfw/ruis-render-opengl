@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <ruis/render/render_factory.hpp>
+#include <ruis/render/factory.hpp>
 #include <ruis/render/texture_2d.hpp>
 
 #include "opengl_texture.hpp"
@@ -37,7 +37,7 @@ public:
 		rasterimage::format type,
 		rasterimage::dimensioned::dimensions_type dims,
 		utki::span<const uint8_t> data,
-		ruis::render::render_factory::texture_2d_parameters params
+		ruis::render::factory::texture_2d_parameters params
 	);
 
 	texture_2d(const texture_2d&) = delete;
