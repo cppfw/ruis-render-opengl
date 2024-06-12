@@ -35,7 +35,7 @@ class renderer : public ruis::render::renderer
 	GLuint default_framebuffer;
 
 public:
-	renderer(std::unique_ptr<factory> factory = std::make_unique<factory>());
+	renderer(std::unique_ptr<ruis::render::opengl::factory> factory = std::make_unique<ruis::render::opengl::factory>());
 
 	renderer(const renderer&) = delete;
 	renderer& operator=(const renderer&) = delete;
