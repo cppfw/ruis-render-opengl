@@ -59,7 +59,7 @@ void GLAPIENTRY opengl_error_callback(
 } // namespace
 #endif
 
-renderer::renderer(std::unique_ptr<render_factory> factory) :
+renderer::renderer(std::unique_ptr<factory> factory) :
 	ruis::render::renderer(
 		std::move(factory),
 		{.max_texture_size = get_max_texture_size(),

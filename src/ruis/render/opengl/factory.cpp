@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /* ================ LICENSE END ================ */
 
-#include "render_factory.hpp"
+#include "factory.hpp"
 
 #include <GL/glew.h>
 
@@ -41,7 +41,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace ruis::render::opengl;
 
-render_factory::render_factory()
+factory::factory()
 {
 	// check that the OpenGL version we have supports shaders
 	if (!GLEW_ARB_vertex_shader || !GLEW_ARB_fragment_shader) {
@@ -51,7 +51,7 @@ render_factory::render_factory()
 	}
 }
 
-utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d(
+utki::shared_ref<ruis::render::texture_2d> factory::create_texture_2d(
 	rasterimage::format format,
 	rasterimage::dimensioned::dimensions_type dims,
 	texture_2d_parameters params
@@ -60,7 +60,7 @@ utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d(
 	return this->create_texture_2d_internal(format, dims, nullptr, std::move(params));
 }
 
-utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d(
+utki::shared_ref<ruis::render::texture_2d> factory::create_texture_2d(
 	const rasterimage::image_variant& imvar,
 	texture_2d_parameters params
 )
@@ -69,7 +69,7 @@ utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d(
 	return this->create_texture_2d(std::move(imvar_copy), std::move(params));
 }
 
-utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d(
+utki::shared_ref<ruis::render::texture_2d> factory::create_texture_2d(
 	rasterimage::image_variant&& imvar,
 	texture_2d_parameters params
 )
@@ -79,7 +79,7 @@ utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d(
 		[this, &imvar = iv, &params](auto&& im) -> utki::shared_ref<ruis::render::texture_2d> {
 			if constexpr (sizeof(im.pixels().front().front()) != 1) {
 				throw std::logic_error(
-					"render_factory::create_texture_2d(): "
+					"factory::create_texture_2d(): "
 					"non-8bit images are not supported"
 				);
 			} else {
@@ -97,7 +97,7 @@ utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d(
 	);
 }
 
-utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d_internal(
+utki::shared_ref<ruis::render::texture_2d> factory::create_texture_2d_internal(
 	rasterimage::format type,
 	rasterimage::dimensioned::dimensions_type dims,
 	utki::span<const uint8_t> data,
@@ -112,14 +112,14 @@ utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d_int
 	);
 }
 
-utki::shared_ref<ruis::render::texture_depth> render_factory::create_texture_depth(
+utki::shared_ref<ruis::render::texture_depth> factory::create_texture_depth(
 	rasterimage::dimensioned::dimensions_type dims
 )
 {
 	return utki::make_shared<texture_depth>(dims);
 }
 
-utki::shared_ref<ruis::render::texture_cube> render_factory::create_texture_cube(
+utki::shared_ref<ruis::render::texture_cube> factory::create_texture_cube(
 	rasterimage::image_variant&& positive_x,
 	rasterimage::image_variant&& negative_x,
 	rasterimage::image_variant&& positive_y,
@@ -146,7 +146,7 @@ utki::shared_ref<ruis::render::texture_cube> render_factory::create_texture_cube
 			[&](auto& im) {
 				if constexpr (sizeof(im.pixels().front().front()) != 1) {
 					throw std::logic_error(
-						"render_factory::create_texture_cube(): "
+						"factory::create_texture_cube(): "
 						"non-8bit images are not supported"
 					);
 				} else {
@@ -166,33 +166,33 @@ utki::shared_ref<ruis::render::texture_cube> render_factory::create_texture_cube
 	return utki::make_shared<texture_cube>(faces);
 }
 
-utki::shared_ref<ruis::render::vertex_buffer> render_factory::create_vertex_buffer(
+utki::shared_ref<ruis::render::vertex_buffer> factory::create_vertex_buffer(
 	utki::span<const r4::vector4<float>> vertices
 )
 {
 	return utki::make_shared<vertex_buffer>(vertices);
 }
 
-utki::shared_ref<ruis::render::vertex_buffer> render_factory::create_vertex_buffer(
+utki::shared_ref<ruis::render::vertex_buffer> factory::create_vertex_buffer(
 	utki::span<const r4::vector3<float>> vertices
 )
 {
 	return utki::make_shared<vertex_buffer>(vertices);
 }
 
-utki::shared_ref<ruis::render::vertex_buffer> render_factory::create_vertex_buffer(
+utki::shared_ref<ruis::render::vertex_buffer> factory::create_vertex_buffer(
 	utki::span<const r4::vector2<float>> vertices
 )
 {
 	return utki::make_shared<vertex_buffer>(vertices);
 }
 
-utki::shared_ref<ruis::render::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const float> vertices)
+utki::shared_ref<ruis::render::vertex_buffer> factory::create_vertex_buffer(utki::span<const float> vertices)
 {
 	return utki::make_shared<vertex_buffer>(vertices);
 }
 
-utki::shared_ref<ruis::render::vertex_array> render_factory::create_vertex_array(
+utki::shared_ref<ruis::render::vertex_array> factory::create_vertex_array(
 	std::vector<utki::shared_ref<const ruis::render::vertex_buffer>> buffers,
 	const utki::shared_ref<const ruis::render::index_buffer>& indices,
 	ruis::render::vertex_array::mode mode
@@ -201,17 +201,17 @@ utki::shared_ref<ruis::render::vertex_array> render_factory::create_vertex_array
 	return utki::make_shared<vertex_array>(std::move(buffers), indices, mode);
 }
 
-utki::shared_ref<ruis::render::index_buffer> render_factory::create_index_buffer(utki::span<const uint16_t> indices)
+utki::shared_ref<ruis::render::index_buffer> factory::create_index_buffer(utki::span<const uint16_t> indices)
 {
 	return utki::make_shared<index_buffer>(indices);
 }
 
-utki::shared_ref<ruis::render::index_buffer> render_factory::create_index_buffer(utki::span<const uint32_t> indices)
+utki::shared_ref<ruis::render::index_buffer> factory::create_index_buffer(utki::span<const uint32_t> indices)
 {
 	return utki::make_shared<index_buffer>(indices);
 }
 
-std::unique_ptr<ruis::render::factory::shaders> render_factory::create_shaders()
+std::unique_ptr<ruis::render::factory::shaders> factory::create_shaders()
 {
 	auto ret = std::make_unique<ruis::render::factory::shaders>();
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
@@ -229,7 +229,7 @@ std::unique_ptr<ruis::render::factory::shaders> render_factory::create_shaders()
 	return ret;
 }
 
-utki::shared_ref<ruis::render::frame_buffer> render_factory::create_framebuffer( //
+utki::shared_ref<ruis::render::frame_buffer> factory::create_framebuffer( //
 	std::shared_ptr<ruis::render::texture_2d> color,
 	std::shared_ptr<ruis::render::texture_depth> depth,
 	std::shared_ptr<ruis::render::texture_stencil> stencil

@@ -25,18 +25,18 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 namespace ruis::render::opengl {
 
-class render_factory : public ruis::render::factory
+class factory : public ruis::render::factory
 {
 public:
-	render_factory();
+	factory();
 
-	render_factory(const render_factory&) = delete;
-	render_factory& operator=(const render_factory&) = delete;
+	factory(const factory&) = delete;
+	factory& operator=(const factory&) = delete;
 
-	render_factory(render_factory&&) = delete;
-	render_factory& operator=(render_factory&&) = delete;
+	factory(factory&&) = delete;
+	factory& operator=(factory&&) = delete;
 
-	~render_factory() override = default;
+	~factory() override = default;
 
 	utki::shared_ref<ruis::render::texture_2d> create_texture_2d(
 		rasterimage::format format,
