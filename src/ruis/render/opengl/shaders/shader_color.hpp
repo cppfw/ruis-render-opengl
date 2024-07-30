@@ -44,8 +44,11 @@ public:
 
 	~shader_color() override = default;
 
-	void render(const r4::matrix4<float>& m, const ruis::render::vertex_array& va, r4::vector4<float> color)
-		const override;
+	void render(
+		const r4::matrix4<float>& m,
+		const ruis::render::vertex_array& va,
+		r4::vector4<float> color
+	) const override;
 };
 
 } // namespace ruis::render::opengl

@@ -71,8 +71,12 @@ public:
 
 	void enable_blend(bool enable) override;
 
-	void set_blend_func(blend_factor src_color, blend_factor dst_color, blend_factor src_alpha, blend_factor dst_alpha)
-		override;
+	void set_blend_func(
+		blend_factor src_color,
+		blend_factor dst_color,
+		blend_factor src_alpha,
+		blend_factor dst_alpha
+	) override;
 
 	bool is_depth_enabled() const noexcept override;
 
