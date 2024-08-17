@@ -132,8 +132,11 @@ utki::shared_ref<ruis::render::texture_cube> factory::create_texture_cube(
 	std::array<rasterimage::image_variant, num_cube_sides> sides = {
 		std::move(positive_x),
 		std::move(negative_x),
-		std::move(positive_y),
+
+		// negative_y and positive_y are swapped due to texture coordinates y-axis going downwards
 		std::move(negative_y),
+		std::move(positive_y),
+
 		std::move(positive_z),
 		std::move(negative_z)
 	};
