@@ -1,3 +1,9 @@
+libruis-render-opengl (0.1.79) unstable; urgency=medium
+
+  * doxygen: html_timestamp = no
+
+ -- Ivan Gagis <igagis@gmail.com>  Mon, 19 Aug 2024 18:24:43 +0300
+
 libruis-render-opengl (0.1.78) unstable; urgency=medium
 
   * update
