@@ -1,3 +1,9 @@
+libruis-render-opengl (0.1.80) unstable; urgency=medium
+
+  * ubuntu noble
+
+ -- Ivan Gagis <igagis@gmail.com>  Tue, 10 Sep 2024 11:57:19 +0300
+
 libruis-render-opengl (0.1.79) unstable; urgency=medium
 
   * doxygen: html_timestamp = no
