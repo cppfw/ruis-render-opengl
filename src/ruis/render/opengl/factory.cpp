@@ -57,7 +57,7 @@ utki::shared_ref<ruis::render::texture_2d> factory::create_texture_2d(
 	texture_2d_parameters params
 )
 {
-	return this->create_texture_2d_internal(format, dims, nullptr, std::move(params));
+	return this->create_texture_2d_internal(format, dims, {}, std::move(params));
 }
 
 utki::shared_ref<ruis::render::texture_2d> factory::create_texture_2d(
