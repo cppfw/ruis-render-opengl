@@ -18,9 +18,9 @@ nuget{
 		title: OpenGL renderer for ruis C++ GUI library;
 		authors: {Ivan Gagis};
 		owners: {Ivan Gagis};
-		licenseUrl: "https://raw.githubusercontent.com/cppfw/ruis-render-opengl/master/LICENSE";
+		licenseUrl: "https://raw.githubusercontent.com/cppfw/ruis-render-opengl/main/LICENSE";
 		projectUrl: "https://github.com/cppfw/ruis-render-opengl";
-		iconUrl: "https://github.com/cppfw/ruis-render-opengl/blob/master/logo.svg";
+		iconUrl: "https://github.com/cppfw/ruis-render-opengl/blob/main/logo.svg";
 		requireLicenseAcceptance:false;
 		summary: OpenGL renderer for ruis C++ GUI library;
 
