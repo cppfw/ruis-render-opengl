@@ -81,7 +81,7 @@ public:
 	utki::shared_ref<ruis::render::index_buffer> create_index_buffer(utki::span<const uint32_t> indices) override;
 	utki::shared_ref<ruis::render::vertex_array> create_vertex_array(
 		std::vector<utki::shared_ref<const ruis::render::vertex_buffer>> buffers,
-		const utki::shared_ref<const ruis::render::index_buffer>& indices,
+		utki::shared_ref<const ruis::render::index_buffer> indices,
 		ruis::render::vertex_array::mode mode
 	) override;
 

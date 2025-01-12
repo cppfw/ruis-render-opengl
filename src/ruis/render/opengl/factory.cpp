@@ -197,11 +197,15 @@ utki::shared_ref<ruis::render::vertex_buffer> factory::create_vertex_buffer(utki
 
 utki::shared_ref<ruis::render::vertex_array> factory::create_vertex_array(
 	std::vector<utki::shared_ref<const ruis::render::vertex_buffer>> buffers,
-	const utki::shared_ref<const ruis::render::index_buffer>& indices,
+	utki::shared_ref<const ruis::render::index_buffer> indices,
 	ruis::render::vertex_array::mode mode
 )
 {
-	return utki::make_shared<vertex_array>(std::move(buffers), indices, mode);
+	return utki::make_shared<vertex_array>(
+		std::move(buffers), //
+		std::move(indices),
+		mode
+	);
 }
 
 utki::shared_ref<ruis::render::index_buffer> factory::create_index_buffer(utki::span<const uint16_t> indices)
