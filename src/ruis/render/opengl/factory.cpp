@@ -117,7 +117,10 @@ utki::shared_ref<ruis::render::texture_depth> factory::create_texture_depth(
 	rasterimage::dimensioned::dimensions_type dims
 )
 {
-	return utki::make_shared<texture_depth>(dims);
+	return utki::make_shared<texture_depth>(
+		this->get_renderer(), //
+		dims
+	);
 }
 
 utki::shared_ref<ruis::render::texture_cube> factory::create_texture_cube(

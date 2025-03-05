@@ -32,7 +32,10 @@ class texture_depth :
 	public ruis::render::texture_depth
 {
 public:
-	texture_depth(r4::vector2<uint32_t> dims);
+	texture_depth(
+		utki::shared_ref<ruis::render::renderer> renderer, //
+		r4::vector2<uint32_t> dims
+	);
 
 	texture_depth(const texture_depth&) = delete;
 	texture_depth& operator=(const texture_depth&) = delete;
