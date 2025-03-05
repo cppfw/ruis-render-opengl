@@ -41,7 +41,10 @@ public:
 
 	constexpr static const auto num_cube_faces = 6;
 
-	texture_cube(const std::array<cube_face_image, num_cube_faces>& side_images);
+	texture_cube(
+		utki::shared_ref<ruis::render::renderer> renderer, //
+		const std::array<cube_face_image, num_cube_faces>& side_images
+	);
 
 	texture_cube(const texture_cube&) = delete;
 	texture_cube& operator=(const texture_cube&) = delete;

@@ -167,7 +167,10 @@ utki::shared_ref<ruis::render::texture_cube> factory::create_texture_cube(
 		++face;
 	}
 
-	return utki::make_shared<texture_cube>(faces);
+	return utki::make_shared<texture_cube>(
+		this->get_renderer(), //
+		faces
+	);
 }
 
 utki::shared_ref<ruis::render::vertex_buffer> factory::create_vertex_buffer(

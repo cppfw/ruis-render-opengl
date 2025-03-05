@@ -25,7 +25,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace ruis::render::opengl;
 
-texture_cube::texture_cube(const std::array<cube_face_image, num_cube_faces>& side_images)
+texture_cube::texture_cube(
+	utki::shared_ref<ruis::render::renderer> renderer, //
+	const std::array<cube_face_image, num_cube_faces>& side_images
+) :
+	ruis::render::texture_cube(std::move(renderer))
 {
 	this->bind(0);
 
