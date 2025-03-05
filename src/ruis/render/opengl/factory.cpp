@@ -210,12 +210,18 @@ utki::shared_ref<ruis::render::vertex_array> factory::create_vertex_array(
 
 utki::shared_ref<ruis::render::index_buffer> factory::create_index_buffer(utki::span<const uint16_t> indices)
 {
-	return utki::make_shared<index_buffer>(indices);
+	return utki::make_shared<index_buffer>(
+		this->get_renderer(), //
+		indices
+	);
 }
 
 utki::shared_ref<ruis::render::index_buffer> factory::create_index_buffer(utki::span<const uint32_t> indices)
 {
-	return utki::make_shared<index_buffer>(indices);
+	return utki::make_shared<index_buffer>(
+		this->get_renderer(), //
+		indices
+	);
 }
 
 std::unique_ptr<ruis::render::factory::shaders> factory::create_shaders()
