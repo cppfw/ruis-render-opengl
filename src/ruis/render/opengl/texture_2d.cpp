@@ -26,12 +26,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace ruis::render::opengl;
 
 texture_2d::texture_2d(
+	utki::shared_ref<ruis::render::renderer> renderer, //
 	rasterimage::format type,
 	rasterimage::dimensioned::dimensions_type dims,
 	utki::span<const uint8_t> data,
 	ruis::render::factory::texture_2d_parameters params
 ) :
-	ruis::render::texture_2d(dims)
+	ruis::render::texture_2d(
+		std::move(renderer), //
+		dims
+	)
 {
 	ASSERT(data.size() % rasterimage::to_num_channels(type) == 0)
 	ASSERT(data.size() % dims.x() == 0)

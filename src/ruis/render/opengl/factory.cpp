@@ -105,7 +105,8 @@ utki::shared_ref<ruis::render::texture_2d> factory::create_texture_2d_internal(
 )
 {
 	return utki::make_shared<texture_2d>(
-		type, //
+		this->get_renderer(), //
+		type,
 		dims,
 		data,
 		params

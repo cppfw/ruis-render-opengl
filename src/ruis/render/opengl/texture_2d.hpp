@@ -34,6 +34,7 @@ class texture_2d :
 {
 public:
 	texture_2d(
+		utki::shared_ref<ruis::render::renderer> renderer, //
 		rasterimage::format type,
 		rasterimage::dimensioned::dimensions_type dims,
 		utki::span<const uint8_t> data,
