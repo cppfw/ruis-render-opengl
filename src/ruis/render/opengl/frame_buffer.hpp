@@ -32,6 +32,7 @@ public:
 	GLuint fbo = 0;
 
 	frame_buffer( //
+		utki::shared_ref<ruis::render::renderer> renderer,
 		std::shared_ptr<ruis::render::texture_2d> color,
 		std::shared_ptr<ruis::render::texture_depth> depth,
 		std::shared_ptr<ruis::render::texture_stencil> stencil
