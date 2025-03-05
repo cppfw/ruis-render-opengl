@@ -34,32 +34,56 @@ void vertex_buffer::init(GLsizeiptr size, const GLvoid* data)
 	assert_opengl_no_error();
 }
 
-vertex_buffer::vertex_buffer(utki::span<const r4::vector4<float>> vertices) :
-	ruis::render::vertex_buffer(vertices.size()),
+vertex_buffer::vertex_buffer(
+	utki::shared_ref<ruis::render::renderer> renderer, //
+	utki::span<const r4::vector4<float>> vertices
+) :
+	ruis::render::vertex_buffer(
+		std::move(renderer), //
+		vertices.size()
+	),
 	num_components(4),
 	type(GL_FLOAT)
 {
 	this->init(GLsizeiptr(vertices.size_bytes()), vertices.data());
 }
 
-vertex_buffer::vertex_buffer(utki::span<const r4::vector3<float>> vertices) :
-	ruis::render::vertex_buffer(vertices.size()),
+vertex_buffer::vertex_buffer(
+	utki::shared_ref<ruis::render::renderer> renderer, //
+	utki::span<const r4::vector3<float>> vertices
+) :
+	ruis::render::vertex_buffer(
+		std::move(renderer), //
+		vertices.size()
+	),
 	num_components(3),
 	type(GL_FLOAT)
 {
 	this->init(GLsizeiptr(vertices.size_bytes()), vertices.data());
 }
 
-vertex_buffer::vertex_buffer(utki::span<const r4::vector2<float>> vertices) :
-	ruis::render::vertex_buffer(vertices.size()),
+vertex_buffer::vertex_buffer(
+	utki::shared_ref<ruis::render::renderer> renderer, //
+	utki::span<const r4::vector2<float>> vertices
+) :
+	ruis::render::vertex_buffer(
+		std::move(renderer), //
+		vertices.size()
+	),
 	num_components(2),
 	type(GL_FLOAT)
 {
 	this->init(GLsizeiptr(vertices.size_bytes()), vertices.data());
 }
 
-vertex_buffer::vertex_buffer(utki::span<const float> vertices) :
-	ruis::render::vertex_buffer(vertices.size()),
+vertex_buffer::vertex_buffer(
+	utki::shared_ref<ruis::render::renderer> renderer, //
+	utki::span<const float> vertices
+) :
+	ruis::render::vertex_buffer(
+		std::move(renderer), //
+		vertices.size()
+	),
 	num_components(1),
 	type(GL_FLOAT)
 {

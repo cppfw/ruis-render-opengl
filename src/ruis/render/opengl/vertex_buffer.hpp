@@ -37,13 +37,25 @@ public:
 	const GLint num_components;
 	const GLenum type;
 
-	vertex_buffer(utki::span<const r4::vector4<float>> vertices);
+	vertex_buffer(
+		utki::shared_ref<ruis::render::renderer> renderer, //
+		utki::span<const r4::vector4<float>> vertices
+	);
 
-	vertex_buffer(utki::span<const r4::vector3<float>> vertices);
+	vertex_buffer(
+		utki::shared_ref<ruis::render::renderer> renderer, //
+		utki::span<const r4::vector3<float>> vertices
+	);
 
-	vertex_buffer(utki::span<const r4::vector2<float>> vertices);
+	vertex_buffer(
+		utki::shared_ref<ruis::render::renderer> renderer, //
+		utki::span<const r4::vector2<float>> vertices
+	);
 
-	vertex_buffer(utki::span<const float> vertices);
+	vertex_buffer(
+		utki::shared_ref<ruis::render::renderer> renderer, //
+		utki::span<const float> vertices
+	);
 
 	vertex_buffer(const vertex_buffer&) = delete;
 	vertex_buffer& operator=(const vertex_buffer&) = delete;
