@@ -38,44 +38,8 @@ vertex_array::vertex_array(
 		std::move(buffers),
 		std::move(indices),
 		rendering_mode
-	),
-	vao([]() {
-		if (GLEW_ARB_vertex_array_object) {
-			// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
-			GLuint ret;
-			glGenVertexArrays(1, &ret);
-			assert_opengl_no_error();
-			return ret;
-		} else {
-			return GLuint(0);
-		}
-	}())
-{
-	if (GLEW_ARB_vertex_array_object) {
-		glBindVertexArray(this->vao);
-		assert_opengl_no_error();
-
-		this->bind_buffers();
-
-		glBindVertexArray(0);
-		assert_opengl_no_error();
-
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		assert_opengl_no_error();
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		assert_opengl_no_error();
-	}
-}
-
-vertex_array::~vertex_array()
-{
-	if (GLEW_ARB_vertex_array_object) {
-		glBindVertexArray(0);
-		assert_opengl_no_error();
-		glDeleteVertexArrays(1, &this->vao);
-		assert_opengl_no_error();
-	}
-}
+	)
+{}
 
 void vertex_array::bind_buffers() const
 {

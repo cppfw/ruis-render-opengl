@@ -29,7 +29,7 @@ namespace ruis::render::opengl {
 class vertex_array : public ruis::render::vertex_array
 {
 public:
-	const GLuint vao;
+	// NOTE: The native OpenGL Vertex Array Object is not used because it cannot be shared between OpenGL contexts.
 
 	vertex_array(
 		utki::shared_ref<ruis::render::renderer> renderer, //
@@ -44,7 +44,7 @@ public:
 	vertex_array(vertex_array&&) = delete;
 	vertex_array& operator=(vertex_array&&) = delete;
 
-	~vertex_array() override;
+	~vertex_array() override = default;
 
 	void bind_buffers() const;
 

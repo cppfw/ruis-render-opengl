@@ -183,25 +183,11 @@ void shader_base::render(const r4::matrix4<float>& m, const ruis::render::vertex
 	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 	const auto& ogl_va = static_cast<const vertex_array&>(va);
 
-	if (GLEW_ARB_vertex_array_object) {
-		glBindVertexArray(ogl_va.vao);
-		assert_opengl_no_error();
-	} else {
-		ogl_va.bind_buffers();
-	}
+	ogl_va.bind_buffers();
 
 	//	TRACE(<< "ivbo.elementsCount = " << ivbo.elementsCount << "
 	// ivbo.elementType = " << ivbo.elementType << std::endl)
 
 	glDrawElements(mode_to_gl_mode(va.rendering_mode), ivbo.elements_count, ivbo.element_type, nullptr);
 	assert_opengl_no_error();
-
-	if (GLEW_ARB_vertex_array_object) {
-		// For some reason on linux when leaving bound vertex array after done with
-		// rendering a frame, the vertex array can become corrupted in some
-		// scenarios, like changing viewport size and possibly some other scenarios.
-		// Because of that, unbind the vertex array after glDrawElements() call.
-		glBindVertexArray(0);
-		assert_opengl_no_error();
-	}
 }
