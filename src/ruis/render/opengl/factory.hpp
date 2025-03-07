@@ -28,7 +28,7 @@ namespace ruis::render::opengl {
 class factory : public ruis::render::factory
 {
 public:
-	factory();
+	factory(utki::shared_ref<ruis::render::context> render_context);
 
 	factory(const factory&) = delete;
 	factory& operator=(const factory&) = delete;

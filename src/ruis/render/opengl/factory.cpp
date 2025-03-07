@@ -41,7 +41,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace ruis::render::opengl;
 
-factory::factory()
+factory::factory(utki::shared_ref<ruis::render::context> render_context) :
+	ruis::render::factory(std::move(render_context))
 {
 	// check that the OpenGL version we have supports shaders
 	if (!GLEW_ARB_vertex_shader || !GLEW_ARB_fragment_shader) {

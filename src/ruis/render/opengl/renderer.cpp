@@ -28,19 +28,19 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace ruis::render::opengl;
 
-namespace {
-unsigned get_max_texture_size()
-{
-	// the val variable is initialized via output argument, so no need to initialize
-	// it here
+// namespace {
+// unsigned get_max_texture_size()
+// {
+// 	// the val variable is initialized via output argument, so no need to initialize
+// 	// it here
 
-	// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
-	GLint val;
-	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &val);
-	ASSERT(val > 0)
-	return unsigned(val);
-}
-} // namespace
+// 	// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
+// 	GLint val;
+// 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &val);
+// 	ASSERT(val > 0)
+// 	return unsigned(val);
+// }
+// } // namespace
 
 #ifdef DEBUG
 namespace {
@@ -62,8 +62,7 @@ void GLAPIENTRY opengl_error_callback(
 renderer::renderer(std::unique_ptr<ruis::render::opengl::factory> factory) :
 	ruis::render::renderer(
 		std::move(factory),
-		{.max_texture_size = get_max_texture_size(),
-		 .initial_matrix = ruis::matrix4()
+		{.initial_matrix = ruis::matrix4()
 							   // OpenGL identity matrix:
 							   //   viewport edges: left = -1, right = 1, top = 1, bottom = -1
 							   //   z-axis towards viewer
