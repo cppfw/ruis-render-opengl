@@ -245,7 +245,7 @@ utki::shared_ref<ruis::render::frame_buffer> factory::create_framebuffer( //
 )
 {
 	return utki::make_shared<frame_buffer>( //
-		this->get_renderer(),
+		this->render_context,
 		std::move(color),
 		std::move(depth),
 		std::move(stencil)
