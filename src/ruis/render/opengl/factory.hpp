@@ -85,7 +85,7 @@ public:
 		ruis::render::vertex_array::mode mode
 	) override;
 
-	std::unique_ptr<shaders> create_shaders() override;
+	utki::shared_ref<shaders> create_shaders() override;
 
 	utki::shared_ref<ruis::render::frame_buffer> create_framebuffer( //
 		std::shared_ptr<ruis::render::texture_2d> color,

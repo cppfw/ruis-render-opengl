@@ -245,21 +245,22 @@ utki::shared_ref<ruis::render::index_buffer> factory::create_index_buffer(utki::
 	);
 }
 
-std::unique_ptr<ruis::render::factory::shaders> factory::create_shaders()
+utki::shared_ref<ruis::render::factory::shaders> factory::create_shaders()
 {
-	auto ret = std::make_unique<ruis::render::factory::shaders>();
+	// TODO: are those lint supressions still valid?
+	auto ret = utki::make_shared<ruis::render::factory::shaders>();
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret->pos_tex = std::make_unique<shader_pos_tex>();
+	ret.get().pos_tex = std::make_unique<shader_pos_tex>();
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret->color_pos = std::make_unique<shader_color>();
+	ret.get().color_pos = std::make_unique<shader_color>();
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret->pos_clr = std::make_unique<shader_pos_clr>();
+	ret.get().pos_clr = std::make_unique<shader_pos_clr>();
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret->color_pos_tex = std::make_unique<shader_color_pos_tex>();
+	ret.get().color_pos_tex = std::make_unique<shader_color_pos_tex>();
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret->color_pos_tex_alpha = std::make_unique<shader_color_pos_tex_alpha>();
+	ret.get().color_pos_tex_alpha = std::make_unique<shader_color_pos_tex_alpha>();
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret->color_pos_lum = std::make_unique<shader_color_pos_lum>();
+	ret.get().color_pos_lum = std::make_unique<shader_color_pos_lum>();
 	return ret;
 }
 
