@@ -23,13 +23,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <GL/glew.h>
 
-#include "shaders/shader_color.hpp"
-#include "shaders/shader_color_pos_lum.hpp"
-#include "shaders/shader_color_pos_tex.hpp"
-#include "shaders/shader_color_pos_tex_alpha.hpp"
-#include "shaders/shader_pos_clr.hpp"
-#include "shaders/shader_pos_tex.hpp"
-
 #include "frame_buffer.hpp"
 #include "index_buffer.hpp"
 #include "texture_2d.hpp"
@@ -243,25 +236,6 @@ utki::shared_ref<ruis::render::index_buffer> factory::create_index_buffer(utki::
 		this->get_renderer(), //
 		indices
 	);
-}
-
-utki::shared_ref<ruis::render::factory::shaders> factory::create_shaders()
-{
-	// TODO: are those lint supressions still valid?
-	auto ret = utki::make_shared<ruis::render::factory::shaders>();
-	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret.get().pos_tex = std::make_unique<shader_pos_tex>();
-	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret.get().color_pos = std::make_unique<shader_color>();
-	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret.get().pos_clr = std::make_unique<shader_pos_clr>();
-	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret.get().color_pos_tex = std::make_unique<shader_color_pos_tex>();
-	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret.get().color_pos_tex_alpha = std::make_unique<shader_color_pos_tex_alpha>();
-	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret.get().color_pos_lum = std::make_unique<shader_color_pos_lum>();
-	return ret;
 }
 
 utki::shared_ref<ruis::render::frame_buffer> factory::create_framebuffer( //

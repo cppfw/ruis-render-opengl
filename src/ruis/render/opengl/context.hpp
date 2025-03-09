@@ -28,6 +28,7 @@ namespace ruis::render::opengl {
 class context : public ruis::render::context
 {
 public:
+	utki::shared_ref<shaders> create_shaders() override;
 };
 
 } // namespace ruis::render::opengl
