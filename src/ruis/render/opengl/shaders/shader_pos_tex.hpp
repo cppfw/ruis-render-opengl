@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <ruis/render/texturing_shader.hpp>
+#include <ruis/render/shaders/texturing_shader.hpp>
 
 #include "../shader_base.hpp"
 
@@ -34,7 +34,7 @@ class shader_pos_tex :
 	GLint texture_uniform;
 
 public:
-	shader_pos_tex();
+	shader_pos_tex(utki::shared_ref<ruis::render::context> render_context);
 
 	shader_pos_tex(const shader_pos_tex&) = delete;
 	shader_pos_tex& operator=(const shader_pos_tex&) = delete;

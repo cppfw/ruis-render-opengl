@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <ruis/render/coloring_shader.hpp>
+#include <ruis/render/shaders/coloring_shader.hpp>
 
 #include "../shader_base.hpp"
 
@@ -34,7 +34,7 @@ class shader_color_pos_lum :
 	GLint color_uniform;
 
 public:
-	shader_color_pos_lum();
+	shader_color_pos_lum(utki::shared_ref<ruis::render::context> render_context);
 
 	shader_color_pos_lum(const shader_color_pos_lum&) = delete;
 	shader_color_pos_lum& operator=(const shader_color_pos_lum&) = delete;

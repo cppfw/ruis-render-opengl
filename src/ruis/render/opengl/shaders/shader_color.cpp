@@ -23,7 +23,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace ruis::render::opengl;
 
-shader_color::shader_color() :
+shader_color::shader_color(utki::shared_ref<ruis::render::context> render_context) :
+	ruis::render::coloring_shader(std::move(render_context)),
 	shader_base(
 		R"qwertyuiop(
 			attribute vec4 a0;

@@ -21,6 +21,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "context.hpp"
 
+#include <utki/shared.hpp>
+
 #include "shaders/shader_color.hpp"
 #include "shaders/shader_color_pos_lum.hpp"
 #include "shaders/shader_color_pos_tex.hpp"
@@ -35,16 +37,16 @@ utki::shared_ref<ruis::render::context::shaders> context::create_shaders()
 	// TODO: are those lint supressions still valid?
 	auto ret = utki::make_shared<ruis::render::context::shaders>();
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret.get().pos_tex = std::make_unique<shader_pos_tex>();
+	ret.get().pos_tex = std::make_unique<shader_pos_tex>(this->get_shared_ref());
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret.get().color_pos = std::make_unique<shader_color>();
+	ret.get().color_pos = std::make_unique<shader_color>(this->get_shared_ref());
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret.get().pos_clr = std::make_unique<shader_pos_clr>();
+	ret.get().pos_clr = std::make_unique<shader_pos_clr>(this->get_shared_ref());
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret.get().color_pos_tex = std::make_unique<shader_color_pos_tex>();
+	ret.get().color_pos_tex = std::make_unique<shader_color_pos_tex>(this->get_shared_ref());
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret.get().color_pos_tex_alpha = std::make_unique<shader_color_pos_tex_alpha>();
+	ret.get().color_pos_tex_alpha = std::make_unique<shader_color_pos_tex_alpha>(this->get_shared_ref());
 	// NOLINTNEXTLINE(bugprone-unused-return-value, "false positive")
-	ret.get().color_pos_lum = std::make_unique<shader_color_pos_lum>();
+	ret.get().color_pos_lum = std::make_unique<shader_color_pos_lum>(this->get_shared_ref());
 	return ret;
 }

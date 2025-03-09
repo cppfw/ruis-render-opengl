@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <ruis/render/coloring_texturing_shader.hpp>
+#include <ruis/render/shaders/coloring_texturing_shader.hpp>
 
 #include "../shader_base.hpp"
 
@@ -35,7 +35,7 @@ class shader_color_pos_tex :
 	GLint color_uniform;
 
 public:
-	shader_color_pos_tex();
+	shader_color_pos_tex(utki::shared_ref<ruis::render::context> render_context);
 
 	shader_color_pos_tex(const shader_color_pos_tex&) = delete;
 	shader_color_pos_tex& operator=(const shader_color_pos_tex&) = delete;

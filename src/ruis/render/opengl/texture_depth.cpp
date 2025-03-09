@@ -26,11 +26,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace ruis::render::opengl;
 
 texture_depth::texture_depth(
-	utki::shared_ref<ruis::render::renderer> renderer, //
+	utki::shared_ref<ruis::render::context> render_context, //
 	r4::vector2<uint32_t> dims
 ) :
 	ruis::render::texture_depth(
-		std::move(renderer), //
+		std::move(render_context), //
 		dims
 	)
 {

@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <ruis/render/shader.hpp>
+#include <ruis/render/shaders/shader.hpp>
 
 #include "../shader_base.hpp"
 
@@ -32,7 +32,7 @@ class shader_pos_clr :
 	public shader_base
 {
 public:
-	shader_pos_clr();
+	shader_pos_clr(utki::shared_ref<ruis::render::context> render_context);
 
 	shader_pos_clr(const shader_pos_clr&) = delete;
 	shader_pos_clr& operator=(const shader_pos_clr&) = delete;
