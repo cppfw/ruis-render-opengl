@@ -59,9 +59,9 @@ void GLAPIENTRY opengl_error_callback(
 } // namespace
 #endif
 
-renderer::renderer(std::unique_ptr<ruis::render::opengl::factory> factory) :
+renderer::renderer(utki::shared_ref<ruis::render::context> render_context) :
 	ruis::render::renderer(
-		std::move(factory),
+		std::move(render_context),
 		{.initial_matrix = ruis::matrix4()
 							   // OpenGL identity matrix:
 							   //   viewport edges: left = -1, right = 1, top = 1, bottom = -1

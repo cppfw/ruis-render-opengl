@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <ruis/render/factory.hpp>
+#include <ruis/render/context.hpp>
 #include <ruis/render/texture_2d.hpp>
 
 #include "opengl_texture.hpp"

@@ -26,8 +26,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <GL/glew.h>
 #include <ruis/render/renderer.hpp>
 
-#include "factory.hpp"
-
 namespace ruis::render::opengl {
 
 class renderer : public ruis::render::renderer
@@ -35,7 +33,7 @@ class renderer : public ruis::render::renderer
 	GLuint default_framebuffer;
 
 public:
-	renderer(std::unique_ptr<ruis::render::opengl::factory> factory);
+	renderer(utki::shared_ref<ruis::render::context> render_context);
 
 	renderer(const renderer&) = delete;
 	renderer& operator=(const renderer&) = delete;
