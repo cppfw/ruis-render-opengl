@@ -37,67 +37,6 @@ public:
 	factory& operator=(factory&&) = delete;
 
 	~factory() override = default;
-
-	utki::shared_ref<ruis::render::texture_2d> create_texture_2d(
-		rasterimage::format format,
-		rasterimage::dimensioned::dimensions_type dims,
-		texture_2d_parameters params
-	) override;
-
-	utki::shared_ref<ruis::render::texture_2d> create_texture_2d(
-		const rasterimage::image_variant& imvar,
-		texture_2d_parameters params
-	) override;
-
-	utki::shared_ref<ruis::render::texture_2d> create_texture_2d(
-		rasterimage::image_variant&& imvar,
-		texture_2d_parameters params
-	) override;
-
-	utki::shared_ref<ruis::render::texture_depth> create_texture_depth(
-		rasterimage::dimensioned::dimensions_type dims
-	) override;
-
-	utki::shared_ref<ruis::render::texture_cube> create_texture_cube(
-		rasterimage::image_variant&& positive_x,
-		rasterimage::image_variant&& negative_x,
-		rasterimage::image_variant&& positive_y,
-		rasterimage::image_variant&& negative_y,
-		rasterimage::image_variant&& positive_z,
-		rasterimage::image_variant&& negative_z
-	) override;
-
-	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(
-		utki::span<const r4::vector4<float>> vertices
-	) override;
-	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(
-		utki::span<const r4::vector3<float>> vertices
-	) override;
-	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(
-		utki::span<const r4::vector2<float>> vertices
-	) override;
-	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(utki::span<const float> vertices) override;
-	utki::shared_ref<ruis::render::index_buffer> create_index_buffer(utki::span<const uint16_t> indices) override;
-	utki::shared_ref<ruis::render::index_buffer> create_index_buffer(utki::span<const uint32_t> indices) override;
-	utki::shared_ref<ruis::render::vertex_array> create_vertex_array(
-		std::vector<utki::shared_ref<const ruis::render::vertex_buffer>> buffers,
-		utki::shared_ref<const ruis::render::index_buffer> indices,
-		ruis::render::vertex_array::mode mode
-	) override;
-
-	utki::shared_ref<ruis::render::frame_buffer> create_framebuffer( //
-		std::shared_ptr<ruis::render::texture_2d> color,
-		std::shared_ptr<ruis::render::texture_depth> depth,
-		std::shared_ptr<ruis::render::texture_stencil> stencil
-	) override;
-
-private:
-	utki::shared_ref<ruis::render::texture_2d> create_texture_2d_internal(
-		rasterimage::format type,
-		rasterimage::dimensioned::dimensions_type dims,
-		utki::span<const uint8_t> data,
-		texture_2d_parameters params
-	);
 };
 
 } // namespace ruis::render::opengl

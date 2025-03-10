@@ -38,7 +38,7 @@ public:
 		rasterimage::format type,
 		rasterimage::dimensioned::dimensions_type dims,
 		utki::span<const uint8_t> data,
-		ruis::render::factory::texture_2d_parameters params
+		ruis::render::context::texture_2d_parameters params
 	);
 
 	texture_2d(const texture_2d&) = delete;
