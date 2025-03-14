@@ -1,7 +1,7 @@
-#include <ruis/render/opengl/renderer.hpp>
+#include <ruis/render/opengl/context.hpp>
 
 int main(int argc, const char** argv){
-	auto r = utki::make_shared<ruis::render::opengl::renderer>();
+	auto c = utki::make_shared<ruis::render::opengl::context>();
 
 	std::cout << "hello ruis-render-opengl!" << std::endl;
 
