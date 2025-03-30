@@ -66,7 +66,7 @@ shader_color_pos_tex_alpha::shader_color_pos_tex_alpha(utki::shared_ref<ruis::re
 void shader_color_pos_tex_alpha::render(
 	const r4::matrix4<float>& m,
 	const ruis::render::vertex_array& va,
-	r4::vector4<float> color,
+	const r4::vector4<float>& color,
 	const ruis::render::texture_2d& tex
 ) const
 {
@@ -77,8 +77,18 @@ void shader_color_pos_tex_alpha::render(
 	static_cast<const texture_2d&>(tex).bind(texture_unit_number);
 	this->bind();
 
-	this->set_uniform_sampler(this->texture_uniform, texture_unit_number);
-	this->set_uniform4f(this->color_uniform, color.x(), color.y(), color.z(), color.w());
+	this->set_uniform_sampler(
+		this->texture_uniform, //
+		texture_unit_number
+	);
+
+	this->set_uniform4f(
+		this->color_uniform, //
+		color.x(),
+		color.y(),
+		color.z(),
+		color.w()
+	);
 
 	this->shader_base::render(m, va);
 }
