@@ -49,12 +49,18 @@ shader_color::shader_color(utki::shared_ref<ruis::render::context> render_contex
 void shader_color::render(
 	const r4::matrix4<float>& m,
 	const ruis::render::vertex_array& va,
-	r4::vector4<float> color
+	const r4::vector4<float>& color
 ) const
 {
 	this->bind();
 
-	this->set_uniform4f(this->color_uniform, color.x(), color.y(), color.z(), color.w());
+	this->set_uniform4f(
+		this->color_uniform, //
+		color.x(),
+		color.y(),
+		color.z(),
+		color.w()
+	);
 
 	this->shader_base::render(m, va);
 }
