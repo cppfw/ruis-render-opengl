@@ -113,7 +113,7 @@ context::context() :
 	glEnable(GL_CULL_FACE);
 }
 
-utki::shared_ref<ruis::render::context::shaders> context::create_shaders()
+utki::shared_ref<ruis::render::context::shaders> context::make_shaders()
 {
 	// TODO: are those lint supressions still valid?
 	auto ret = utki::make_shared<ruis::render::context::shaders>();
@@ -132,7 +132,7 @@ utki::shared_ref<ruis::render::context::shaders> context::create_shaders()
 	return ret;
 }
 
-utki::shared_ref<ruis::render::texture_2d> context::create_texture_2d(
+utki::shared_ref<ruis::render::texture_2d> context::make_texture_2d(
 	rasterimage::format format,
 	rasterimage::dimensioned::dimensions_type dims,
 	texture_2d_parameters params
@@ -141,16 +141,16 @@ utki::shared_ref<ruis::render::texture_2d> context::create_texture_2d(
 	return this->create_texture_2d_internal(format, dims, {}, std::move(params));
 }
 
-utki::shared_ref<ruis::render::texture_2d> context::create_texture_2d(
+utki::shared_ref<ruis::render::texture_2d> context::make_texture_2d(
 	const rasterimage::image_variant& imvar,
 	texture_2d_parameters params
 )
 {
 	auto imvar_copy = imvar;
-	return this->create_texture_2d(std::move(imvar_copy), std::move(params));
+	return this->make_texture_2d(std::move(imvar_copy), std::move(params));
 }
 
-utki::shared_ref<ruis::render::texture_2d> context::create_texture_2d(
+utki::shared_ref<ruis::render::texture_2d> context::make_texture_2d(
 	rasterimage::image_variant&& imvar,
 	texture_2d_parameters params
 )
@@ -160,7 +160,7 @@ utki::shared_ref<ruis::render::texture_2d> context::create_texture_2d(
 		[this, &imvar = iv, &params](auto&& im) -> utki::shared_ref<ruis::render::texture_2d> {
 			if constexpr (sizeof(im.pixels().front().front()) != 1) {
 				throw std::logic_error(
-					"context::create_texture_2d(): "
+					"context::make_texture_2d(): "
 					"non-8bit images are not supported"
 				);
 			} else {
@@ -194,7 +194,7 @@ utki::shared_ref<ruis::render::texture_2d> context::create_texture_2d_internal(
 	);
 }
 
-utki::shared_ref<ruis::render::texture_depth> context::create_texture_depth(
+utki::shared_ref<ruis::render::texture_depth> context::make_texture_depth(
 	rasterimage::dimensioned::dimensions_type dims
 )
 {
@@ -204,7 +204,7 @@ utki::shared_ref<ruis::render::texture_depth> context::create_texture_depth(
 	);
 }
 
-utki::shared_ref<ruis::render::texture_cube> context::create_texture_cube(
+utki::shared_ref<ruis::render::texture_cube> context::make_texture_cube(
 	rasterimage::image_variant&& positive_x,
 	rasterimage::image_variant&& negative_x,
 	rasterimage::image_variant&& positive_y,
@@ -234,7 +234,7 @@ utki::shared_ref<ruis::render::texture_cube> context::create_texture_cube(
 			[&](auto& im) {
 				if constexpr (sizeof(im.pixels().front().front()) != 1) {
 					throw std::logic_error(
-						"context::create_texture_cube(): "
+						"context::make_texture_cube(): "
 						"non-8bit images are not supported"
 					);
 				} else {
@@ -257,9 +257,7 @@ utki::shared_ref<ruis::render::texture_cube> context::create_texture_cube(
 	);
 }
 
-utki::shared_ref<ruis::render::vertex_buffer> context::create_vertex_buffer(
-	utki::span<const r4::vector4<float>> vertices
-)
+utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer(utki::span<const r4::vector4<float>> vertices)
 {
 	return utki::make_shared<vertex_buffer>(
 		this->get_shared_ref(), //
@@ -267,9 +265,7 @@ utki::shared_ref<ruis::render::vertex_buffer> context::create_vertex_buffer(
 	);
 }
 
-utki::shared_ref<ruis::render::vertex_buffer> context::create_vertex_buffer(
-	utki::span<const r4::vector3<float>> vertices
-)
+utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer(utki::span<const r4::vector3<float>> vertices)
 {
 	return utki::make_shared<vertex_buffer>(
 		this->get_shared_ref(), //
@@ -277,9 +273,7 @@ utki::shared_ref<ruis::render::vertex_buffer> context::create_vertex_buffer(
 	);
 }
 
-utki::shared_ref<ruis::render::vertex_buffer> context::create_vertex_buffer(
-	utki::span<const r4::vector2<float>> vertices
-)
+utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer(utki::span<const r4::vector2<float>> vertices)
 {
 	return utki::make_shared<vertex_buffer>(
 		this->get_shared_ref(), //
@@ -287,7 +281,7 @@ utki::shared_ref<ruis::render::vertex_buffer> context::create_vertex_buffer(
 	);
 }
 
-utki::shared_ref<ruis::render::vertex_buffer> context::create_vertex_buffer(utki::span<const float> vertices)
+utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer(utki::span<const float> vertices)
 {
 	return utki::make_shared<vertex_buffer>(
 		this->get_shared_ref(), //
@@ -295,7 +289,7 @@ utki::shared_ref<ruis::render::vertex_buffer> context::create_vertex_buffer(utki
 	);
 }
 
-utki::shared_ref<ruis::render::vertex_array> context::create_vertex_array(
+utki::shared_ref<ruis::render::vertex_array> context::make_vertex_array(
 	std::vector<utki::shared_ref<const ruis::render::vertex_buffer>> buffers,
 	utki::shared_ref<const ruis::render::index_buffer> indices,
 	ruis::render::vertex_array::mode mode
@@ -309,7 +303,7 @@ utki::shared_ref<ruis::render::vertex_array> context::create_vertex_array(
 	);
 }
 
-utki::shared_ref<ruis::render::index_buffer> context::create_index_buffer(utki::span<const uint16_t> indices)
+utki::shared_ref<ruis::render::index_buffer> context::make_index_buffer(utki::span<const uint16_t> indices)
 {
 	return utki::make_shared<index_buffer>(
 		this->get_shared_ref(), //
@@ -317,7 +311,7 @@ utki::shared_ref<ruis::render::index_buffer> context::create_index_buffer(utki::
 	);
 }
 
-utki::shared_ref<ruis::render::index_buffer> context::create_index_buffer(utki::span<const uint32_t> indices)
+utki::shared_ref<ruis::render::index_buffer> context::make_index_buffer(utki::span<const uint32_t> indices)
 {
 	return utki::make_shared<index_buffer>(
 		this->get_shared_ref(), //
@@ -325,7 +319,7 @@ utki::shared_ref<ruis::render::index_buffer> context::create_index_buffer(utki::
 	);
 }
 
-utki::shared_ref<ruis::render::frame_buffer> context::create_framebuffer( //
+utki::shared_ref<ruis::render::frame_buffer> context::make_framebuffer( //
 	std::shared_ptr<ruis::render::texture_2d> color,
 	std::shared_ptr<ruis::render::texture_depth> depth,
 	std::shared_ptr<ruis::render::texture_stencil> stencil
