@@ -5,7 +5,8 @@ set(CMAKE_TOOLCHAIN_FILE $ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake)
 project(test)
 
 find_package(utki CONFIG REQUIRED)
-find_package(ruis REQUIRED)
+find_package(ruis CONFIG REQUIRED)
+find_package(Freetype REQUIRED)
 
 find_package(ruis-render-opengl CONFIG REQUIRED)
 
