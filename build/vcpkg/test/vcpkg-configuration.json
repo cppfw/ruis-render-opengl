@@ -13,7 +13,12 @@
         "packages": [
           "utki",
           "papki",
-          "ruis"
+          "ruis",
+          "r4",
+          "rasterimage",
+          "svgren",
+          "tml",
+          "veg"
         ]
       }
     ],
