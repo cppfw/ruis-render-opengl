@@ -6,6 +6,7 @@ project(test)
 
 find_package(utki CONFIG REQUIRED)
 find_package(ruis CONFIG REQUIRED)
+find_package(papki CONFIG REQUIRED)
 find_package(Freetype REQUIRED)
 
 find_package(ruis-render-opengl CONFIG REQUIRED)
