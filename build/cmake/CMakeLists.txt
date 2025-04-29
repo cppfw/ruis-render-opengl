@@ -14,6 +14,7 @@ find_package(papki CONFIG REQUIRED)
 find_package(ruis CONFIG REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(Freetype REQUIRED)
+find_package(GLEW REQUIRED)
 
 # ============================
 
@@ -42,6 +43,7 @@ target_link_libraries(
         utki::utki
         papki::papki
         ruis::ruis
+        GLEW::GLEW
 )
 
 # install library header files preserving directory hierarchy
