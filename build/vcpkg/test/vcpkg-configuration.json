@@ -17,6 +17,8 @@
           "r4",
           "rasterimage",
           "svgren",
+          "svgdom",
+          "agg",
           "tml",
           "veg"
         ]
