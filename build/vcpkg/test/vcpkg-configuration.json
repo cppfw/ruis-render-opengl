@@ -19,6 +19,8 @@
           "svgren",
           "svgdom",
           "agg",
+          "cssom",
+          "mikroxml",
           "tml",
           "veg"
         ]
