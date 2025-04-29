@@ -11,8 +11,9 @@ project(${name})
 
 find_package(utki CONFIG REQUIRED)
 find_package(papki CONFIG REQUIRED)
+find_package(ruis CONFIG REQUIRED)
 find_package(ZLIB REQUIRED)
-find_package(ruis REQUIRED)
+find_package(Freetype REQUIRED)
 
 # ============================
 
