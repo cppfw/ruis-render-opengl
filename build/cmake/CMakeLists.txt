@@ -10,6 +10,7 @@ set(dir_name ruis)
 find_package(myci CONFIG REQUIRED)
 
 find_package(JPEG REQUIRED)
+find_package(PNG REQUIRED)
 find_package(GLEW REQUIRED)
 
 set(srcs)
@@ -42,5 +43,6 @@ myci_declare_library(${name}
         Freetype
     EXTERNAL_DEPENDENCIES
         JPEG::JPEG
+        PNG::PNG
         GLEW::GLEW
 )
