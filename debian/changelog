@@ -1,3 +1,9 @@
+libruis-render-opengl (0.1.89) unstable; urgency=medium
+
+  * cmake: add png dep
+
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 25 May 2025 14:03:01 +0300
+
 libruis-render-opengl (0.1.88) unstable; urgency=medium
 
   * cmake:ext deps
