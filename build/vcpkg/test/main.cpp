@@ -5,9 +5,16 @@
 #include <ruis/render/opengl/context.hpp>
 
 int main(int argc, const char** argv){
-    ruis::render::opengl::context c;
+    std::function<void()> f = [](){
+        ruis::render::opengl::context c;
+    };
 
-    std::cout << "scissor enabled = " << c.is_scissor_enabled() << std::endl;
+    // do not call f() to avoid segmentation fault, becuase OpenGL is not initialized
 
+    if(!f){
+        return 1;
+    }
+
+    std::cout << "Hello ruis-render-opengl!" << std::endl;
     return 0;
 }
