@@ -9,11 +9,6 @@ set(dir_name ruis)
 # Otherwise VCPKG does not set the CMAKE_PREFIX_PATH to find packages.
 find_package(myci CONFIG REQUIRED)
 
-find_package(Freetype CONFIG REQUIRED)
-find_package(JPEG REQUIRED)
-find_package(PNG REQUIRED)
-find_package(GLEW REQUIRED)
-
 set(srcs)
 myci_add_source_files(srcs
     DIRECTORY
@@ -31,19 +26,7 @@ myci_declare_library(${name}
     DEPENDENCIES
         rasterimage
         r4
-        papki
-        tml
         utki
-        agg
-        veg
-        mikroxml
-        cssom
-        svgdom
-        svgren
         ruis
-    EXTERNAL_DEPENDENCIES
-        Freetype::Freetype
-        JPEG::JPEG
-        PNG::PNG
-        GLEW::GLEW
+        GLEW
 )
