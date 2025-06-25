@@ -52,7 +52,8 @@ noextract=()
 md5sums=()
 validpgpkeys=()
 
-rootDir=$(pwd)/.. # project root directory
+# project root directory
+rootDir=$(pwd)/../..
 
 prepare() {
 	cd "$rootDir"
