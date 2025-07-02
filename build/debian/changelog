@@ -1,3 +1,9 @@
+libruis-render-opengl (0.1.92) unstable; urgency=medium
+
+  * add debian dbg package
+
+ -- Ivan Gagis <igagis@gmail.com>  Wed, 02 Jul 2025 23:36:30 +0300
+
 libruis-render-opengl (0.1.91) unstable; urgency=medium
 
   * debian dbg package
