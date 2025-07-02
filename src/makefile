@@ -14,18 +14,18 @@ this_soname := $(shell cat $(d)soname.txt)
 this_srcs += $(call prorab-src-dir, $(this_src_dir))
 
 ifeq ($(os), linux)
-    this_ldlibs += -lGL
-    this_ldlibs += -lGLEW
+    this_ldlibs += -l GL
+    this_ldlibs += -l GLEW
 else ifeq ($(os), windows)
-    this_ldlibs += -lopengl32
-    this_ldlibs += -lglew32
+    this_ldlibs += -l opengl32
+    this_ldlibs += -l glew32
 else ifeq ($(os), macosx)
-    this_ldlibs += -lGLEW
+    this_ldlibs += -l GLEW
     this_ldlibs += -framework OpenGL
 endif
 
-this_ldlibs += -lruis$(this_dbg)
-this_ldlibs += -lutki$(this_dbg)
+this_ldlibs += -l ruis$(this_dbg)
+this_ldlibs += -l utki$(this_dbg)
 
 $(eval $(prorab-build-lib))
 

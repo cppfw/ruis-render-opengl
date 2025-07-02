@@ -50,11 +50,11 @@ Depends:
 	${misc:Depends}
 Suggests: libruis-render-opengl-doc
 Description: OpenGL renderer for ruis.
- OpenGL renderer for ruis GUI library.
+	OpenGL renderer for ruis GUI library.
 
 Package: libruis-render-opengl-doc
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}
 Description: documentation for libruis-render-opengl library.
- For more details see description to libruis-render-opengl-dev package.
+	For more details see description to libruis-render-opengl-dev package.
