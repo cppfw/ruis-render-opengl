@@ -45,7 +45,7 @@ public:
 	~shader_pos_tex() override = default;
 
 	void render(
-		const r4::matrix4<float>& m,
+		const r4::matrix4<float>& m, //
 		const ruis::render::vertex_array& va,
 		const ruis::render::texture_2d& tex
 	) const override;

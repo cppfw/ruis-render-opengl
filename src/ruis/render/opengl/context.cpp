@@ -195,7 +195,7 @@ utki::shared_ref<ruis::render::texture_2d> context::create_texture_2d_internal(
 	);
 }
 
-utki::shared_ref<ruis::render::texture_depth> context::make_texture_depth(
+utki::shared_ref<ruis::render::texture_depth> context::make_texture_depth( //
 	rasterimage::dimensioned::dimensions_type dims
 )
 {

@@ -55,7 +55,7 @@ public:
 		texture_2d_parameters params
 	) override;
 
-	utki::shared_ref<ruis::render::texture_depth> make_texture_depth(
+	utki::shared_ref<ruis::render::texture_depth> make_texture_depth( //
 		rasterimage::dimensioned::dimensions_type dims
 	) override;
 
@@ -68,13 +68,13 @@ public:
 		rasterimage::image_variant&& negative_z
 	) override;
 
-	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer(
+	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer( //
 		utki::span<const r4::vector4<float>> vertices
 	) override;
-	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer(
+	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer( //
 		utki::span<const r4::vector3<float>> vertices
 	) override;
-	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer(
+	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer( //
 		utki::span<const r4::vector2<float>> vertices
 	) override;
 	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer(utki::span<const float> vertices) override;
@@ -129,7 +129,7 @@ public:
 	void enable_blend(bool enable) override;
 
 	void set_blend_func(
-		blend_factor src_color,
+		blend_factor src_color, //
 		blend_factor dst_color,
 		blend_factor src_alpha,
 		blend_factor dst_alpha
