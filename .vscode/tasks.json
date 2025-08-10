@@ -13,9 +13,9 @@
             "group": "build"
         },
         {
-            "label": "make-dbg",
+            "label": "make-dev",
             "type": "shell",
-            "command": "make config=dbg",
+            "command": "make config=dev",
             "problemMatcher": [
                 "$gcc"
             ],

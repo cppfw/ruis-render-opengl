@@ -4,6 +4,8 @@
 
 #include <ruis/render/opengl/context.hpp>
 
+#include <iostream>
+
 int main(int argc, const char** argv){
     std::function<void()> f = [](){
         ruis::render::opengl::context c;
