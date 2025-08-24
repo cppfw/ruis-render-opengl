@@ -72,46 +72,52 @@ void GLAPIENTRY opengl_error_callback(
 } // namespace
 #endif
 
-context::context() :
+context::context(utki::shared_ref<ruis::native_window> native_window) :
 	ruis::render::context(
-		{.initial_matrix = ruis::matrix4()
-							   // OpenGL identity matrix:
-							   //   viewport edges: left = -1, right = 1, top = 1, bottom = -1
-							   //   z-axis towards viewer
-							   .set_identity()
-							   // x-axis right, y-axis down, z-axis away
-							   .scale(1, -1, -1)
-							   // viewport edges: left = 0, top = 0
-							   .translate(-1, -1)
-							   // viewport edges: right = 1, bottom = 1
-							   .scale(2, 2)}
+		std::move(native_window),
+		// clang-format off
+		{
+			.initial_matrix = ruis::matrix4()
+				// OpenGL identity matrix:
+				//   viewport edges: left = -1, right = 1, top = 1, bottom = -1
+				//   z-axis towards viewer
+				.set_identity()
+				// x-axis right, y-axis down, z-axis away
+				.scale(1, -1, -1)
+				// viewport edges: left = 0, top = 0
+				.translate(-1, -1)
+				// viewport edges: right = 1, bottom = 1
+				.scale(2, 2)
+		} // clang-format on
 	)
 {
-	LOG([](auto& o) {
-		o << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
-	})
+	this->apply([&]() {
+		utki::log_debug([](auto& o) {
+			o << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
+		});
 
-	// On some platforms the default framebuffer is not 0, so because of this
-	// check if default framebuffer value is saved or not everytime some
-	// framebuffer is going to be bound and save the value if needed.
+		// On some platforms the default framebuffer is not 0, so because of this
+		// check if default framebuffer value is saved or not everytime some
+		// framebuffer is going to be bound and save the value if needed.
 
-	// the old_fb variable is initialized via output argument, so no need to initialize
-	// it here
+		// the old_fb variable is initialized via output argument, so no need to initialize
+		// it here
 
-	// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
-	GLint old_fb;
-	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old_fb);
-	LOG([&](auto& o) {
-		o << "old_fb = " << old_fb << std::endl;
-	})
-	this->default_framebuffer = GLuint(old_fb);
+		// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
+		GLint old_fb;
+		glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old_fb);
+		utki::log_debug([&](auto& o) {
+			o << "old_fb = " << old_fb << std::endl;
+		});
+		this->default_framebuffer = GLuint(old_fb);
 
 #ifdef DEBUG
-	glEnable(GL_DEBUG_OUTPUT);
-	glDebugMessageCallback(opengl_error_callback, nullptr);
+		glEnable(GL_DEBUG_OUTPUT);
+		glDebugMessageCallback(opengl_error_callback, nullptr);
 #endif
 
-	glEnable(GL_CULL_FACE);
+		glEnable(GL_CULL_FACE);
+	});
 }
 
 utki::shared_ref<ruis::render::context::shaders> context::make_shaders()

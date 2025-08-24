@@ -32,7 +32,7 @@ class context : public ruis::render::context
 	GLuint default_framebuffer;
 
 public:
-	context();
+	context(utki::shared_ref<ruis::native_window> native_window);
 
 	// ===============================
 	// ====== factory functions ======
