@@ -37,27 +37,27 @@ public:
 	// ===============================
 	// ====== factory functions ======
 
-	utki::shared_ref<shaders> make_shaders() override;
+	utki::shared_ref<shaders> make_shaders() const override;
 
 	utki::shared_ref<ruis::render::texture_2d> make_texture_2d(
 		rasterimage::format format,
 		rasterimage::dimensioned::dimensions_type dims,
 		texture_2d_parameters params
-	) override;
+	) const override;
 
 	utki::shared_ref<ruis::render::texture_2d> make_texture_2d(
 		const rasterimage::image_variant& imvar,
 		texture_2d_parameters params
-	) override;
+	) const override;
 
 	utki::shared_ref<ruis::render::texture_2d> make_texture_2d(
 		rasterimage::image_variant&& imvar,
 		texture_2d_parameters params
-	) override;
+	) const override;
 
 	utki::shared_ref<ruis::render::texture_depth> make_texture_depth( //
 		rasterimage::dimensioned::dimensions_type dims
-	) override;
+	) const override;
 
 	utki::shared_ref<ruis::render::texture_cube> make_texture_cube(
 		rasterimage::image_variant&& positive_x,
@@ -66,25 +66,31 @@ public:
 		rasterimage::image_variant&& negative_y,
 		rasterimage::image_variant&& positive_z,
 		rasterimage::image_variant&& negative_z
-	) override;
+	) const override;
 
 	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer( //
 		utki::span<const r4::vector4<float>> vertices
-	) override;
+	) const override;
 	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer( //
 		utki::span<const r4::vector3<float>> vertices
-	) override;
+	) const override;
 	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer( //
 		utki::span<const r4::vector2<float>> vertices
-	) override;
-	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer(utki::span<const float> vertices) override;
-	utki::shared_ref<ruis::render::index_buffer> make_index_buffer(utki::span<const uint16_t> indices) override;
-	utki::shared_ref<ruis::render::index_buffer> make_index_buffer(utki::span<const uint32_t> indices) override;
+	) const override;
+	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer( //
+		utki::span<const float> vertices
+	) const override;
+	utki::shared_ref<ruis::render::index_buffer> make_index_buffer( //
+		utki::span<const uint16_t> indices
+	) const override;
+	utki::shared_ref<ruis::render::index_buffer> make_index_buffer( //
+		utki::span<const uint32_t> indices
+	) const override;
 	utki::shared_ref<ruis::render::vertex_array> make_vertex_array(
-		std::vector<utki::shared_ref<const ruis::render::vertex_buffer>> buffers,
+		std::vector<utki::shared_ref<const ruis::render::vertex_buffer>> buffers, //
 		utki::shared_ref<const ruis::render::index_buffer> indices,
 		ruis::render::vertex_array::mode mode
-	) override;
+	) const override;
 
 	utki::shared_ref<ruis::render::frame_buffer> make_framebuffer( //
 		std::shared_ptr<ruis::render::texture_2d> color,
@@ -98,7 +104,7 @@ private:
 		rasterimage::dimensioned::dimensions_type dims,
 		utki::span<const uint8_t> data,
 		texture_2d_parameters params
-	);
+	) const;
 
 public:
 	// =====================================
@@ -112,7 +118,7 @@ public:
 
 	void clear_framebuffer_stencil() override;
 
-	r4::vector2<uint32_t> to_window_coords(ruis::vec2 point) const override;
+	r4::vector2<uint32_t> to_window_coords(const ruis::vec2& point) const override;
 
 	bool is_scissor_enabled() const noexcept override;
 
@@ -120,11 +126,11 @@ public:
 
 	r4::rectangle<uint32_t> get_scissor() const override;
 
-	void set_scissor(r4::rectangle<uint32_t> r) override;
+	void set_scissor(const r4::rectangle<uint32_t>& r) override;
 
 	r4::rectangle<uint32_t> get_viewport() const override;
 
-	void set_viewport(r4::rectangle<uint32_t> r) override;
+	void set_viewport(const r4::rectangle<uint32_t>& r) override;
 
 	void enable_blend(bool enable) override;
 

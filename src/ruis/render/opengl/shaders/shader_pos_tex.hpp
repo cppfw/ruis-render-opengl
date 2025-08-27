@@ -34,7 +34,7 @@ class shader_pos_tex :
 	GLint texture_uniform;
 
 public:
-	shader_pos_tex(utki::shared_ref<ruis::render::context> render_context);
+	shader_pos_tex(utki::shared_ref<const ruis::render::context> rendering_context);
 
 	shader_pos_tex(const shader_pos_tex&) = delete;
 	shader_pos_tex& operator=(const shader_pos_tex&) = delete;

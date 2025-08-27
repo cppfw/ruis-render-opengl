@@ -35,7 +35,7 @@ class shader_color_pos_tex :
 	GLint color_uniform;
 
 public:
-	shader_color_pos_tex(utki::shared_ref<ruis::render::context> render_context);
+	shader_color_pos_tex(utki::shared_ref<const ruis::render::context> rendering_context);
 
 	shader_color_pos_tex(const shader_color_pos_tex&) = delete;
 	shader_color_pos_tex& operator=(const shader_color_pos_tex&) = delete;

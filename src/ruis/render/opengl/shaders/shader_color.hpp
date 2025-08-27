@@ -34,7 +34,7 @@ class shader_color :
 	GLint color_uniform;
 
 public:
-	shader_color(utki::shared_ref<ruis::render::context> render_context);
+	shader_color(utki::shared_ref<const ruis::render::context> rendering_context);
 
 	shader_color(const shader_color&) = delete;
 	shader_color& operator=(const shader_color&) = delete;

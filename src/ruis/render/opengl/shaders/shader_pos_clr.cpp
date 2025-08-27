@@ -23,8 +23,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace ruis::render::opengl;
 
-shader_pos_clr::shader_pos_clr(utki::shared_ref<ruis::render::context> render_context) :
-	ruis::render::shader(std::move(render_context)),
+shader_pos_clr::shader_pos_clr(utki::shared_ref<const ruis::render::context> rendering_context) :
+	ruis::render::shader(std::move(rendering_context)),
 	shader_base(
 		R"qwertyuiop(
 			uniform mat4 matrix;

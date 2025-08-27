@@ -35,7 +35,7 @@ class shader_color_pos_tex_alpha :
 	GLint color_uniform;
 
 public:
-	shader_color_pos_tex_alpha(utki::shared_ref<ruis::render::context> render_context);
+	shader_color_pos_tex_alpha(utki::shared_ref<const ruis::render::context> rendering_context);
 
 	shader_color_pos_tex_alpha(const shader_color_pos_tex_alpha&) = delete;
 	shader_color_pos_tex_alpha& operator=(const shader_color_pos_tex_alpha&) = delete;

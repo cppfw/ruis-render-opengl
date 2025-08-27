@@ -31,13 +31,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace ruis::render::opengl;
 
 frame_buffer::frame_buffer(
-	utki::shared_ref<ruis::render::context> render_context,
+	utki::shared_ref<ruis::render::context> rendering_context,
 	std::shared_ptr<ruis::render::texture_2d> color,
 	std::shared_ptr<ruis::render::texture_depth> depth,
 	std::shared_ptr<ruis::render::texture_stencil> stencil
 ) :
 	ruis::render::frame_buffer( //
-		std::move(render_context),
+		std::move(rendering_context),
 		std::move(color),
 		std::move(depth),
 		std::move(stencil)

@@ -26,14 +26,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace ruis::render::opengl;
 
 texture_2d::texture_2d(
-	utki::shared_ref<ruis::render::context> render_context, //
+	utki::shared_ref<const ruis::render::context> rendering_context, //
 	rasterimage::format type,
 	rasterimage::dimensioned::dimensions_type dims,
 	utki::span<const uint8_t> data,
 	ruis::render::context::texture_2d_parameters params
 ) :
 	ruis::render::texture_2d(
-		std::move(render_context), //
+		std::move(rendering_context), //
 		dims
 	)
 {

@@ -42,7 +42,7 @@ public:
 	constexpr static const auto num_cube_faces = 6;
 
 	texture_cube(
-		utki::shared_ref<ruis::render::context> render_context, //
+		utki::shared_ref<const ruis::render::context> rendering_context, //
 		const std::array<cube_face_image, num_cube_faces>& side_images
 	);
 

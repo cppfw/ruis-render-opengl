@@ -120,7 +120,7 @@ context::context(utki::shared_ref<ruis::render::native_window> native_window) :
 	});
 }
 
-utki::shared_ref<ruis::render::context::shaders> context::make_shaders()
+utki::shared_ref<ruis::render::context::shaders> context::make_shaders() const
 {
 	// TODO: are those lint supressions still valid?
 	auto ret = utki::make_shared<ruis::render::context::shaders>();
@@ -140,27 +140,35 @@ utki::shared_ref<ruis::render::context::shaders> context::make_shaders()
 }
 
 utki::shared_ref<ruis::render::texture_2d> context::make_texture_2d(
-	rasterimage::format format,
+	rasterimage::format format, //
 	rasterimage::dimensioned::dimensions_type dims,
 	texture_2d_parameters params
-)
+) const
 {
-	return this->create_texture_2d_internal(format, dims, {}, std::move(params));
+	return this->create_texture_2d_internal(
+		format, //
+		dims,
+		{},
+		std::move(params)
+	);
 }
 
 utki::shared_ref<ruis::render::texture_2d> context::make_texture_2d(
-	const rasterimage::image_variant& imvar,
+	const rasterimage::image_variant& imvar, //
 	texture_2d_parameters params
-)
+) const
 {
 	auto imvar_copy = imvar;
-	return this->make_texture_2d(std::move(imvar_copy), std::move(params));
+	return this->make_texture_2d(
+		std::move(imvar_copy), //
+		std::move(params)
+	);
 }
 
 utki::shared_ref<ruis::render::texture_2d> context::make_texture_2d(
-	rasterimage::image_variant&& imvar,
+	rasterimage::image_variant&& imvar, //
 	texture_2d_parameters params
-)
+) const
 {
 	auto iv = std::move(imvar);
 	return std::visit(
@@ -186,11 +194,11 @@ utki::shared_ref<ruis::render::texture_2d> context::make_texture_2d(
 }
 
 utki::shared_ref<ruis::render::texture_2d> context::create_texture_2d_internal(
-	rasterimage::format type,
+	rasterimage::format type, //
 	rasterimage::dimensioned::dimensions_type dims,
 	utki::span<const uint8_t> data,
 	texture_2d_parameters params
-)
+) const
 {
 	return utki::make_shared<texture_2d>(
 		this->get_shared_ref(), //
@@ -203,7 +211,7 @@ utki::shared_ref<ruis::render::texture_2d> context::create_texture_2d_internal(
 
 utki::shared_ref<ruis::render::texture_depth> context::make_texture_depth( //
 	rasterimage::dimensioned::dimensions_type dims
-)
+) const
 {
 	return utki::make_shared<texture_depth>(
 		this->get_shared_ref(), //
@@ -218,7 +226,7 @@ utki::shared_ref<ruis::render::texture_cube> context::make_texture_cube(
 	rasterimage::image_variant&& negative_y,
 	rasterimage::image_variant&& positive_z,
 	rasterimage::image_variant&& negative_z
-)
+) const
 {
 	constexpr auto num_cube_sides = 6;
 	std::array<rasterimage::image_variant, num_cube_sides> sides = {
@@ -264,7 +272,9 @@ utki::shared_ref<ruis::render::texture_cube> context::make_texture_cube(
 	);
 }
 
-utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer(utki::span<const r4::vector4<float>> vertices)
+utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer( //
+	utki::span<const r4::vector4<float>> vertices
+) const
 {
 	return utki::make_shared<vertex_buffer>(
 		this->get_shared_ref(), //
@@ -272,7 +282,9 @@ utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer(utki::
 	);
 }
 
-utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer(utki::span<const r4::vector3<float>> vertices)
+utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer( //
+	utki::span<const r4::vector3<float>> vertices
+) const
 {
 	return utki::make_shared<vertex_buffer>(
 		this->get_shared_ref(), //
@@ -280,7 +292,9 @@ utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer(utki::
 	);
 }
 
-utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer(utki::span<const r4::vector2<float>> vertices)
+utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer( //
+	utki::span<const r4::vector2<float>> vertices
+) const
 {
 	return utki::make_shared<vertex_buffer>(
 		this->get_shared_ref(), //
@@ -288,7 +302,9 @@ utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer(utki::
 	);
 }
 
-utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer(utki::span<const float> vertices)
+utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer( //
+	utki::span<const float> vertices
+) const
 {
 	return utki::make_shared<vertex_buffer>(
 		this->get_shared_ref(), //
@@ -297,10 +313,10 @@ utki::shared_ref<ruis::render::vertex_buffer> context::make_vertex_buffer(utki::
 }
 
 utki::shared_ref<ruis::render::vertex_array> context::make_vertex_array(
-	std::vector<utki::shared_ref<const ruis::render::vertex_buffer>> buffers,
+	std::vector<utki::shared_ref<const ruis::render::vertex_buffer>> buffers, //
 	utki::shared_ref<const ruis::render::index_buffer> indices,
 	ruis::render::vertex_array::mode mode
-)
+) const
 {
 	return utki::make_shared<vertex_array>(
 		this->get_shared_ref(), //
@@ -310,7 +326,9 @@ utki::shared_ref<ruis::render::vertex_array> context::make_vertex_array(
 	);
 }
 
-utki::shared_ref<ruis::render::index_buffer> context::make_index_buffer(utki::span<const uint16_t> indices)
+utki::shared_ref<ruis::render::index_buffer> context::make_index_buffer( //
+	utki::span<const uint16_t> indices
+) const
 {
 	return utki::make_shared<index_buffer>(
 		this->get_shared_ref(), //
@@ -318,7 +336,9 @@ utki::shared_ref<ruis::render::index_buffer> context::make_index_buffer(utki::sp
 	);
 }
 
-utki::shared_ref<ruis::render::index_buffer> context::make_index_buffer(utki::span<const uint32_t> indices)
+utki::shared_ref<ruis::render::index_buffer> context::make_index_buffer( //
+	utki::span<const uint32_t> indices
+) const
 {
 	return utki::make_shared<index_buffer>(
 		this->get_shared_ref(), //
@@ -326,8 +346,8 @@ utki::shared_ref<ruis::render::index_buffer> context::make_index_buffer(utki::sp
 	);
 }
 
-utki::shared_ref<ruis::render::frame_buffer> context::make_framebuffer( //
-	std::shared_ptr<ruis::render::texture_2d> color,
+utki::shared_ref<ruis::render::frame_buffer> context::make_framebuffer(
+	std::shared_ptr<ruis::render::texture_2d> color, //
 	std::shared_ptr<ruis::render::texture_depth> depth,
 	std::shared_ptr<ruis::render::texture_stencil> stencil
 )
@@ -377,16 +397,16 @@ void context::clear_framebuffer_stencil()
 	assert_opengl_no_error();
 }
 
-r4::vector2<uint32_t> context::to_window_coords(ruis::vec2 point) const
+r4::vector2<uint32_t> context::to_window_coords(const ruis::vec2& point) const
 {
 	auto vp = this->get_viewport();
 
-	point += ruis::vec2(1, 1);
-	point = max(point, {0, 0}); // clamp to >= 0
-	point /= 2;
-	point.comp_multiply(vp.d.to<real>());
-	point = round(point);
-	return point.to<uint32_t>() + vp.p;
+	auto p = point + ruis::vec2(1, 1);
+	p = max(p, {0, 0}); // clamp to >= 0
+	p /= 2;
+	p.comp_multiply(vp.d.to<real>());
+	p = round(p);
+	return p.to<uint32_t>() + vp.p;
 }
 
 bool context::is_scissor_enabled() const noexcept
@@ -422,9 +442,14 @@ r4::rectangle<uint32_t> context::get_scissor() const
 	};
 }
 
-void context::set_scissor(r4::rectangle<uint32_t> r)
+void context::set_scissor(const r4::rectangle<uint32_t>& r)
 {
-	glScissor(GLint(r.p.x()), GLint(r.p.y()), GLint(r.d.x()), GLint(r.d.y()));
+	glScissor(
+		GLint(r.p.x()), //
+		GLint(r.p.y()),
+		GLint(r.d.x()),
+		GLint(r.d.y())
+	);
 	assert_opengl_no_error();
 }
 
@@ -448,9 +473,14 @@ r4::rectangle<uint32_t> context::get_viewport() const
 	};
 }
 
-void context::set_viewport(r4::rectangle<uint32_t> r)
+void context::set_viewport(const r4::rectangle<uint32_t>& r)
 {
-	glViewport(GLint(r.p.x()), GLint(r.p.y()), GLint(r.d.x()), GLint(r.d.y()));
+	glViewport(
+		GLint(r.p.x()), //
+		GLint(r.p.y()),
+		GLint(r.d.x()),
+		GLint(r.d.y())
+	);
 	assert_opengl_no_error();
 }
 

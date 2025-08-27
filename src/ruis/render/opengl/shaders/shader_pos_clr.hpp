@@ -32,7 +32,7 @@ class shader_pos_clr :
 	public shader_base
 {
 public:
-	shader_pos_clr(utki::shared_ref<ruis::render::context> render_context);
+	shader_pos_clr(utki::shared_ref<const ruis::render::context> rendering_context);
 
 	shader_pos_clr(const shader_pos_clr&) = delete;
 	shader_pos_clr& operator=(const shader_pos_clr&) = delete;

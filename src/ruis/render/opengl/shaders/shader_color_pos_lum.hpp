@@ -34,7 +34,7 @@ class shader_color_pos_lum :
 	GLint color_uniform;
 
 public:
-	shader_color_pos_lum(utki::shared_ref<ruis::render::context> render_context);
+	shader_color_pos_lum(utki::shared_ref<const ruis::render::context> rendering_context);
 
 	shader_color_pos_lum(const shader_color_pos_lum&) = delete;
 	shader_color_pos_lum& operator=(const shader_color_pos_lum&) = delete;

@@ -28,13 +28,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace ruis::render::opengl;
 
 index_buffer::index_buffer(
-	utki::shared_ref<ruis::render::context> render_context, //
+	utki::shared_ref<const ruis::render::context> rendering_context, //
 	const void* data,
 	size_t size_bytes,
 	size_t size,
 	GLenum element_type
 ) :
-	ruis::render::index_buffer(std::move(render_context)),
+	ruis::render::index_buffer(std::move(rendering_context)),
 	element_type(element_type),
 	elements_count(GLsizei(size))
 {
@@ -54,11 +54,11 @@ index_buffer::index_buffer(
 }
 
 index_buffer::index_buffer(
-	utki::shared_ref<ruis::render::context> render_context, //
+	utki::shared_ref<const ruis::render::context> rendering_context, //
 	utki::span<const uint16_t> indices
 ) :
 	index_buffer(
-		std::move(render_context), //
+		std::move(rendering_context), //
 		indices.data(),
 		indices.size_bytes(),
 		indices.size(),
@@ -67,11 +67,11 @@ index_buffer::index_buffer(
 {}
 
 index_buffer::index_buffer(
-	utki::shared_ref<ruis::render::context> render_context, //
+	utki::shared_ref<const ruis::render::context> rendering_context, //
 	utki::span<const uint32_t> indices
 ) :
 	index_buffer(
-		std::move(render_context), //
+		std::move(rendering_context), //
 		indices.data(),
 		indices.size_bytes(),
 		indices.size(),
