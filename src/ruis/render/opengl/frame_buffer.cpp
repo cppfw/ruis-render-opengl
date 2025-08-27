@@ -96,6 +96,10 @@ frame_buffer::frame_buffer(
 
 frame_buffer::~frame_buffer()
 {
-	glDeleteFramebuffers(1, &this->fbo);
-	assert_opengl_no_error();
+	// In OpenGL framebuffer objects are not shared between contexts,
+	// so make sure the owning context is bound when deleting the framebuffer object.
+	this->rendering_context.get().apply([this]() {
+		glDeleteFramebuffers(1, &this->fbo);
+		assert_opengl_no_error();
+	});
 }
