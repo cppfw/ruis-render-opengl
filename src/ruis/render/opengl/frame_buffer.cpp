@@ -59,7 +59,7 @@ frame_buffer::frame_buffer(
 		assert_opengl_no_error();
 
 		if (this->color) {
-			ASSERT(dynamic_cast<texture_2d*>(this->color.get()))
+			utki::assert(dynamic_cast<texture_2d*>(this->color.get()), SL);
 			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 			auto& tex = static_cast<texture_2d&>(*this->color);
 
@@ -70,7 +70,7 @@ frame_buffer::frame_buffer(
 		}
 
 		if (this->depth) {
-			ASSERT(dynamic_cast<texture_depth*>(this->depth.get()))
+			utki::assert(dynamic_cast<texture_depth*>(this->depth.get()), SL);
 			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 			auto& tex = static_cast<texture_depth&>(*this->depth);
 

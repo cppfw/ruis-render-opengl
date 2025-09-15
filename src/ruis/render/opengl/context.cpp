@@ -22,6 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "context.hpp"
 
 #include <utki/shared.hpp>
+#include <utki/config.hpp>
 
 #include "shaders/shader_color.hpp"
 #include "shaders/shader_color_pos_lum.hpp"
@@ -56,6 +57,7 @@ using namespace ruis::render::opengl;
 // } // namespace
 
 #ifdef DEBUG
+#	if CFG_OS != CFG_OS_MACOSX
 namespace {
 void GLAPIENTRY opengl_error_callback(
 	GLenum source,
@@ -70,6 +72,7 @@ void GLAPIENTRY opengl_error_callback(
 	std::cout << "OpenGL" << (type == GL_DEBUG_TYPE_ERROR ? " ERROR" : "") << ": " << message << std::endl;
 }
 } // namespace
+#	endif
 #endif
 
 context::context(utki::shared_ref<ruis::render::native_window> native_window) :
@@ -107,16 +110,24 @@ context::context(utki::shared_ref<ruis::render::native_window> native_window) :
 		GLint old_fb;
 		glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old_fb);
 		utki::log_debug([&](auto& o) {
-			o << "old_fb = " << old_fb << std::endl;
+			o << "ruis::render::opengl::context::context(): old_fb = " << old_fb << std::endl;
 		});
 		this->default_framebuffer = GLuint(old_fb);
 
 #ifdef DEBUG
+// glDebugMessageCallback() was introduced in OpenGL 4.3, Macos does not support this version
+#	if CFG_OS != CFG_OS_MACOSX
+		// utki::logcat_debug("ruis::render::opengl::context::context(): enable debug output", '\n');
 		glEnable(GL_DEBUG_OUTPUT);
-		glDebugMessageCallback(opengl_error_callback, nullptr);
+		// utki::logcat_debug("ruis::render::opengl::context::context(): debug output enabled", '\n');
+		glDebugMessageCallback(&opengl_error_callback, nullptr);
+		// utki::logcat_debug("ruis::render::opengl::context::context(): debug message callback set", '\n');
+#	endif
 #endif
 
+		// utki::logcat_debug("ruis::render::opengl::context::context(): enable face culling", '\n');
 		glEnable(GL_CULL_FACE);
+		// utki::logcat_debug("ruis::render::opengl::context::context(): face culling enabled", '\n');
 	});
 }
 

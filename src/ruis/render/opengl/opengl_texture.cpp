@@ -56,7 +56,7 @@ GLint opengl_texture::set_swizzeling(rasterimage::format f) const
 {
 	switch (f) {
 		default:
-			ASSERT(false)
+			utki::assert(false, SL);
 		case rasterimage::format::grey:
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
 			assert_opengl_no_error();

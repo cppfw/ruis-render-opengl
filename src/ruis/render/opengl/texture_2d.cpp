@@ -37,9 +37,9 @@ texture_2d::texture_2d(
 		dims
 	)
 {
-	ASSERT(data.size() % rasterimage::to_num_channels(type) == 0)
-	ASSERT(data.size() % dims.x() == 0)
-	ASSERT(data.size() == 0 || data.size() / rasterimage::to_num_channels(type) / dims.x() == dims.y())
+	utki::assert(data.size() % rasterimage::to_num_channels(type) == 0, SL);
+	utki::assert(data.size() % dims.x() == 0, SL);
+	utki::assert(data.size() == 0 || data.size() / rasterimage::to_num_channels(type) / dims.x() == dims.y(), SL);
 
 	this->bind(0);
 
