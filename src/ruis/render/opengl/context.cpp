@@ -59,8 +59,6 @@ using namespace ruis::render::opengl;
 // }
 // } // namespace
 
-#ifdef DEBUG
-#	if CFG_OS != CFG_OS_MACOSX
 namespace {
 void GLAPIENTRY opengl_error_callback(
 	GLenum source,
@@ -75,8 +73,6 @@ void GLAPIENTRY opengl_error_callback(
 	std::cout << "OpenGL" << (type == GL_DEBUG_TYPE_ERROR ? " ERROR" : "") << ": " << message << std::endl;
 }
 } // namespace
-#	endif
-#endif
 
 namespace {
 utki::version_duplet parse_opengl_version(std::string_view version_string)
