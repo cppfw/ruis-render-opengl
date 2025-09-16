@@ -23,6 +23,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <GL/glew.h>
 #include <rasterimage/image_variant.hpp>
+#include <utki/flags.hpp>
+
+#include "context.hpp"
 
 namespace ruis::render::opengl {
 
@@ -44,7 +47,10 @@ struct opengl_texture {
 protected:
 	void set_active_texture(unsigned unit_num) const;
 
-	GLint set_swizzeling(rasterimage::format f) const;
+	GLint set_swizzeling(
+		rasterimage::format f, //
+		const utki::flags<extension>& supported_extensions
+	) const;
 };
 
 } // namespace ruis::render::opengl

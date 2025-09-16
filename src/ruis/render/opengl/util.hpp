@@ -34,34 +34,58 @@ inline void assert_opengl_no_error()
 		case GL_NO_ERROR:
 			return;
 		case GL_INVALID_ENUM:
-			utki::assert(false, [](auto& o) {
-				o << "OpenGL error: GL_INVALID_ENUM";
-			}, SL);
+			utki::assert(
+				false,
+				[](auto& o) {
+					o << "OpenGL error: GL_INVALID_ENUM";
+				},
+				SL
+			);
 			break;
 		case GL_INVALID_VALUE:
-			utki::assert(false, [](auto& o) {
-				o << "OpenGL error: GL_INVALID_VALUE";
-			}, SL);
+			utki::assert(
+				false,
+				[](auto& o) {
+					o << "OpenGL error: GL_INVALID_VALUE";
+				},
+				SL
+			);
 			break;
 		case GL_INVALID_OPERATION:
-			utki::assert(false, [](auto& o) {
-				o << "OpenGL error: GL_INVALID_OPERATION";
-			}, SL);
+			utki::assert(
+				false,
+				[](auto& o) {
+					o << "OpenGL error: GL_INVALID_OPERATION";
+				},
+				SL
+			);
 			break;
 		case GL_INVALID_FRAMEBUFFER_OPERATION:
-			utki::assert(false, [](auto& o) {
-				o << "OpenGL error: GL_INVALID_FRAMEBUFFER_OPERATION";
-			}, SL);
+			utki::assert(
+				false,
+				[](auto& o) {
+					o << "OpenGL error: GL_INVALID_FRAMEBUFFER_OPERATION";
+				},
+				SL
+			);
 			break;
 		case GL_OUT_OF_MEMORY:
-			utki::assert(false, [](auto& o) {
-				o << "OpenGL error: GL_OUT_OF_MEMORY";
-			}, SL);
+			utki::assert(
+				false,
+				[](auto& o) {
+					o << "OpenGL error: GL_OUT_OF_MEMORY";
+				},
+				SL
+			);
 			break;
 		default:
-			utki::assert(false, [&](auto& o) {
-				o << "Unknown OpenGL error, code = " << int(error);
-			}, SL);
+			utki::assert(
+				false,
+				[&](auto& o) {
+					o << "Unknown OpenGL error, code = " << int(error);
+				},
+				SL
+			);
 			break;
 	}
 #endif

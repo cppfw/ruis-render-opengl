@@ -29,13 +29,19 @@ texture_cube::texture_cube(
 	utki::shared_ref<const ruis::render::context> rendering_context, //
 	const std::array<cube_face_image, num_cube_faces>& side_images
 ) :
-	ruis::render::texture_cube(std::move(rendering_context))
+	ruis::render::texture_cube(rendering_context)
 {
 	this->bind(0);
 
+	utki::assert(dynamic_cast<const opengl::context*>(&rendering_context.get()), SL);
+	auto& opengl_context = static_cast<const opengl::context&>(rendering_context.get());
+
 	unsigned i = 0;
 	for (const auto& s : side_images) {
-		auto format = this->set_swizzeling(s.type);
+		auto format = this->set_swizzeling(
+			s.type, //
+			opengl_context.supported_extensions
+		);
 		glTexImage2D( //
 			GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
 			0, // 0th level, no mipmaps

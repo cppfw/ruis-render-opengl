@@ -29,7 +29,7 @@ opengl_texture::opengl_texture()
 {
 	glGenTextures(1, &this->tex);
 	assert_opengl_no_error();
-	ASSERT(this->tex != 0)
+	utki::assert(this->tex != 0, SL);
 }
 
 opengl_texture::~opengl_texture()
@@ -52,33 +52,42 @@ void opengl_texture::bind(unsigned unit_num) const
 	assert_opengl_no_error();
 }
 
-GLint opengl_texture::set_swizzeling(rasterimage::format f) const
+GLint opengl_texture::set_swizzeling(
+	rasterimage::format f, //
+	const utki::flags<extension>& supported_extensions
+) const
 {
 	switch (f) {
 		default:
 			utki::assert(false, SL);
 		case rasterimage::format::grey:
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
-			assert_opengl_no_error();
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
-			assert_opengl_no_error();
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
-			assert_opengl_no_error();
-
-			// GL_LUMINANCE is deprecated in OpenGL 3, so we use GL_RED
-			return GL_RED;
+			if (supported_extensions.get(extension::ext_texture_swizzle)) {
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
+				assert_opengl_no_error();
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
+				assert_opengl_no_error();
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
+				assert_opengl_no_error();
+				return GL_RED;
+			} else {
+				// swizzling is not supported, so we have to use GL_LUMINANCE which is deprecated in OpenGL 3
+				return GL_LUMINANCE;
+			}
 		case rasterimage::format::greya:
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
-			assert_opengl_no_error();
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
-			assert_opengl_no_error();
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
-			assert_opengl_no_error();
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_A, GL_GREEN);
-			assert_opengl_no_error();
-
-			// GL_LUMINANCE_ALPHA is deprecated in OpenGL 3, so we use GL_RG
-			return GL_RG;
+			if (supported_extensions.get(extension::ext_texture_swizzle)) {
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
+				assert_opengl_no_error();
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
+				assert_opengl_no_error();
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
+				assert_opengl_no_error();
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_A, GL_GREEN);
+				assert_opengl_no_error();
+				return GL_RG;
+			} else {
+				// swizzling is not supported, so we have to use GL_LUMINANCE_ALPHA which is deprecated in OpenGL 3
+				return GL_LUMINANCE_ALPHA;
+			}
 		case rasterimage::format::rgb:
 			return GL_RGB;
 		case rasterimage::format::rgba:

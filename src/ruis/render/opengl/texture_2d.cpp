@@ -33,7 +33,7 @@ texture_2d::texture_2d(
 	ruis::render::context::texture_2d_parameters params
 ) :
 	ruis::render::texture_2d(
-		std::move(rendering_context), //
+		rendering_context, //
 		dims
 	)
 {
@@ -43,7 +43,12 @@ texture_2d::texture_2d(
 
 	this->bind(0);
 
-	GLint internal_format = this->set_swizzeling(type);
+	utki::assert(dynamic_cast<const opengl::context*>(&rendering_context.get()), SL);
+	auto& opengl_context = static_cast<const opengl::context&>(rendering_context.get());
+	GLint internal_format = this->set_swizzeling(
+		type, //
+		opengl_context.supported_extensions
+	);
 
 	// we will be passing pixels to OpenGL which are 1-byte aligned.
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);

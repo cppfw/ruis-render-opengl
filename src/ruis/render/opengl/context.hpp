@@ -23,15 +23,28 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <GL/glew.h>
 #include <ruis/render/context.hpp>
+#include <utki/flags.hpp>
 #include <utki/shared.hpp>
+#include <utki/version.hpp>
 
 namespace ruis::render::opengl {
+
+enum class extension {
+	ext_texture_swizzle,
+	arb_texture_swizzle = ext_texture_swizzle,
+
+	enum_size
+};
 
 class context : public ruis::render::context
 {
 	GLuint default_framebuffer;
 
 public:
+	const utki::version_duplet gl_version;
+
+	const utki::flags<extension> supported_extensions;
+
 	context(utki::shared_ref<ruis::render::native_window> native_window);
 
 	// ===============================

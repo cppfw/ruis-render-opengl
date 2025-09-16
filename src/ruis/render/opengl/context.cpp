@@ -21,8 +21,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "context.hpp"
 
-#include <utki/shared.hpp>
 #include <utki/config.hpp>
+#include <utki/shared.hpp>
+#include <utki/string.hpp>
 
 #include "shaders/shader_color.hpp"
 #include "shaders/shader_color_pos_lum.hpp"
@@ -38,6 +39,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "texture_depth.hpp"
 #include "vertex_array.hpp"
 #include "vertex_buffer.hpp"
+
+using namespace std::string_view_literals;
 
 using namespace ruis::render::opengl;
 
@@ -75,6 +78,63 @@ void GLAPIENTRY opengl_error_callback(
 #	endif
 #endif
 
+namespace {
+utki::version_duplet parse_opengl_version(std::string_view version_string)
+{
+	utki::log_debug([&](auto& o) {
+		o << "OpenGL version: " << version_string << std::endl;
+	});
+
+	utki::string_parser version_parser(version_string);
+
+	auto major = version_parser.read_number<uint16_t>();
+
+	// skip '.'
+	utki::assert(version_parser.peek_char() == '.', SL);
+	version_parser.read_char();
+
+	auto minor = version_parser.read_number<uint16_t>();
+
+	utki::log_debug([&](auto& o) {
+		o << "Parsed OpenGL version: " << major << '.' << minor << std::endl;
+	});
+
+	return utki::version_duplet{major, minor};
+}
+} // namespace
+
+namespace {
+utki::flags<ruis::render::opengl::extension> parse_supported_extensions(std::string_view extensions_string)
+{
+	utki::flags<ruis::render::opengl::extension> ext_flags = false;
+
+	utki::log_debug([&](auto& o) {
+		o << "OpenGL extensions: " << extensions_string << std::endl;
+	});
+
+	auto extensions = utki::split(extensions_string, ' ');
+	for (auto& ext : extensions) {
+		if (ext == "GL_EXT_texture_swizzle"sv) {
+			ext_flags.set(ruis::render::opengl::extension::ext_texture_swizzle);
+		} else if (ext == "GL_ARB_texture_swizzle"sv) {
+			ext_flags.set(ruis::render::opengl::extension::arb_texture_swizzle);
+		}
+	}
+
+	utki::log_debug([&](auto& o) {
+		o << "Supported OpenGL extensions:" << std::endl;
+		if (ext_flags.get(ruis::render::opengl::extension::ext_texture_swizzle)) {
+			o << "  GL_EXT_texture_swizzle" << std::endl;
+		}
+		if (ext_flags.get(ruis::render::opengl::extension::arb_texture_swizzle)) {
+			o << "  GL_ARB_texture_swizzle" << std::endl;
+		}
+	});
+
+	return ext_flags;
+}
+} // namespace
+
 context::context(utki::shared_ref<ruis::render::native_window> native_window) :
 	ruis::render::context(
 		std::move(native_window),
@@ -92,13 +152,25 @@ context::context(utki::shared_ref<ruis::render::native_window> native_window) :
 				// viewport edges: right = 1, bottom = 1
 				.scale(2, 2)
 		} // clang-format on
-	)
-{
-	this->apply([&]() {
-		utki::log_debug([](auto& o) {
-			o << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
+	),
+	gl_version([&]() {
+		std::string_view version_string;
+		this->apply([&]() {
+			version_string = std::string_view(reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 		});
 
+		return parse_opengl_version(version_string);
+	}()),
+	supported_extensions([&]() {
+		std::string_view extensions_string;
+		this->apply([&]() {
+			extensions_string = std::string_view(reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS)));
+		});
+
+		return parse_supported_extensions(extensions_string);
+	}())
+{
+	this->apply([&]() {
 		// On some platforms the default framebuffer is not 0, so because of this
 		// check if default framebuffer value is saved or not everytime some
 		// framebuffer is going to be bound and save the value if needed.
@@ -114,16 +186,13 @@ context::context(utki::shared_ref<ruis::render::native_window> native_window) :
 		});
 		this->default_framebuffer = GLuint(old_fb);
 
-#ifdef DEBUG
-// glDebugMessageCallback() was introduced in OpenGL 4.3, Macos does not support this version
-#	if CFG_OS != CFG_OS_MACOSX
-		// utki::logcat_debug("ruis::render::opengl::context::context(): enable debug output", '\n');
-		glEnable(GL_DEBUG_OUTPUT);
-		// utki::logcat_debug("ruis::render::opengl::context::context(): debug output enabled", '\n');
-		glDebugMessageCallback(&opengl_error_callback, nullptr);
-		// utki::logcat_debug("ruis::render::opengl::context::context(): debug message callback set", '\n');
-#	endif
-#endif
+		utki::run_debug([&]() {
+			// glDebugMessageCallback() was introduced in OpenGL 4.3
+			if (this->gl_version >= utki::version_duplet{4, 3}) {
+				glEnable(GL_DEBUG_OUTPUT);
+				glDebugMessageCallback(&opengl_error_callback, nullptr);
+			}
+		});
 
 		// utki::logcat_debug("ruis::render::opengl::context::context(): enable face culling", '\n');
 		glEnable(GL_CULL_FACE);
