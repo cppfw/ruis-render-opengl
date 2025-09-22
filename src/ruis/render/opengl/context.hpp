@@ -32,6 +32,8 @@ namespace ruis::render::opengl {
 enum class extension {
 	ext_texture_swizzle,
 	arb_texture_swizzle = ext_texture_swizzle,
+	arb_debug_output,
+	khr_debug,
 
 	enum_size
 };

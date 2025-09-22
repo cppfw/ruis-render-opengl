@@ -114,6 +114,10 @@ utki::flags<ruis::render::opengl::extension> parse_supported_extensions(std::str
 			ext_flags.set(ruis::render::opengl::extension::ext_texture_swizzle);
 		} else if (ext == "GL_ARB_texture_swizzle"sv) {
 			ext_flags.set(ruis::render::opengl::extension::arb_texture_swizzle);
+		} else if (ext == "GL_ARB_debug_output"sv) {
+			ext_flags.set(ruis::render::opengl::extension::arb_debug_output);
+		} else if (ext == "GL_KHR_debug"sv) {
+			ext_flags.set(ruis::render::opengl::extension::khr_debug);
 		}
 	}
 
@@ -124,6 +128,12 @@ utki::flags<ruis::render::opengl::extension> parse_supported_extensions(std::str
 		}
 		if (ext_flags.get(ruis::render::opengl::extension::arb_texture_swizzle)) {
 			o << "  GL_ARB_texture_swizzle" << std::endl;
+		}
+		if (ext_flags.get(ruis::render::opengl::extension::arb_debug_output)) {
+			o << "  GL_ARB_debug_output" << std::endl;
+		}
+		if (ext_flags.get(ruis::render::opengl::extension::khr_debug)) {
+			o << "  GL_KHR_debug" << std::endl;
 		}
 	});
 
@@ -183,8 +193,7 @@ context::context(utki::shared_ref<ruis::render::native_window> native_window) :
 		this->default_framebuffer = GLuint(old_fb);
 
 		utki::run_debug([&]() {
-			// glDebugMessageCallback() was introduced in OpenGL 4.3
-			if (this->gl_version >= utki::version_duplet{4, 3}) {
+			if (this->supported_extensions.get(ruis::render::opengl::extension::khr_debug)) {
 				glEnable(GL_DEBUG_OUTPUT);
 				glDebugMessageCallback(&opengl_error_callback, nullptr);
 			}
