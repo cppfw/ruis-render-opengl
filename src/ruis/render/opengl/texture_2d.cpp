@@ -44,7 +44,9 @@ texture_2d::texture_2d(
 	this->bind(0);
 
 	utki::assert(dynamic_cast<const opengl::context*>(&rendering_context.get()), SL);
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast, "assert(dynamic_cast) done")
 	auto& opengl_context = static_cast<const opengl::context&>(rendering_context.get());
+
 	GLint internal_format = this->set_swizzeling(
 		type, //
 		opengl_context.supported_extensions

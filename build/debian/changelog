@@ -1,3 +1,9 @@
+libruis-render-opengl (0.2.0) UNRELEASED; urgency=medium
+
+  * multiwindow
+
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 05 Oct 2025 19:27:35 +0300
+
 libruis-render-opengl (0.1.93) unstable; urgency=medium
 
   * debian trixie build

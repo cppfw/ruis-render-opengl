@@ -162,7 +162,10 @@ context::context(utki::shared_ref<ruis::render::native_window> native_window) :
 	gl_version([&]() {
 		std::string_view version_string;
 		this->apply([&]() {
-			version_string = std::string_view(reinterpret_cast<const char*>(glGetString(GL_VERSION)));
+			version_string = std::string_view(
+				// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast, "needed to make string_view from GLubyte*")
+				reinterpret_cast<const char*>(glGetString(GL_VERSION))
+			);
 		});
 
 		return parse_opengl_version(version_string);
@@ -170,7 +173,10 @@ context::context(utki::shared_ref<ruis::render::native_window> native_window) :
 	supported_extensions([&]() {
 		std::string_view extensions_string;
 		this->apply([&]() {
-			extensions_string = std::string_view(reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS)));
+			extensions_string = std::string_view(
+				// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast, "needed to make string_view from GLubyte*")
+				reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS))
+			);
 		});
 
 		return parse_supported_extensions(extensions_string);
