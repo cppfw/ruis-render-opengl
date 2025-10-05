@@ -34,7 +34,9 @@ texture_cube::texture_cube(
 	this->bind(0);
 
 	utki::assert(dynamic_cast<const opengl::context*>(&rendering_context.get()), SL);
-	auto& opengl_context = static_cast<const opengl::context&>(rendering_context.get());
+	auto& opengl_context =
+		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast, "assert(dynamic_cast) done")
+		static_cast<const opengl::context&>(rendering_context.get());
 
 	unsigned i = 0;
 	for (const auto& s : side_images) {
