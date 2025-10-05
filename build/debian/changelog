@@ -1,9 +1,9 @@
-libruis-render-opengl (0.3.0) UNRELEASED; urgency=medium
+libruis-render-opengl (0.3.0) unstable; urgency=medium
 
   * multiwindow
   * multiwindow
 
- -- Ivan Gagis <igagis@gmail.com>  Sun, 05 Oct 2025 20:33:27 +0300
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 05 Oct 2025 20:33:45 +0300
 
 libruis-render-opengl (0.1.93) unstable; urgency=medium
 
