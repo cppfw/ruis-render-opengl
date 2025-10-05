@@ -8,7 +8,9 @@
 
 int main(int argc, const char** argv){
     std::function<void()> f = [](){
-        ruis::render::opengl::context c;
+        ruis::render::opengl::context c(
+            utki::make_shared<ruis::render::native_window>()
+        );
     };
 
     // do not call f() to avoid segmentation fault, becuase OpenGL is not initialized
