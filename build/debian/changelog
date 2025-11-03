@@ -1,3 +1,9 @@
+libruis-render-opengl (0.3.3) unstable; urgency=medium
+
+  * debian: fix dbgsrc path
+
+ -- Ivan Gagis <igagis@gmail.com>  Mon, 03 Nov 2025 22:28:02 +0200
+
 libruis-render-opengl (0.3.2) unstable; urgency=medium
 
   * cmake: no ios build
