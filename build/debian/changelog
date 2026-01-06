@@ -1,3 +1,9 @@
+libruis-render-opengl (0.3.4) unstable; urgency=medium
+
+  * update
+
+ -- Ivan Gagis <igagis@gmail.com>  Tue, 06 Jan 2026 17:57:12 +0200
+
 libruis-render-opengl (0.3.3) unstable; urgency=medium
 
   * debian: fix dbgsrc path
