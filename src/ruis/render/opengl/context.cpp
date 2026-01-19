@@ -146,7 +146,7 @@ context::context(utki::shared_ref<ruis::render::native_window> native_window) :
 		std::move(native_window),
 		// clang-format off
 		{
-			.initial_matrix = ruis::matrix4()
+			.initial_matrix = ruis::mat4()
 				// OpenGL identity matrix:
 				//   viewport edges: left = -1, right = 1, top = 1, bottom = -1
 				//   z-axis towards viewer
