@@ -25,8 +25,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace ruis::render::opengl;
 
-shader_color_pos_tex::shader_color_pos_tex(utki::shared_ref<const ruis::render::context> rendering_context) :
-	ruis::render::coloring_texturing_shader(std::move(rendering_context)),
+shader_color_pos_tex::shader_color_pos_tex(const utki::shared_ref<const ruis::render::context>& rendering_context) :
+	ruis::render::coloring_texturing_shader(rendering_context),
 	shader_base(
 		R"qwertyuiop(
 			attribute vec4 a0;
