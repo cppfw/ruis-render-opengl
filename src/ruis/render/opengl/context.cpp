@@ -95,7 +95,7 @@ utki::version_duplet parse_opengl_version(std::string_view version_string)
 		o << "Parsed OpenGL version: " << major << '.' << minor << std::endl;
 	});
 
-	return utki::version_duplet{major, minor};
+	return utki::version_duplet{.major = major, .minor = minor};
 }
 } // namespace
 
