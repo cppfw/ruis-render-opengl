@@ -21,6 +21,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "frame_buffer.hpp"
 
+#include <vector>
+
 #include <GL/glew.h>
 #include <utki/string.hpp>
 
@@ -106,4 +108,44 @@ frame_buffer::~frame_buffer()
 		glDeleteFramebuffers(1, &this->fbo);
 		assert_opengl_no_error();
 	});
+}
+
+rasterimage::image_variant frame_buffer::get_color_pixels()
+{
+	// Reading pixels back from a framebuffer object requires GL 3.0 core or the
+	// ARB_framebuffer_object extension — the same capability the renderer already relies on to
+	// create and render into framebuffer objects. There is deliberately no FBO-free fallback:
+	// without that capability the color attachment cannot be read back at all.
+	if (!GLEW_VERSION_3_0 && !GLEW_ARB_framebuffer_object) {
+		throw std::runtime_error(
+			"opengl::frame_buffer::get_color_pixels(): "
+			"reading pixels from a framebuffer object requires GL 3.0 or the ARB_framebuffer_object extension"
+		);
+	}
+
+	std::vector<uint8_t> buf(static_cast<size_t>(this->dims().x()) * this->dims().y() * sizeof(uint32_t));
+
+	// glReadPixels on the framebuffer is the readback path. apply() binds this FBO and sets the
+	// viewport to its size, restoring both afterwards. We deliberately do not call glReadBuffer():
+	// an FBO with a single color attachment is read from color attachment zero directly, and a
+	// GL_COLOR_ATTACHMENT* read-buffer target is not available in OpenGL 2.
+	this->apply([&]() {
+		glReadPixels(
+			0, //
+			0,
+			GLsizei(this->dims().x()),
+			GLsizei(this->dims().y()),
+			GL_RGBA,
+			GL_UNSIGNED_BYTE,
+			buf.data()
+		);
+	});
+	assert_opengl_no_error();
+
+	// glReadPixels returns the rows from the framebuffer's bottom edge upwards, so the captured
+	// image is vertically flipped; restore the conventional top-down row order before handing it
+	// out (both write_png and the probe transport expect top-down rows).
+	auto im = rasterimage::image<uint8_t, sizeof(uint32_t)>::make(this->dims(), buf.data());
+	im.span().flip_vertical();
+	return {std::move(im)};
 }
