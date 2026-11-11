@@ -1,3 +1,9 @@
+libruis-render-opengl (0.3.7) unstable; urgency=medium
+
+  * implement get_coor_pixels()
+
+ -- Ivan Gagis <igagis@gmail.com>  Wed, 11 Nov 2026 12:43:40 +0200
+
 libruis-render-opengl (0.3.6) unstable; urgency=medium
 
   * update
