@@ -22,6 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 #include <GL/glew.h>
+#include <rasterimage/image_variant.hpp>
 #include <ruis/render/context.hpp>
 #include <utki/flags.hpp>
 #include <utki/shared.hpp>
