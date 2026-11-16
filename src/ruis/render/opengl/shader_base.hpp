@@ -99,7 +99,7 @@ protected:
 		GLint prog = 0;
 		glGetIntegerv(GL_CURRENT_PROGRAM, &prog);
 
-		ASSERT(prog >= 0)
+		utki::assert(prog >= 0, SL);
 		return GLuint(prog) == this->program.p;
 	}
 

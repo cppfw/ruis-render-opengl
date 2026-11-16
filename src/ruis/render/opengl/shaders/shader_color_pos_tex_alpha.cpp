@@ -74,7 +74,7 @@ void shader_color_pos_tex_alpha::render(
 {
 	constexpr auto texture_unit_number = 0;
 
-	ASSERT(dynamic_cast<const texture_2d*>(&tex))
+	utki::assert(dynamic_cast<const texture_2d*>(&tex), SL);
 	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 	static_cast<const texture_2d&>(tex).bind(texture_unit_number);
 	this->bind();

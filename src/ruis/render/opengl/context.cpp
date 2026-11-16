@@ -335,7 +335,7 @@ utki::shared_ref<ruis::render::texture_cube> context::make_texture_cube(
 
 	auto face = faces.begin();
 	for (auto& side : sides) {
-		ASSERT(face != faces.end())
+		utki::assert(face != faces.end(), SL);
 		std::visit(
 			[&](auto& im) {
 				if constexpr (sizeof(im.pixels().front().front()) != 1) {
@@ -459,7 +459,7 @@ void context::set_framebuffer_internal(ruis::render::frame_buffer* fb)
 		return;
 	}
 
-	ASSERT(dynamic_cast<frame_buffer*>(fb))
+	utki::assert(dynamic_cast<frame_buffer*>(fb), SL);
 	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 	auto& ogl_fb = static_cast<frame_buffer&>(*fb);
 
@@ -521,7 +521,7 @@ r4::rectangle<uint32_t> context::get_scissor() const
 
 #ifdef DEBUG
 	for (auto n : osb) {
-		ASSERT(n >= 0)
+		utki::assert(n >= 0, SL);
 	}
 #endif
 
@@ -552,7 +552,7 @@ r4::rectangle<uint32_t> context::get_viewport() const
 
 #ifdef DEBUG
 	for (auto n : vp) {
-		ASSERT(n >= 0)
+		utki::assert(n >= 0, SL);
 	}
 #endif
 
