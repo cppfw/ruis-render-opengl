@@ -48,12 +48,36 @@ class shader_color_pos_tex;
 class shader_color_pos_tex_alpha;
 class shader_color_pos_lum;
 
+/**
+ * @brief OpenGL render factory.
+ *
+ * The factory binds the shared (headless) GL context in its constructor and
+ * leaves it current, so that all `make_*` calls operate on the shared GL
+ * context.
+ *
+ * @par Why the factory retains a `native_window`
+ * A GL context is always attached to a window (or, on some platforms, to a
+ * hidden "headless" window); there is no such thing as a bare GL context that
+ * is not tied to a window. The factory therefore retains the `native_window`
+ * that holds the shared GL context, so it can bind it and keep the context
+ * alive for all `make_*` calls. The abstract `ruis::render::factory` does not
+ * retain a window; only the concrete renderer factories do, because they hold
+ * the actual shared context.
+ *
+ * Whether a *dummy* window is required depends on the platform:
+ * - Desktop (X11/Wayland): a dummy (hidden, 1x1) window is created solely to
+ *   hold the shared GL context (see `shared_gl_context_native_window` in the
+ *   glue); the real application windows share the context with it.
+ * - Android: there is only one window (the app's window) and GLES has no
+ *   headless context, so the factory uses the actual app window.
+ */
 class factory : public ruis::render::factory
 {
 public:
 	// the native_window holds the actual shared (headless) GL context, so this
 	// concrete factory retains it (the abstract ruis::render::factory does not)
-	// to keep the context alive for all make_* calls.
+	// to keep the context alive for all make_* calls. See the class comment for
+	// why a (possibly dummy) window is required to hold the context.
 	const utki::shared_ref<ruis::render::native_window> native_window;
 
 	const utki::version_duplet gl_version;
