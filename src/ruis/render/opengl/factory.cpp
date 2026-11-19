@@ -130,10 +130,11 @@ utki::flags<ruis::render::opengl::extension> parse_supported_extensions(std::str
 } // namespace
 
 factory::factory(utki::shared_ref<ruis::render::native_window> native_window) :
+	native_window(std::move(native_window)),
 	gl_version([&]() {
 		// bind the headless GL context and leave it current so that object
 		// creation (make_*) operates on the shared GL context.
-		this->bind(native_window.get());
+		this->bind(this->native_window.get());
 
 		std::string_view version_string = std::string_view(
 			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast, "needed to make string_view from GLubyte*")
