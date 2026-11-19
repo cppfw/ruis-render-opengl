@@ -34,11 +34,11 @@ class texture_2d :
 {
 public:
 	texture_2d(
-		const utki::shared_ref<const ruis::render::context>& rendering_context, //
+		const utki::shared_ref<const ruis::render::factory>& rendering_context, //
 		rasterimage::format type,
 		rasterimage::dimensioned::dimensions_type dims,
 		utki::span<const uint8_t> data,
-		ruis::render::context::texture_2d_parameters params
+		ruis::render::factory::texture_2d_parameters params
 	);
 
 	texture_2d(const texture_2d&) = delete;

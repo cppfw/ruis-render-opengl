@@ -26,6 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <utki/flags.hpp>
 
 #include "context.hpp"
+#include "extension.hpp"
 
 namespace ruis::render::opengl {
 

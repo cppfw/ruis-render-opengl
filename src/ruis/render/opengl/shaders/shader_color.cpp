@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace ruis::render::opengl;
 
-shader_color::shader_color(const utki::shared_ref<const ruis::render::context>& rendering_context) :
+shader_color::shader_color(const utki::shared_ref<const ruis::render::factory>& rendering_context) :
 	ruis::render::coloring_shader(rendering_context),
 	shader_base(
 		R"qwertyuiop(
