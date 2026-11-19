@@ -51,11 +51,6 @@ class shader_color_pos_lum;
 class factory : public ruis::render::factory
 {
 public:
-	// this holds the headless (shared) GL context window. the factory binds
-	// this context in its constructor and leaves it current, so that all
-	// make_* calls operate on the shared GL context.
-	const utki::shared_ref<ruis::render::native_window> native_window;
-
 	const utki::version_duplet gl_version;
 	const utki::flags<extension> supported_extensions;
 
