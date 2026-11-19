@@ -1,0 +1,131 @@
+/*
+ruis-render-opengl - OpenGL renderer
+
+Copyright (C) 2012-2024  Ivan Gagis <igagis@gmail.com>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* ================ LICENSE END ================ */
+
+#pragma once
+
+#include <vector>
+
+#include <GL/glew.h>
+#include <rasterimage/image_variant.hpp>
+#include <ruis/render/context.hpp>
+#include <ruis/render/factory.hpp>
+#include <utki/flags.hpp>
+#include <utki/shared.hpp>
+#include <utki/version.hpp>
+
+#include "extension.hpp"
+
+namespace ruis::render::opengl {
+
+class texture_2d;
+class texture_cube;
+class texture_depth;
+class vertex_array;
+class vertex_buffer;
+class index_buffer;
+class shader_pos_tex;
+class shader_color;
+class shader_pos_clr;
+class shader_color_pos_tex;
+class shader_color_pos_tex_alpha;
+class shader_color_pos_lum;
+
+class factory : public ruis::render::factory
+{
+public:
+	// this holds the headless (shared) GL context window. the factory binds
+	// this context in its constructor and leaves it current, so that all
+	// make_* calls operate on the shared GL context.
+	const utki::shared_ref<ruis::render::native_window> native_window;
+
+	const utki::version_duplet gl_version;
+	const utki::flags<extension> supported_extensions;
+
+	factory(utki::shared_ref<ruis::render::native_window> native_window);
+
+	// ===============================
+	// ====== factory functions ======
+
+	utki::shared_ref<shaders> make_shaders() const override;
+
+	utki::shared_ref<ruis::render::texture_2d> make_texture_2d(
+		rasterimage::format format,
+		rasterimage::dimensioned::dimensions_type dims,
+		texture_2d_parameters params
+	) const override;
+
+	utki::shared_ref<ruis::render::texture_2d> make_texture_2d(
+		const rasterimage::image_variant& imvar,
+		texture_2d_parameters params
+	) const override;
+
+	utki::shared_ref<ruis::render::texture_2d> make_texture_2d(
+		rasterimage::image_variant&& imvar,
+		texture_2d_parameters params
+	) const override;
+
+	utki::shared_ref<ruis::render::texture_depth> make_texture_depth( //
+		rasterimage::dimensioned::dimensions_type dims
+	) const override;
+
+	utki::shared_ref<ruis::render::texture_cube> make_texture_cube(
+		rasterimage::image_variant&& positive_x,
+		rasterimage::image_variant&& negative_x,
+		rasterimage::image_variant&& positive_y,
+		rasterimage::image_variant&& negative_y,
+		rasterimage::image_variant&& positive_z,
+		rasterimage::image_variant&& negative_z
+	) const override;
+
+	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer( //
+		utki::span<const r4::vector4<float>> vertices
+	) const override;
+	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer( //
+		utki::span<const r4::vector3<float>> vertices
+	) const override;
+	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer( //
+		utki::span<const r4::vector2<float>> vertices
+	) const override;
+	utki::shared_ref<ruis::render::vertex_buffer> make_vertex_buffer( //
+		utki::span<const float> vertices
+	) const override;
+	utki::shared_ref<ruis::render::index_buffer> make_index_buffer( //
+		utki::span<const uint16_t> indices
+	) const override;
+	utki::shared_ref<ruis::render::index_buffer> make_index_buffer( //
+		utki::span<const uint32_t> indices
+	) const override;
+	utki::shared_ref<ruis::render::vertex_array> make_vertex_array(
+		std::vector<utki::shared_ref<const ruis::render::vertex_buffer>> buffers, //
+		utki::shared_ref<const ruis::render::index_buffer> indices,
+		ruis::render::vertex_array::mode mode
+	) const override;
+
+private:
+	utki::shared_ref<ruis::render::texture_2d> create_texture_2d_internal(
+		rasterimage::format type, //
+		rasterimage::dimensioned::dimensions_type dims,
+		utki::span<const uint8_t> data,
+		texture_2d_parameters params
+	) const;
+};
+
+} // namespace ruis::render::opengl

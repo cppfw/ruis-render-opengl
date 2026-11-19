@@ -35,7 +35,7 @@ void vertex_buffer::init(GLsizeiptr size, const GLvoid* data)
 }
 
 vertex_buffer::vertex_buffer(
-	const utki::shared_ref<const ruis::render::context>& rendering_context, //
+	const utki::shared_ref<const ruis::render::factory>& rendering_context, //
 	utki::span<const r4::vector4<float>> vertices
 ) :
 	ruis::render::vertex_buffer(
@@ -49,7 +49,7 @@ vertex_buffer::vertex_buffer(
 }
 
 vertex_buffer::vertex_buffer(
-	const utki::shared_ref<const ruis::render::context>& rendering_context, //
+	const utki::shared_ref<const ruis::render::factory>& rendering_context, //
 	utki::span<const r4::vector3<float>> vertices
 ) :
 	ruis::render::vertex_buffer(
@@ -63,7 +63,7 @@ vertex_buffer::vertex_buffer(
 }
 
 vertex_buffer::vertex_buffer(
-	const utki::shared_ref<const ruis::render::context>& rendering_context, //
+	const utki::shared_ref<const ruis::render::factory>& rendering_context, //
 	utki::span<const r4::vector2<float>> vertices
 ) :
 	ruis::render::vertex_buffer(
@@ -77,7 +77,7 @@ vertex_buffer::vertex_buffer(
 }
 
 vertex_buffer::vertex_buffer(
-	const utki::shared_ref<const ruis::render::context>& rendering_context, //
+	const utki::shared_ref<const ruis::render::factory>& rendering_context, //
 	utki::span<const float> vertices
 ) :
 	ruis::render::vertex_buffer(
