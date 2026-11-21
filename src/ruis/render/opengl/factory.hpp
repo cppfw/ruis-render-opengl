@@ -35,19 +35,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 namespace ruis::render::opengl {
 
-class texture_2d;
-class texture_cube;
-class texture_depth;
-class vertex_array;
-class vertex_buffer;
-class index_buffer;
-class shader_pos_tex;
-class shader_color;
-class shader_pos_clr;
-class shader_color_pos_tex;
-class shader_color_pos_tex_alpha;
-class shader_color_pos_lum;
-
 /**
  * @brief OpenGL render factory.
  *
