@@ -21,28 +21,29 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "texture_cube.hpp"
 
+#include "factory.hpp"
 #include "util.hpp"
 
 using namespace ruis::render::opengl;
 
 texture_cube::texture_cube(
-	const utki::shared_ref<const ruis::render::context>& rendering_context, //
+	const utki::shared_ref<const ruis::render::factory>& rendering_context, //
 	const std::array<cube_face_image, num_cube_faces>& side_images
 ) :
 	ruis::render::texture_cube(rendering_context)
 {
 	this->bind(0);
 
-	utki::assert(dynamic_cast<const opengl::context*>(&rendering_context.get()), SL);
-	auto& opengl_context =
+	utki::assert(dynamic_cast<const opengl::factory*>(&rendering_context.get()), SL);
+	auto& opengl_factory =
 		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast, "assert(dynamic_cast) done")
-		static_cast<const opengl::context&>(rendering_context.get());
+		static_cast<const opengl::factory&>(rendering_context.get());
 
 	unsigned i = 0;
 	for (const auto& s : side_images) {
 		auto format = this->set_swizzeling(
 			s.type, //
-			opengl_context.supported_extensions
+			opengl_factory.supported_extensions
 		);
 		glTexImage2D( //
 			GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,

@@ -21,16 +21,17 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "texture_2d.hpp"
 
+#include "factory.hpp"
 #include "util.hpp"
 
 using namespace ruis::render::opengl;
 
 texture_2d::texture_2d(
-	const utki::shared_ref<const ruis::render::context>& rendering_context, //
+	const utki::shared_ref<const ruis::render::factory>& rendering_context, //
 	rasterimage::format type,
 	rasterimage::dimensioned::dimensions_type dims,
 	utki::span<const uint8_t> data,
-	ruis::render::context::texture_2d_parameters params
+	ruis::render::factory::texture_2d_parameters params
 ) :
 	ruis::render::texture_2d(
 		rendering_context, //
@@ -43,14 +44,14 @@ texture_2d::texture_2d(
 
 	this->bind(0);
 
-	utki::assert(dynamic_cast<const opengl::context*>(&rendering_context.get()), SL);
-	auto& opengl_context =
+	utki::assert(dynamic_cast<const opengl::factory*>(&rendering_context.get()), SL);
+	auto& opengl_factory =
 		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast, "assert(dynamic_cast) done")
-		static_cast<const opengl::context&>(rendering_context.get());
+		static_cast<const opengl::factory&>(rendering_context.get());
 
 	GLint internal_format = this->set_swizzeling(
 		type, //
-		opengl_context.supported_extensions
+		opengl_factory.supported_extensions
 	);
 
 	// we will be passing pixels to OpenGL which are 1-byte aligned.

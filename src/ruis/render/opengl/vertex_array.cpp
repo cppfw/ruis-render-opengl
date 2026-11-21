@@ -28,7 +28,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace ruis::render::opengl;
 
 vertex_array::vertex_array(
-	const utki::shared_ref<const ruis::render::context>& rendering_context, //
+	const utki::shared_ref<const ruis::render::factory>& rendering_context, //
 	buffers_type buffers,
 	utki::shared_ref<const ruis::render::index_buffer> indices,
 	mode rendering_mode
