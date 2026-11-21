@@ -136,7 +136,7 @@ factory::factory(utki::shared_ref<ruis::render::native_window> native_window) :
 		// creation (make_*) operates on the shared GL context.
 		this->bind(this->native_window.get());
 
-		std::string_view version_string = std::string_view(
+		auto version_string = std::string_view(
 			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast, "needed to make string_view from GLubyte*")
 			reinterpret_cast<const char*>(glGetString(GL_VERSION))
 		);
@@ -144,7 +144,7 @@ factory::factory(utki::shared_ref<ruis::render::native_window> native_window) :
 		return parse_opengl_version(version_string);
 	}()),
 	supported_extensions([&]() {
-		std::string_view extensions_string = std::string_view(
+		auto extensions_string = std::string_view(
 			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast, "needed to make string_view from GLubyte*")
 			reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS))
 		);
