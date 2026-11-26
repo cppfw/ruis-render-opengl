@@ -168,7 +168,7 @@ factory::factory(utki::shared_ref<ruis::render::native_window> native_window) :
 
 void factory::bind() const
 {
-	this->bind(this->native_window.get());
+	this->ruis::render::factory::bind(this->native_window.get());
 }
 
 utki::shared_ref<ruis::render::factory::shaders> factory::make_shaders() const
