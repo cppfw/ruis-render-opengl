@@ -72,6 +72,10 @@ public:
 
 	factory(utki::shared_ref<ruis::render::native_window> native_window);
 
+protected:
+	void bind() const override;
+
+public:
 	// ===============================
 	// ====== factory functions ======
 

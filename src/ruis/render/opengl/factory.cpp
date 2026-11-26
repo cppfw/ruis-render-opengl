@@ -134,7 +134,7 @@ factory::factory(utki::shared_ref<ruis::render::native_window> native_window) :
 	gl_version([&]() {
 		// bind the headless GL context and leave it current so that object
 		// creation (make_*) operates on the shared GL context.
-		this->bind(this->native_window.get());
+		this->native_window.get().bind_rendering_context();
 
 		auto version_string = std::string_view(
 			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast, "needed to make string_view from GLubyte*")
@@ -162,6 +162,11 @@ factory::factory(utki::shared_ref<ruis::render::native_window> native_window) :
 	});
 
 	glEnable(GL_CULL_FACE);
+}
+
+void factory::bind() const
+{
+	this->native_window.get().bind_rendering_context();
 }
 
 utki::shared_ref<ruis::render::factory::shaders> factory::make_shaders() const
