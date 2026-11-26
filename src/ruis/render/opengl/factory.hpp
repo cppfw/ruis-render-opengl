@@ -73,6 +73,8 @@ public:
 	factory(utki::shared_ref<ruis::render::native_window> native_window);
 
 protected:
+	// the base class bind(native_window&) is hidden by the bind() override
+	using ruis::render::factory::bind;
 	void bind() const override;
 
 public:
